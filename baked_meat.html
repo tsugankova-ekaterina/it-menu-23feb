@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🥩 Мясо в духовке | IT-Меню</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            background: #f8f9fa; color: #333;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6; padding: 20px; max-width: 800px; margin: 0 auto;
+            min-height: 100vh; display: flex; flex-direction: column;
+        }
+        .back-btn {
+            display: inline-flex; align-items: center; gap: 8px;
+            background: #6c757d; color: white; text-decoration: none;
+            padding: 12px 24px; border-radius: 8px; font-weight: 600;
+            margin-bottom: 30px; transition: background 0.3s; width: fit-content;
+        }
+        .back-btn:hover { background: #5a6268; }
+        .dish-header {
+            background: linear-gradient(135deg, #8B0000 0%, #B22222 100%);
+            color: white; border-radius: 15px; padding: 30px;
+            margin-bottom: 30px; box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        .dish-icon-large { font-size: 4rem; margin-bottom: 15px; text-align: center; }
+        .dish-name { color: white; font-size: 2.5rem; margin-bottom: 10px; 
+                    font-weight: 800; text-align: center; }
+        .dish-meta { color: rgba(255,255,255,0.9); font-size: 1.1rem; 
+                    font-family: 'Courier New', monospace; margin-bottom: 20px; text-align: center; }
+        .info-block { background: white; border-radius: 12px; padding: 25px;
+                     margin-bottom: 25px; box-shadow: 0 3px 10px rgba(0,0,0,0.06); }
+        .info-title { color: #2c3e50; font-size: 1.5rem; margin-bottom: 20px;
+                     padding-bottom: 10px; border-bottom: 2px solid #f0f5ff;
+                     display: flex; align-items: center; gap: 10px; }
+        .info-title::before { content: "›"; color: #8B0000; 
+                            font-weight: bold; font-size: 1.8rem; }
+        .ingredients-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; }
+        .ingredient-item { background: #f8f9fa; padding: 15px; border-radius: 8px;
+                          border-left: 4px solid #8B0000; transition: transform 0.2s; }
+        .ingredient-item:hover { transform: translateY(-3px); }
+        .ingredient-name { font-weight: 700; color: #2c3e50; margin-bottom: 5px; font-size: 1.1rem; }
+        .ingredient-desc { color: #666; font-size: 0.95rem; }
+        .joke-box { background: #ffebee; border-left: 4px solid #f44336;
+                   padding: 20px; border-radius: 8px; margin: 20px 0; }
+        .joke-title { color: #c62828; font-weight: 700; margin-bottom: 10px;
+                     display: flex; align-items: center; gap: 10px; }
+        .tech-box { background: #fff5f5; border-left: 4px solid #B22222;
+                   padding: 20px; border-radius: 8px; font-family: 'Courier New', monospace;
+                   font-size: 1rem; line-height: 1.8; }
+        .tech-line { margin-bottom: 8px; }
+        .tech-key { color: #8B0000; font-weight: bold; }
+        .meat-types { display: flex; flex-wrap: wrap; gap: 15px; margin-top: 20px; }
+        .meat-type { flex: 1; min-width: 180px; background: #ffebee; 
+                    padding: 15px; border-radius: 8px; border: 2px solid #f44336; }
+        .meat-type h4 { color: #c62828; margin-bottom: 10px; }
+        @media (max-width: 768px) {
+            body { padding: 15px; } .dish-header { padding: 20px; }
+            .dish-name { font-size: 2rem; } .dish-icon-large { font-size: 3.5rem; }
+            .info-block { padding: 20px; } .ingredients-grid { grid-template-columns: 1fr; }
+            .meat-types { flex-direction: column; }
+        }
+        @media (max-width: 480px) {
+            .dish-name { font-size: 1.8rem; } .info-title { font-size: 1.3rem; }
+            .back-btn { width: 100%; justify-content: center; }
+        }
+    </style>
+</head>
+<body>
+    <a href="index.html" class="back-btn">← НАЗАД К МЕНЮ</a>
+    <div class="dish-header">
+        <span class="dish-icon-large">🥩</span>
+        <h1 class="dish-name">Мясо в духовке</h1>
+        <div class="dish-meta">ID: MEAT_BAKED_001 | Версия: 4.0.2 | Статус: 🔥 ГОРЯЧЕЕ</div>
+    </div>
+    <div class="info-block">
+        <h2 class="info-title">📦 Состав (Protein Core)</h2>
+        <div class="ingredients-grid">
+            <div class="ingredient-item"><div class="ingredient-name">Мясо (свинина/говядина)</div><div class="ingredient-desc">Основной процессор, protein source</div></div>
+            <div class="ingredient-item"><div class="ingredient-name">Лук репчатый</div><div class="ingredient-desc">Ароматический модуль, flavor layer</div></div>
+            <div class="ingredient-item"><div class="ingredient-name">Чеснок</div><div class="ingredient-desc">Система безопасности, antibacterial</div></div>
+            <div class="ingredient-item"><div class="ingredient-name">Специи</div><div class="ingredient-desc">Алгоритмы вкуса, spice algorithms</div></div>
+            <div class="ingredient-item"><div class="ingredient-name">Растительное масло</div><div class="ingredient-desc">Теплопроводящий слой, heat conductor</div></div>
+            <div class="ingredient-item"><div class="ingredient-name">Соль</div><div class="ingredient-desc">Базовый усилитель, basic amplifier</div></div>
+        </div>
+    </div>
+    <div class="info-block">
+        <h2 class="info-title">🎛️ Типы мяса (Processor Types)</h2>
+        <div class="meat-types">
+            <div class="meat-type">
+                <h4>🐷 Свинина</h4>
+                <p>Сочная, жирная</p>
+                <small>Высокая производительность</small>
+            </div>
+            <div class="meat-type">
+                <h4>🐮 Говядина</h4>
+                <p>Плотная, насыщенная</p>
+                <small>Enterprise edition</small>
+            </div>
+            <div class="meat-type">
+                <h4>🐑 Баранина</h4>
+                <p>Ароматная, специфическая</p>
+                <small>Для ценителей</small>
+            </div>
+            <div class="meat-type">
+                <h4>🍗 Курица</h4>
+                <p>Диетическая, нежная</p>
+                <small>Light version</small>
+            </div>
+        </div>
+    </div>
+    <div class="joke-box">
+        <h3 class="joke-title">💡 Мясо в духовке — это backend процесс</h3>
+        <p>• <strong>Долгая обработка</strong> — но результат того стоит</p>
+        <p>• <strong>Высокие температуры</strong> — как стресс-тестирование</p>
+        <p>• <strong>Медленное томление</strong> — оптимизация вкуса</p>
+        <p>• <strong>Аромат по всему office</strong> — лучший мотиватор</p>
+    </div>
+    <div class="info-block">
+        <h2 class="info-title">⚙️ Технические характеристики</h2>
+        <div class="tech-box">
+            <div class="tech-line"><span class="tech-key">Температура духовки:</span> 180-200°C (оптимальный range)</div>
+            <div class="tech-line"><span class="tech-key">Время приготовления:</span> 60-90 минут (в зависимости от размера)</div>
+            <div class="tech-line"><span class="tech-key">Внутренняя температура мяса:</span> 72-75°C (food safety standard)</div>
+            <div class="tech-line"><span class="tech-key">Подача:</span> Горячей, сразу из духовки</div>
+            <div class="tech-line"><span class="tech-key">Порция:</span> 150-200g мяса на человека</div>
+            <div class="tech-line"><span class="tech-key">Идеальные пары:</span> Картофель, овощи, красное вино, пиво</div>
+            <div class="tech-line"><span class="tech-key">Особенность:</span> Мясо должно "отдохнуть" 10 минут перед нарезкой</div>
+        </div>
+    </div>
+    <div class="info-block">
+        <h2 class="info-title">🎯 Процесс приготовления</h2>
+        <div class="tech-box">
+            <div class="tech-line">1. Подготовка мяса (initial setup)</div>
+            <div class="tech-line">2. Маринование (data preprocessing)</div>
+            <div class="tech-line">3. Обжарка (searing, quick deploy)</div>
+            <div class="tech-line">4. Запекание (baking, long process)</div>
+            <div class="tech-line">5. Отдых (resting, cool down)</div>
+            <div class="tech-line">6. Нарезка и подача (serving, production)</div>
+        </div>
+    </div>
+    <div style="margin-top: 40px; text-align: center;">
+        <a href="index.html" class="back-btn" style="background: linear-gradient(135deg, #8B0000 0%, #B22222 100%);">← ВЕРНУТЬСЯ К СПИСКУ БЛЮД</a>
+    </div>
+    <script>
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        document.querySelectorAll('.back-btn').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                e.preventDefault();
+                document.body.style.opacity = '0.9';
+                setTimeout(() => { window.location.href = this.getAttribute('href'); }, 150);
+            });
+        });
+    </script>
+</body>
+</html>

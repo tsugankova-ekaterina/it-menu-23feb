@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🧀 Сырная закуска | IT-Меню</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            background: #f8f9fa; color: #333;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6; padding: 20px; max-width: 800px; margin: 0 auto;
+            min-height: 100vh; display: flex; flex-direction: column;
+        }
+        .back-btn {
+            display: inline-flex; align-items: center; gap: 8px;
+            background: #6c757d; color: white; text-decoration: none;
+            padding: 12px 24px; border-radius: 8px; font-weight: 600;
+            margin-bottom: 30px; transition: background 0.3s; width: fit-content;
+        }
+        .back-btn:hover { background: #5a6268; }
+        .dish-header {
+            background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
+            color: #333; border-radius: 15px; padding: 30px;
+            margin-bottom: 30px; box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        .dish-icon-large { font-size: 4rem; margin-bottom: 15px; text-align: center; }
+        .dish-name { color: #333; font-size: 2.5rem; margin-bottom: 10px; 
+                    font-weight: 800; text-align: center; }
+        .dish-meta { color: #666; font-size: 1.1rem; font-family: 'Courier New', monospace;
+                    margin-bottom: 20px; text-align: center; }
+        .info-block { background: white; border-radius: 12px; padding: 25px;
+                     margin-bottom: 25px; box-shadow: 0 3px 10px rgba(0,0,0,0.06); }
+        .info-title { color: #2c3e50; font-size: 1.5rem; margin-bottom: 20px;
+                     padding-bottom: 10px; border-bottom: 2px solid #f0f5ff;
+                     display: flex; align-items: center; gap: 10px; }
+        .info-title::before { content: "›"; color: #FFD700; 
+                            font-weight: bold; font-size: 1.8rem; }
+        .ingredients-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; }
+        .ingredient-item { background: #f8f9fa; padding: 15px; border-radius: 8px;
+                          border-left: 4px solid #FFD700; transition: transform 0.2s; }
+        .ingredient-item:hover { transform: translateY(-3px); }
+        .ingredient-name { font-weight: 700; color: #2c3e50; margin-bottom: 5px; font-size: 1.1rem; }
+        .ingredient-desc { color: #666; font-size: 0.95rem; }
+        .joke-box { background: #fff9e6; border-left: 4px solid #ffc107;
+                   padding: 20px; border-radius: 8px; margin: 20px 0; }
+        .joke-title { color: #e65100; font-weight: 700; margin-bottom: 10px;
+                     display: flex; align-items: center; gap: 10px; }
+        .tech-box { background: #fffaf0; border-left: 4px solid #FFA500;
+                   padding: 20px; border-radius: 8px; font-family: 'Courier New', monospace;
+                   font-size: 1rem; line-height: 1.8; }
+        .tech-line { margin-bottom: 8px; }
+        .tech-key { color: #b8860b; font-weight: bold; }
+        @media (max-width: 768px) {
+            body { padding: 15px; } .dish-header { padding: 20px; }
+            .dish-name { font-size: 2rem; } .dish-icon-large { font-size: 3.5rem; }
+            .info-block { padding: 20px; } .ingredients-grid { grid-template-columns: 1fr; }
+        }
+        @media (max-width: 480px) {
+            .dish-name { font-size: 1.8rem; } .info-title { font-size: 1.3rem; }
+            .back-btn { width: 100%; justify-content: center; }
+        }
+    </style>
+</head>
+<body>
+    <a href="index.html" class="back-btn">← НАЗАД К МЕНЮ</a>
+    <div class="dish-header">
+        <span class="dish-icon-large">🧀</span>
+        <h1 class="dish-name">Сырная закуска</h1>
+        <div class="dish-meta">ID: SNACK_CHEESE_001 | Версия: 2.1.0 | Статус: 🧊 ОХЛАЖДЁННАЯ</div>
+    </div>
+    <div class="info-block">
+        <h2 class="info-title">📦 Состав (Data Layers)</h2>
+        <div class="ingredients-grid">
+            <div class="ingredient-item"><div class="ingredient-name">Сыр твёрдых сортов</div><div class="ingredient-desc">Основной dataset, aged to perfection</div></div>
+            <div class="ingredient-item"><div class="ingredient-name">Сыр сливочный</div><div class="ingredient-desc">Кремовый слой, soft integration</div></div>
+            <div class="ingredient-item"><div class="ingredient-name">Чеснок</div><div class="ingredient-desc">Security layer, защита от вирусов</div></div>
+            <div class="ingredient-item"><div class="ingredient-name">Зелень (укроп/петрушка)</div><div class="ingredient-desc">UI decoration, fresh commits</div></div>
+            <div class="ingredient-item"><div class="ingredient-name">Грецкие орехи</div><div class="ingredient-desc">Hardware upgrade, adds crunch</div></div>
+            <div class="ingredient-item"><div class="ingredient-name">Пряности</div><div class="ingredient-desc">Algorithm spices, flavor optimization</div></div>
+        </div>
+    </div>
+    <div class="joke-box">
+        <h3 class="joke-title">💡 Почему сыр — это идеальный код?</h3>
+        <p>• <strong>Выдержанный</strong> — как опытный разработчик</p>
+        <p>• <strong>Дырявый</strong> — но это фича, а не баг (швейцарский)</p>
+        <p>• <strong>Плавленный</strong> — легко интегрируется</p>
+        <p>• <strong>Твёрдый</strong> — стабильная основа системы</p>
+    </div>
+    <div class="info-block">
+        <h2 class="info-title">⚙️ Технические характеристики</h2>
+        <div class="tech-box">
+            <div class="tech-line"><span class="tech-key">Текстура:</span> Creamy & Crunchy (гибридная архитектура)</div>
+            <div class="tech-line"><span class="tech-key">Температура сервировки:</span> +5°C до +8°C</div>
+            <div class="tech-line"><span class="tech-key">Время подготовки:</span> 15-20 минут (быстрая сборка)</div>
+            <div class="tech-line"><span class="tech-key">Срок годности:</span> 48 часов (нужен регулярный деплой)</div>
+            <div class="tech-line"><span class="tech-key">Порция:</span> ≈100-150g (lightweight package)</div>
+            <div class="tech-line"><span class="tech-key">Идеальные пары:</span> Красное вино, крекеры, белый хлеб</div>
+            <div class="tech-line"><span class="tech-key">Противопоказания:</span> Непереносимость лактозы (incompatible OS)</div>
+        </div>
+    </div>
+    <div class="info-block">
+        <h2 class="info-title">🎛️ Варианты сборки</h2>
+        <div class="tech-box">
+            <div class="tech-line"><span class="tech-key">Классическая:</span> Твёрдый сыр + чеснок + майонез</div>
+            <div class="tech-line"><span class="tech-key">Гурме:</span> Дорблю/рокфор + грецкие орехи + мёд</div>
+            <div class="tech-line"><span class="tech-key">Лайт:</span> Творожный сыр + зелень + йогурт</div>
+            <div class="tech-line"><span class="tech-key">Фирменная:</span> Копчёный сыр + чернослив + миндаль</div>
+        </div>
+    </div>
+    <div style="margin-top: 40px; text-align: center;">
+        <a href="index.html" class="back-btn" style="background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%); color: #333;">← ВЕРНУТЬСЯ К СПИСКУ БЛЮД</a>
+    </div>
+    <script>
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        document.querySelectorAll('.back-btn').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                e.preventDefault();
+                document.body.style.opacity = '0.9';
+                setTimeout(() => { window.location.href = this.getAttribute('href'); }, 150);
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎪 Вафельные трубочки | IT-Меню</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            background: #f8f9fa; color: #333;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6; padding: 20px; max-width: 800px; margin: 0 auto;
+            min-height: 100vh; display: flex; flex-direction: column;
+        }
+        .back-btn {
+            display: inline-flex; align-items: center; gap: 8px;
+            background: #6c757d; color: white; text-decoration: none;
+            padding: 12px 24px; border-radius: 8px; font-weight: 600;
+            margin-bottom: 30px; transition: background 0.3s; width: fit-content;
+        }
+        .back-btn:hover { background: #5a6268; }
+        .dish-header {
+            background: linear-gradient(135deg, #8E2DE2 0%, #4A00E0 100%);
+            color: white; border-radius: 15px; padding: 30px;
+            margin-bottom: 30px; box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        .dish-icon-large { font-size: 4rem; margin-bottom: 15px; text-align: center; }
+        .dish-name { color: white; font-size: 2.5rem; margin-bottom: 10px; 
+                    font-weight: 800; text-align: center; }
+        .dish-meta { color: rgba(255,255,255,0.9); font-size: 1.1rem; 
+                    font-family: 'Courier New', monospace; margin-bottom: 20px; text-align: center; }
+        .info-block { background: white; border-radius: 12px; padding: 25px;
+                     margin-bottom: 25px; box-shadow: 0 3px 10px rgba(0,0,0,0.06); }
+        .info-title { color: #2c3e50; font-size: 1.5rem; margin-bottom: 20px;
+                     padding-bottom: 10px; border-bottom: 2px solid #f0f5ff;
+                     display: flex; align-items: center; gap: 10px; }
+        .info-title::before { content: "›"; color: #8E2DE2; 
+                            font-weight: bold; font-size: 1.8rem; }
+        .ingredients-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; }
+        .ingredient-item { background: #f8f9fa; padding: 15px; border-radius: 8px;
+                          border-left: 4px solid #8E2DE2; transition: transform 0.2s; }
+        .ingredient-item:hover { transform: translateY(-3px); }
+        .ingredient-name { font-weight: 700; color: #2c3e50; margin-bottom: 5px; font-size: 1.1rem; }
+        .ingredient-desc { color: #666; font-size: 0.95rem; }
+        .joke-box { background: #f3e5f5; border-left: 4px solid #8E2DE2;
+                   padding: 20px; border-radius: 8px; margin: 20px 0; }
+        .joke-title { color: #7b1fa2; font-weight: 700; margin-bottom: 10px;
+                     display: flex; align-items: center; gap: 10px; }
+        .tech-box { background: #f5f0ff; border-left: 4px solid #4A00E0;
+                   padding: 20px; border-radius: 8px; font-family: 'Courier New', monospace;
+                   font-size: 1rem; line-height: 1.8; }
+        .tech-line { margin-bottom: 8px; }
+        .tech-key { color: #4527a0; font-weight: bold; }
+        .fillings-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); 
+                        gap: 15px; margin-top: 20px; }
+        .filling { background: #e8eaf6; padding: 15px; border-radius: 8px; text-align: center; }
+        .filling h4 { color: #5c6bc0; margin-bottom: 10px; }
+        @media (max-width: 768px) {
+            body { padding: 15px; } .dish-header { padding: 20px; }
+            .dish-name { font-size: 2rem; } .dish-icon-large { font-size: 3.5rem; }
+            .info-block { padding: 20px; } .ingredients-grid { grid-template-columns: 1fr; }
+            .fillings-grid { grid-template-columns: 1fr; }
+        }
+        @media (max-width: 480px) {
+            .dish-name { font-size: 1.8rem; } .info-title { font-size: 1.3rem; }
+            .back-btn { width: 100%; justify-content: center; }
+        }
+    </style>
+</head>
+<body>
+    <a href="index.html" class="back-btn">← НАЗАД К МЕНЮ</a>
+    <div class="dish-header">
+        <span class="dish-icon-large">🎪</span>
+        <h1 class="dish-name">Вафельные трубочки</h1>
+        <div class="dish-meta">ID: DESSERT_WAFTUBE_001 | Версия: 3.2.1 | Статус: 🍬 СЛАДКИЕ</div>
+    </div>
+    <div class="info-block">
+        <h2 class="info-title">📦 Конструкция (Tube Architecture)</h2>
+        <div class="ingredients-grid">
+            <div class="ingredient-item"><div class="ingredient-name">Вафельные листы</div><div class="ingredient-desc">Хрустящий корпус, crispy shell</div></div>
+            <div class="ingredient-item"><div class="ingredient-name">Сливочное масло</div><div class="ingredient-desc">Склеивающий агент, binding agent</div></div>
+            <div class="ingredient-item"><div class="ingredient-name">Сахар/ваниль</div><div class="ingredient-desc">Сладкий алгоритм, sweetness protocol</div></div>
+            <div class="ingredient-item"><div class="ingredient-name">Начинка кремовая</div><div class="ingredient-desc">Внутренний контент, core content</div></div>
+        </div>
+    </div>
+    <div class="info-block">
+        <h2 class="info-title">🎛️ Начинки (Content Types)</h2>
+        <div class="fillings-grid">
+            <div class="filling">
+                <h4>🧁 Заварной крем</h4>
+                <p>Классика, vanilla flavor</p>
+            </div>
+            <div class="filling">
+                <h4>🍫 Шоколадная</h4>
+                <p>Для cocoa lovers</p>
+            </div>
+            <div class="filling">
+                <h4>🍓 Клубничная</h4>
+                <p>С ягодным конфитюром</p>
+            </div>
+            <div class="filling">
+                <h4>🥜 Ореховая</h4>
+                <p>С пралине и фундуком</p>
+            </div>
+        </div>
+    </div>
+    <div class="joke-box">
+        <h3 class="joke-title">💡 Трубочки — это съедобные контейнеры</h3>
+        <p>• <strong>Инкапсуляция</strong> — начинка внутри, не вытекает</p>
+        <p>• <strong>Портабельность</strong> — можно есть на ходу</p>
+        <p>• <strong>Модульность</strong> — можно ломать на части</p>
+        <p>• <strong>API</strong> — просто откуси конец и наслаждайся</p>
+    </div>
+    <div class="info-block">
+        <h2 class="info-title">⚙️ Технические характеристики</h2>
+        <div class="tech-box">
+            <div class="tech-line"><span class="tech-key">Длина трубочки:</span> 12-15 см (удобный размер)</div>
+            <div class="tech-line"><span class="tech-key">Диаметр:</span> 2-3 см (оптимальный grip)</div>
+            <div class="tech-line"><span class="tech-key">Текстура корпуса:</span> Хрустящая, но не крошится</div>
+            <div class="tech-line"><span class="tech-key">Температура сервировки:</span> Комнатная</div>
+            <div class="tech-line"><span class="tech-key">Рекомендуемое количество:</span> 2-3 трубочки на человека</div>
+            <div class="tech-line"><span class="tech-key">Идеальные пары:</span> Кофе, чай, молоко, какао</div>
+            <div class="tech-line"><span class="tech-key">Особенность:</span> Можно использовать как straw для напитков (advanced technique)</div>
+        </div>
+    </div>
+    <div class="info-block">
+        <h2 class="info-title">🎯 Процесс потребления</h2>
+        <div class="tech-box">
+            <div class="tech-line">1. Визуальный осмотр (code review)</div>
+            <div class="tech-line">2. Откусить кончик (initiate process)</div>
+            <div class="tech-line">3. Наслаждаться начинкой (core experience)</div>
+            <div class="tech-line">4. Съесть корпус (cleanup phase)</div>
+            <div class="tech-line">5. Повторить при необходимости (loop)</div>
+        </div>
+    </div>
+    <div style="margin-top: 40px; text-align: center;">
+        <a href="index.html" class="back-btn" style="background: linear-gradient(135deg, #8E2DE2 0%, #4A00E0 100%);">← ВЕРНУТЬСЯ К СПИСКУ БЛЮД</a>
+    </div>
+    <script>
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        document.querySelectorAll('.back-btn').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                e.preventDefault();
+                document.body.style.opacity = '0.9';
+                setTimeout(() => { window.location.href = this.getAttribute('href'); }, 150);
+            });
+        });
+    </script>
+</body>
+</html>

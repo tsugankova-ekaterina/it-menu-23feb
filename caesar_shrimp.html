@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🦐 Цезарь с креветками | IT-Меню</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            background: #f8f9fa; color: #333;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6; padding: 20px; max-width: 800px; margin: 0 auto;
+            min-height: 100vh; display: flex; flex-direction: column;
+        }
+        .back-btn {
+            display: inline-flex; align-items: center; gap: 8px;
+            background: #6c757d; color: white; text-decoration: none;
+            padding: 12px 24px; border-radius: 8px; font-weight: 600;
+            margin-bottom: 30px; transition: background 0.3s; width: fit-content;
+        }
+        .back-btn:hover { background: #5a6268; }
+        .dish-header {
+            background: linear-gradient(135deg, #00b4db 0%, #0083b0 100%);
+            color: white; border-radius: 15px; padding: 30px;
+            margin-bottom: 30px; box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        .dish-icon-large { font-size: 4rem; margin-bottom: 15px; text-align: center; }
+        .dish-name { color: white; font-size: 2.5rem; margin-bottom: 10px; 
+                    font-weight: 800; text-align: center; }
+        .dish-meta { color: rgba(255,255,255,0.9); font-size: 1.1rem; 
+                    font-family: 'Courier New', monospace; margin-bottom: 20px; text-align: center; }
+        .info-block { background: white; border-radius: 12px; padding: 25px;
+                     margin-bottom: 25px; box-shadow: 0 3px 10px rgba(0,0,0,0.06); }
+        .info-title { color: #2c3e50; font-size: 1.5rem; margin-bottom: 20px;
+                     padding-bottom: 10px; border-bottom: 2px solid #f0f5ff;
+                     display: flex; align-items: center; gap: 10px; }
+        .info-title::before { content: "›"; color: #00b4db; 
+                            font-weight: bold; font-size: 1.8rem; }
+        .ingredients-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; }
+        .ingredient-item { background: #f8f9fa; padding: 15px; border-radius: 8px;
+                          border-left: 4px solid #00b4db; transition: transform 0.2s; }
+        .ingredient-item:hover { transform: translateY(-3px); }
+        .ingredient-name { font-weight: 700; color: #2c3e50; margin-bottom: 5px; font-size: 1.1rem; }
+        .ingredient-desc { color: #666; font-size: 0.95rem; }
+        .joke-box { background: #e3f2fd; border-left: 4px solid #2196f3;
+                   padding: 20px; border-radius: 8px; margin: 20px 0; }
+        .joke-title { color: #0d47a1; font-weight: 700; margin-bottom: 10px;
+                     display: flex; align-items: center; gap: 10px; }
+        .tech-box { background: #e8f4fc; border-left: 4px solid #0083b0;
+                   padding: 20px; border-radius: 8px; font-family: 'Courier New', monospace;
+                   font-size: 1rem; line-height: 1.8; }
+        .tech-line { margin-bottom: 8px; }
+        .tech-key { color: #005b82; font-weight: bold; }
+        .premium-badge { background: #ffd700; color: #333; padding: 5px 15px;
+                        border-radius: 20px; font-weight: bold; display: inline-block;
+                        margin-left: 10px; font-size: 0.8rem; }
+        @media (max-width: 768px) {
+            body { padding: 15px; } .dish-header { padding: 20px; }
+            .dish-name { font-size: 2rem; } .dish-icon-large { font-size: 3.5rem; }
+            .info-block { padding: 20px; } .ingredients-grid { grid-template-columns: 1fr; }
+        }
+        @media (max-width: 480px) {
+            .dish-name { font-size: 1.8rem; } .info-title { font-size: 1.3rem; }
+            .back-btn { width: 100%; justify-content: center; }
+        }
+    </style>
+</head>
+<body>
+    <a href="index.html" class="back-btn">← НАЗАД К МЕНЮ</a>
+    <div class="dish-header">
+        <span class="dish-icon-large">🦐</span>
+        <h1 class="dish-name">Цезарь с креветками <span class="premium-badge">PREMIUM</span></h1>
+        <div class="dish-meta">ID: SALAD_CAESAR_001 | Версия: 3.0.1 | Статус: ⭐ ПРЕМИУМ</div>
+    </div>
+    <div class="info-block">
+        <h2 class="info-title">📦 Состав (Premium Stack)</h2>
+        <div class="ingredients-grid">
+            <div class="ingredient-item"><div class="ingredient-name">Креветки тигровые</div><div class="ingredient-desc">Enterprise-grade seafood, крупный калибр</div></div>
+            <div class="ingredient-item"><div class="ingredient-name">Салат романо</div><div class="ingredient-desc">Base framework, crisp & fresh</div></div>
+            <div class="ingredient-item"><div class="ingredient-name">Сухарики домашние</div><div class="ingredient-desc">Crunch module, texture enhancement</div></div>
+            <div class="ingredient-item"><div class="ingredient-name">Сыр пармезан</div><div class="ingredient-desc">Aged意大利 database, hard & salty</div></div>
+            <div class="ingredient-item"><div class="ingredient-name">Соус Цезарь</div><div class="ingredient-desc">Proprietary algorithm (секретный рецепт)</div></div>
+            <div class="ingredient-item"><div class="ingredient-name">Чеснок, лимон</div><div class="ingredient-desc">Security & freshness layers</div></div>
+        </div>
+    </div>
+    <div class="joke-box">
+        <h3 class="joke-title">💡 Цезарь — салат для тимлидов</h3>
+        <p>• <strong>Дорогой</strong> — как senior-разработчик</p>
+        <p>• <strong>Сложный в сборке</strong> — но результат того стоит</p>
+        <p>• <strong>Креветки = морепродукты</strong> — как морской контейнер в логистике</p>
+        <p>• <strong>Императорский</strong> — требует уважительного отношения</p>
+    </div>
+    <div class="info-block">
+        <h2 class="info-title">⚙️ Технические характеристики</h2>
+        <div class="tech-box">
+            <div class="tech-line"><span class="tech-key">Уровень сложности:</span> Intermediate (нужен опытный шеф)</div>
+            <div class="tech-line"><span class="tech-key">Время сборки:</span> 20-25 минут (включая deploy креветок)</div>
+            <div class="tech-line"><span class="tech-key">Температура сервировки:</span> +2°C до +6°C (chilled server)</div>
+            <div class="tech-line"><span class="tech-key">Калорийность:</span> ~280 ккал (balanced nutrition)</div>
+            <div class="tech-line"><span class="tech-key">Идеальные пары:</span> Белое сухое вино, хлеб чиабатта</div>
+            <div class="tech-line"><span class="tech-key">Особенность:</span> Соус добавляется непосредственно перед serving</div>
+        </div>
+    </div>
+    <div class="info-block">
+        <h2 class="info-title">🎛️ Вариации рецепта</h2>
+        <div class="tech-box">
+            <div class="tech-line"><span class="tech-key">Классический:</span> С куриной грудкой (бюджетная сборка)</div>
+            <div class="tech-line"><span class="tech-key">Лососевый:</span> С лососем слабосолёным (арктический deploy)</div>
+            <div class="tech-line"><span class="tech-key">Веганский:</span> С тофу и nutritional yeast (open source)</div>
+            <div class="tech-line"><span class="tech-key">Специальный:</span> С крабом и авокадо (CEO edition)</div>
+        </div>
+    </div>
+    <div class="joke-box">
+        <h3 class="joke-title">⚠️ Важное примечание</h3>
+        <p>Креветки должны быть очищены от панциря (декомпилированы) для удобства потребления.</p>
+        <p>Салат романо не терпит over-dressing — как код не терпит over-engineering.</p>
+    </div>
+    <div style="margin-top: 40px; text-align: center;">
+        <a href="index.html" class="back-btn" style="background: linear-gradient(135deg, #00b4db 0%, #0083b0 100%);">← ВЕРНУТЬСЯ К СПИСКУ БЛЮД</a>
+    </div>
+    <script>
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        document.querySelectorAll('.back-btn').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                e.preventDefault();
+                document.body.style.opacity = '0.9';
+                setTimeout(() => { window.location.href = this.getAttribute('href'); }, 150);
+            });
+        });
+    </script>
+</body>
+</html>
