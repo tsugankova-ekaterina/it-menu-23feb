@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🌯 Рулеты в лаваше | IT-Меню</title>
+    <style>
+        /* ОБЩИЕ СТИЛИ КАК НА ГЛАВНОЙ */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            background: #f8f9fa;
+            color: #333;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            line-height: 1.6;
+            padding: 20px;
+            max-width: 800px;
+            margin: 0 auto;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        /* КНОПКА НАЗАД */
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: #6c757d;
+            color: white;
+            text-decoration: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-weight: 600;
+            margin-bottom: 30px;
+            transition: background 0.3s;
+            width: fit-content;
+        }
+        
+        .back-btn:hover {
+            background: #5a6268;
+        }
+        
+        /* ЗАГОЛОВОК БЛЮДА */
+        .dish-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .dish-icon-large {
+            font-size: 4rem;
+            margin-bottom: 15px;
+            display: block;
+            text-align: center;
+        }
+        
+        .dish-name {
+            color: white;
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            font-weight: 800;
+            text-align: center;
+        }
+        
+        .dish-meta {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 1.1rem;
+            font-family: 'Courier New', monospace;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        /* ИНФО-БЛОКИ */
+        .info-block {
+            background: white;
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 25px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.06);
+        }
+        
+        .info-title {
+            color: #2c3e50;
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #f0f5ff;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .info-title::before {
+            content: "›";
+            color: #667eea;
+            font-weight: bold;
+            font-size: 1.8rem;
+        }
+        
+        /* СПИСОК ИНГРЕДИЕНТОВ */
+        .ingredients-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
+        
+        .ingredient-item {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 4px solid #667eea;
+            transition: transform 0.2s;
+        }
+        
+        .ingredient-item:hover {
+            transform: translateY(-3px);
+        }
+        
+        .ingredient-name {
+            font-weight: 700;
+            color: #2c3e50;
+            margin-bottom: 5px;
+            font-size: 1.1rem;
+        }
+        
+        .ingredient-desc {
+            color: #666;
+            font-size: 0.95rem;
+        }
+        
+        /* IT-ШУТКИ */
+        .joke-box {
+            background: #e8f5e9;
+            border-left: 4px solid #4caf50;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        
+        .joke-title {
+            color: #2e7d32;
+            font-weight: 700;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        /* ТЕХНИЧЕСКИЕ ДЕТАЛИ */
+        .tech-box {
+            background: #e3f2fd;
+            border-left: 4px solid #2196f3;
+            padding: 20px;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            font-size: 1rem;
+            line-height: 1.8;
+        }
+        
+        .tech-line {
+            margin-bottom: 8px;
+        }
+        
+        .tech-key {
+            color: #1565c0;
+            font-weight: bold;
+        }
+        
+        /* ВАРИАНТЫ */
+        .variants-box {
+            background: #fff3e0;
+            border-left: 4px solid #ff9800;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        
+        .variant-item {
+            padding: 10px 0;
+            border-bottom: 1px dashed #ffcc80;
+        }
+        
+        .variant-item:last-child {
+            border-bottom: none;
+        }
+        
+        /* МОБИЛЬНАЯ АДАПТАЦИЯ */
+        @media (max-width: 768px) {
+            body {
+                padding: 15px;
+            }
+            
+            .dish-header {
+                padding: 20px;
+            }
+            
+            .dish-name {
+                font-size: 2rem;
+            }
+            
+            .dish-icon-large {
+                font-size: 3.5rem;
+            }
+            
+            .info-block {
+                padding: 20px;
+            }
+            
+            .ingredients-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .dish-name {
+                font-size: 1.8rem;
+            }
+            
+            .info-title {
+                font-size: 1.3rem;
+            }
+            
+            .back-btn {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- КНОПКА НАЗАД -->
+    <a href="index.html" class="back-btn">← НАЗАД К МЕНЮ</a>
+    
+    <!-- ЗАГОЛОВОК БЛЮДА -->
+    <div class="dish-header">
+        <span class="dish-icon-large">🌯</span>
+        <h1 class="dish-name">Рулеты в лаваше</h1>
+        <div class="dish-meta">ID: WRAP_FISH_001 | Версия: 2.0.3 | Статус: 🔥 ГОРЯЧИЕ</div>
+    </div>
+    
+    <!-- ИНГРЕДИЕНТЫ -->
+    <div class="info-block">
+        <h2 class="info-title">📦 Состав (Ingredients Array)</h2>
+        <div class="ingredients-grid">
+            <div class="ingredient-item">
+                <div class="ingredient-name">Лаваш армянский</div>
+                <div class="ingredient-desc">Основа проекта, thin-client</div>
+            </div>
+            <div class="ingredient-item">
+                <div class="ingredient-name">Лосось слабосолёный</div>
+                <div class="ingredient-desc">Premium fish-content</div>
+            </div>
+            <div class="ingredient-item">
+                <div class="ingredient-name">Сыр сливочный</div>
+                <div class="ingredient-desc">Для связывания компонентов</div>
+            </div>
+            <div class="ingredient-item">
+                <div class="ingredient-name">Укроп свежий</div>
+                <div class="ingredient-desc">Фича для аромата</div>
+            </div>
+            <div class="ingredient-item">
+                <div class="ingredient-name">Огурец свежий</div>
+                <div class="ingredient-desc">Добавляет crispiness</div>
+            </div>
+            <div class="ingredient-item">
+                <div class="ingredient-name">Сметана/соус</div>
+                <div class="ingredient-desc">User-friendly интерфейс</div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- IT-ШУТКА -->
+    <div class="joke-box">
+        <h3 class="joke-title">💡 Почему программисты любят эти рулеты?</h3>
+        <p>• <strong>Чистая архитектура</strong> — каждый слой на своём месте</p>
+        <p>• <strong>Инкапсуляция</strong> — всё аккуратно завернуто, ничего не выпадает</p>
+        <p>• <strong>Быстрый деплой</strong> — не нужно ждать, пока "скомпилируется"</p>
+        <p>• <strong>Гибкая конфигурация</strong> — можно кастомизировать под свой стек</p>
+    </div>
+    
+    <!-- ТЕХНИЧЕСКИЕ ДЕТАЛИ -->
+    <div class="info-block">
+        <h2 class="info-title">⚙️ Технические характеристики</h2>
+        <div class="tech-box">
+            <div class="tech-line"><span class="tech-key">API endpoint:</span> GET /api/wraps/fish-cheese</div>
+            <div class="tech-line"><span class="tech-key">Время выполнения:</span> 2-3 минуты</div>
+            <div class="tech-line"><span class="tech-key">Температура сервировки:</span> +4°C (холодные)</div>
+            <div class="tech-line"><span class="tech-key">Размер порции:</span> ≈150-200g</div>
+            <div class="tech-line"><span class="tech-key">Калорийность:</span> ~220 ккал/шт</div>
+            <div class="tech-line"><span class="tech-key">Рекомендуемый стек:</span> Белое вино, лёгкое пиво</div>
+            <div class="tech-line"><span class="tech-key">Поддерживаемые ОС:</span> Все (вегетарианцы: без рыбы)</div>
+        </div>
+    </div>
+    
+    <!-- ВАРИАНТЫ ПОДАЧИ -->
+    <div class="variants-box">
+        <h3 class="info-title">🎛️ Варианты конфигурации</h3>
+        <div class="variant-item">
+            <strong>Base model:</strong> Лаваш + лосось + сливочный сыр + укроп
+        </div>
+        <div class="variant-item">
+            <strong>Pro version:</strong> + авокадо + креветки + икра
+        </div>
+        <div class="variant-item">
+            <strong>Light edition:</strong> Сметана заменена на греческий йогурт
+        </div>
+        <div class="variant-item">
+            <strong>Custom build:</strong> Можно запросить свой набор ингредиентов
+        </div>
+    </div>
+    
+    <!-- ИСТОРИЯ ВЕРСИЙ -->
+    <div class="info-block">
+        <h2 class="info-title">📝 Changelog (История обновлений)</h2>
+        <div class="tech-box">
+            <div class="tech-line"><span class="tech-key">v2.0.3 (23.02.2024):</span> Улучшена текстура лаваша</div>
+            <div class="tech-line"><span class="tech-key">v2.0.2:</span> Добавлен соус на выбор</div>
+            <div class="tech-line"><span class="tech-key">v2.0.1:</span> Оптимизирован процесс сворачивания</div>
+            <div class="tech-line"><span class="tech-key">v1.0.0:</span> Первый стабильный релиз</div>
+            <div class="tech-line"><span class="tech-key">Бета-версия:</span> Получила 98% положительных code review</div>
+        </div>
+    </div>
+    
+    <!-- КНОПКА НАЗАД ВНИЗУ -->
+    <div style="margin-top: 40px; text-align: center;">
+        <a href="index.html" class="back-btn" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">← ВЕРНУТЬСЯ К СПИСКУ БЛЮД</a>
+    </div>
+    
+    <!-- СКРИПТ ДЛЯ ПЛАВНОСТИ -->
+    <script>
+        // Плавная прокрутка к началу при загрузке
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        
+        // Плавный переход назад
+        document.querySelectorAll('.back-btn').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                e.preventDefault();
+                document.body.style.opacity = '0.9';
+                setTimeout(() => {
+                    window.location.href = this.getAttribute('href');
+                }, 150);
+            });
+        });
+        
+        // Интерактивность для ингредиентов
+        document.querySelectorAll('.ingredient-item').forEach(item => {
+            item.addEventListener('click', function() {
+                this.style.backgroundColor = '#e8f4fc';
+                setTimeout(() => {
+                    this.style.backgroundColor = '';
+                }, 300);
+            });
+        });
+    </script>
+</body>
+</html>
