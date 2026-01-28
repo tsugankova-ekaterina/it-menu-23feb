@@ -553,6 +553,146 @@
 		</div>
         
     </div>
+	
+	<!-- ПАСХАЛКА -->
+<div class="easter-egg" id="secret-gift">
+    <div class="terminal-window">
+        <div class="terminal-header">
+            <span class="terminal-dot red"></span>
+            <span class="terminal-dot yellow"></span>
+            <span class="terminal-dot green"></span>
+            <span class="terminal-title">secret_terminal.exe</span>
+        </div>
+        <div class="terminal-body">
+            <div class="terminal-line">$ ./scan_for_hidden_features</div>
+            <div class="terminal-line">🔍 Scanning... [####################] 100%</div>
+            <div class="terminal-line">✅ Hidden feature detected!</div>
+            <div class="terminal-line">$ ./access_secret_gift --user=$(whoami)</div>
+            <div class="terminal-line">🔑 Access granted. Welcome, explorer!</div>
+            <div class="terminal-line">&nbsp;</div>
+            <div class="terminal-line" style="color: #00ff00; font-weight: bold;">
+                🎁 СЕКРЕТНЫЙ ПОДАРОК АКТИВИРОВАН!
+            </div>
+            <div class="terminal-line">&nbsp;</div>
+            <div class="terminal-line">
+                <strong>Light Painting Session</strong> — фотосессия с рисованием светом.
+            </div>
+            <div class="terminal-line">
+                • Пишите код, имена, символы светом в темноте
+            </div>
+            <div class="terminal-line">
+                • Профессиональный фотограф + оборудование
+            </div>
+            <div class="terminal-line">
+                • Результат: уникальные фото для соцсетей
+            </div>
+            <div class="terminal-line">&nbsp;</div>
+            <div class="terminal-line">
+                📍 Локация: отдельная комната (дилерская)
+            </div>
+            <div class="terminal-line">
+                ⏰ Время: в течение всего вечера
+            </div>
+            <div class="terminal-line">
+                🎯 Призы: лучшие фото получат призы
+            </div>
+            <div class="terminal-line">&nbsp;</div>
+            <div class="terminal-line" style="color: #ff6b6b;">
+                ⚠️ Внимание: Эта информация видна только тем, 
+                кто доскроллил до самого конца меню!
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+.easter-egg {
+    margin: 60px auto 40px;
+    max-width: 700px;
+    opacity: 0;
+    transform: translateY(50px);
+    transition: all 1s ease-out;
+}
+
+.easter-egg.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.terminal-window {
+    background: #1a1a1a;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    border: 1px solid #333;
+}
+
+.terminal-header {
+    background: #2d2d2d;
+    padding: 15px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border-bottom: 1px solid #444;
+}
+
+.terminal-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.terminal-dot.red { background: #ff5f56; }
+.terminal-dot.yellow { background: #ffbd2e; }
+.terminal-dot.green { background: #27ca3f; }
+
+.terminal-title {
+    color: #888;
+    font-size: 0.9rem;
+    margin-left: 10px;
+    font-family: 'Courier New', monospace;
+}
+
+.terminal-body {
+    padding: 25px;
+    font-family: 'Courier New', monospace;
+    color: #f0f0f0;
+    line-height: 1.8;
+    font-size: 1rem;
+}
+
+.terminal-line {
+    margin-bottom: 8px;
+    white-space: pre-wrap;
+}
+
+.terminal-line:last-child {
+    animation: blink 2s infinite;
+}
+
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+}
+</style>
+
+<script>
+// Показываем пасхалку при скролле до низа
+window.addEventListener('scroll', function() {
+    const easterEgg = document.getElementById('secret-gift');
+    const scrollPosition = window.innerHeight + window.pageYOffset;
+    const pageHeight = document.documentElement.scrollHeight;
+    
+    // Если доскроллили до 95% страницы
+    if (scrollPosition >= pageHeight * 0.95) {
+        easterEgg.classList.add('visible');
+        
+        // Можно добавить звуковой эффект (опционально)
+        // new Audio('https://assets.mixkit.co/sfx/preview/mixkit-unlock-game-notification-253.mp3').play();
+    }
+});
+</script>
 
     <!-- ПОДВАЛ -->
     <footer class="footer">
