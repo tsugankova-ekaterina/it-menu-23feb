@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🍽️ IT-Меню | 23 Февраля</title>
+    <style>
+        /* СБРОС И БАЗОВЫЕ СТИЛИ */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            background: #f8f9fa;
+            color: #333;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            line-height: 1.6;
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        /* ШАПКА */
+        .header {
+            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            font-family: 'Courier New', monospace;
+        }
+        
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+        
+        /* КОНТЕЙНЕР БЛЮД */
+        .dishes-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+        
+        /* КАРТОЧКА БЛЮДА */
+        .dish-card {
+            background: white;
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+            border: 1px solid #e1e5e9;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .dish-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+        }
+        
+        .dish-icon {
+            font-size: 2.8rem;
+            margin-bottom: 15px;
+            display: block;
+        }
+        
+        .dish-title {
+            color: #2c3e50;
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+        
+        .dish-id {
+            background: #e8f4fc;
+            color: #2575fc;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.95rem;
+            display: inline-block;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+        
+        .dish-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 20px;
+        }
+        
+        .tag {
+            background: #f0f5ff;
+            color: #4a6bff;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+        
+        .dish-description {
+            color: #555;
+            font-size: 1.1rem;
+            margin-bottom: 25px;
+            line-height: 1.7;
+        }
+        
+        /* КНОПКА */
+        .btn {
+            display: inline-block;
+            background: linear-gradient(to right, #4776E6, #8E54E9);
+            color: white;
+            text-decoration: none;
+            padding: 14px 28px;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            text-align: center;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s;
+            width: 100%;
+            font-family: 'Courier New', monospace;
+        }
+        
+        .btn:hover {
+            background: linear-gradient(to right, #3a64d4, #7d47d8);
+            box-shadow: 0 4px 12px rgba(142, 84, 233, 0.3);
+        }
+        
+        /* ПОДВАЛ */
+        .footer {
+            text-align: center;
+            padding: 25px;
+            margin-top: 40px;
+            color: #7f8c8d;
+            border-top: 2px solid #eaeaea;
+            font-size: 1rem;
+        }
+        
+        .api-status {
+            background: #d4edda;
+            color: #155724;
+            padding: 12px;
+            border-radius: 8px;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            font-family: 'Courier New', monospace;
+        }
+        
+        .status-dot {
+            width: 12px;
+            height: 12px;
+            background: #28a745;
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.5; }
+            100% { opacity: 1; }
+        }
+        
+        /* МОБИЛЬНАЯ АДАПТАЦИЯ */
+        @media (max-width: 768px) {
+            body {
+                padding: 15px;
+            }
+            
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .dishes-container {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .dish-card {
+                padding: 20px;
+            }
+            
+            .dish-title {
+                font-size: 1.6rem;
+            }
+            
+            .btn {
+                padding: 16px 24px;
+                font-size: 1.05rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .header {
+                padding: 20px 15px;
+            }
+            
+            .header h1 {
+                font-size: 1.8rem;
+            }
+            
+            .dish-icon {
+                font-size: 2.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- ШАПКА -->
+    <header class="header">
+        <h1>🚀 FOOD API v2.4</h1>
+        <p>Интерактивное меню в стиле IT. Выберите блюдо для детальной информации.</p>
+    </header>
+
+    <!-- КОНТЕЙНЕР С БЛЮДАМИ -->
+    <div class="dishes-container">
+        
+        <!-- ГРЕЧЕСКИЙ САЛАТ -->
+        <div class="dish-card">
+            <span class="dish-icon">🥗</span>
+            <h2 class="dish-title">Греческий салат</h2>
+            <div class="dish-id">ID: SALAD_GRK_001</div>
+            
+            <div class="dish-tags">
+                <span class="tag">SALAD</span>
+                <span class="tag">VEGETARIAN</span>
+                <span class="tag">HEALTHY</span>
+                <span class="tag">COLD</span>
+            </div>
+            
+            <p class="dish-description">
+                Свежий коммит из Средиземноморья. Прошёл code review у Зевса. 
+                Идеален для очистки кэша перед основными блюдами.
+            </p>
+            
+            <a href="greek_salad.html" class="btn">📖 SELECT * FROM этот_салат</a>
+        </div>
+
+        <!-- РУЛЕТЫ В ЛАВАШЕ -->
+        <div class="dish-card">
+            <span class="dish-icon">🌯</span>
+            <h2 class="dish-title">Рулеты в лаваше</h2>
+            <div class="dish-id">ID: WRAP_001</div>
+            
+            <div class="dish-tags">
+                <span class="tag">APPETIZER</span>
+                <span class="tag">FISH</span>
+                <span class="tag">CHEESE</span>
+                <span class="tag">ROLLED</span>
+            </div>
+            
+            <p class="dish-description">
+                Запакованные данные с рыбным контентом. Безопасный merge без конфликтов.
+                Рекомендуется перед деплоем основного блюда.
+            </p>
+            
+            <a href="wrap_fish.html" class="btn">📖 EXEC wrap_procedure</a>
+        </div>
+
+        <!-- ОЛИВЬЕ -->
+        <div class="dish-card">
+            <span class="dish-icon">🥗</span>
+            <h2 class="dish-title">Оливье</h2>
+            <div class="dish-id">ID: SALAD_OLV_001</div>
+            
+            <div class="dish-tags">
+                <span class="tag">CLASSIC</span>
+                <span class="tag">LEGACY</span>
+                <span class="tag">MUST_HAVE</span>
+                <span class="tag">NEW_YEAR</span>
+            </div>
+            
+            <p class="dish-description">
+                Legacy-код, который все боятся трогать, но все обожают. 
+                Обратная совместимость с 1970-ми гарантирована.
+            </p>
+            
+            <a href="olivier.html" class="btn">📖 RUN legacy_salad.exe</a>
+        </div>
+
+        <!-- ДОБАВЬТЕ ОСТАЛЬНЫЕ БЛЮДА ПО АНАЛОГИИ -->
+        
+    </div>
+
+    <!-- ПОДВАЛ -->
+    <footer class="footer">
+        <div style="margin-bottom: 20px;">
+            <div class="api-status">
+                <div class="status-dot"></div>
+                API STATUS: ONLINE | Response time: &lt; 50ms
+            </div>
+        </div>
+        <p>© 2026 IT-Кухня. Все блюда протестированы в dev-среде.</p>
+        <p style="font-size: 0.9rem; margin-top: 10px; color: #95a5a6;">
+            Чтобы увидеть QR-код для этого меню, отсканируйте его с карточки на столе.
+        </p>
+    </footer>
+
+    <!-- СКРИПТ ДЛЯ ПЛАВНОЙ ПРОКРУТКИ -->
+    <script>
+        document.querySelectorAll('.btn').forEach(button => {
+            button.addEventListener('click', function(e) {
+                e.preventDefault();
+                const href = this.getAttribute('href');
+                // Плавный переход
+                document.body.style.opacity = '0.9';
+                setTimeout(() => {
+                    window.location.href = href;
+                }, 150);
+            });
+        });
+    </script>
+</body>
+</html>
