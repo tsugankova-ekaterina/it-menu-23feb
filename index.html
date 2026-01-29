@@ -567,12 +567,13 @@
         <h1>🚀 FOOD API v2.4</h1>
         <p>Добро пожаловать в базу данных праздничных блюд. Выберите запрос:</p>
     </header>-->
+
 	<div class="header">
 		<h1>🖥️ FOOD API v2.4</h1>
 		<p>Добро пожаловать в базу данных праздничных блюд (доступно - <span id="dish-count"></span>). Выберите запрос:</p>
 	</div>
 
-<!--
+<!-- ПОИСКОВАЯ СТРОКА
 	<div class="search-box">
 		<input type="text" id="dish-search" placeholder="🔍 Поиск по блюдам, тегам, ID..." 
 			   style="width: 100%; padding: 15px; border-radius: 10px; border: 2px solid #e1e5e9; font-size: 1.1rem;">
@@ -921,6 +922,8 @@
         
     </div>
 	
+
+	<!-- ПАСХАЛКА ДЛЯ ФОТО -->
 	<div class="light-painting-easter">
 		<div class="light-canvas">
 			<!-- Анимированный световой код -->
@@ -990,107 +993,6 @@
 		</div>
 	</div>
 
-
-	<script>
-	// ТАЙМЕР ОБРАТНОГО ОТСЧЁТА
-	function startCountdown() {
-		// Устанавливаем время окончания (например, 16:00 сегодня)
-		const endTime = new Date();
-		endTime.setHours(16, 0, 0, 0); // 16:00 сегодня
-		
-		// Если уже позже 16:00, устанавливаем на завтра
-		if (new Date() > endTime) {
-			endTime.setDate(endTime.getDate() + 1);
-		}
-		
-		function updateTimer() {
-			const now = new Date();
-			const timeLeft = endTime - now;
-			
-			if (timeLeft <= 0) {
-				// Время вышло
-				document.getElementById('hours').textContent = '00';
-				document.getElementById('minutes').textContent = '00';
-				document.getElementById('seconds').textContent = '00';
-				
-				document.querySelector('.timer-message').textContent = '⏰ ВРЕМЯ ВЫШЛО! Лаборатория света закрыта.';
-				document.querySelector('.timer-message').style.color = '#ff4444';
-				return;
-			}
-			
-			// Вычисляем часы, минуты, секунды
-			const hours = Math.floor(timeLeft / (1000 * 60 * 60));
-			const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
-			const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
-			
-			// Форматируем с ведущими нулями
-			document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
-			document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
-			document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
-			
-			// Меняем цвет при малом времени
-			if (hours === 0 && minutes < 30) {
-				document.querySelector('.timer-display').style.borderColor = '#ff4444';
-				document.querySelector('.time-value').forEach(el => el.style.color = '#ff4444');
-			}
-		}
-		
-		// Запускаем таймер сразу и каждую секунду
-		updateTimer();
-		setInterval(updateTimer, 1000);
-	}
-
-	// Анимация появления при скролле
-	const observer = new IntersectionObserver((entries) => {
-		entries.forEach(entry => {
-			if (entry.isIntersecting) {
-				entry.target.classList.add('revealed');
-				
-				// Запускаем анимацию строк по очереди
-				const lines = entry.target.querySelectorAll('.light-line');
-				lines.forEach((line, index) => {
-					setTimeout(() => {
-						line.style.animationPlayState = 'running';
-					}, index * 500 + 500);
-				});
-				
-				// Запускаем таймер
-				startCountdown();
-				
-				// Можно остановить наблюдение после первого показа
-				observer.unobserve(entry.target);
-			}
-		});
-	}, { 
-		threshold: 0.3,
-		rootMargin: '0px 0px -100px 0px' // Сработает чуть раньше
-	});
-
-	// Запускаем при загрузке
-	document.addEventListener('DOMContentLoaded', () => {
-		const easter = document.querySelector('.light-painting-easter');
-		if (easter) observer.observe(easter);
-		
-		// Добавляем звук при клике на примеры (опционально)
-		document.querySelectorAll('.example').forEach(example => {
-			example.addEventListener('click', function() {
-				// Лёгкий звук клика
-				const clickSound = new Audio('data:audio/wav;base64,UklGRigAAABXQVZFZm10IBIAAAABAAEAQB8AAEAfAAABAAgAZGF0YQ');
-				clickSound.volume = 0.1;
-				clickSound.play().catch(() => {});
-				
-				// Эффект "копирования в буфер"
-				this.style.background = '#00ff00';
-				this.style.color = '#000';
-				setTimeout(() => {
-					this.style.background = '';
-					this.style.color = '';
-				}, 300);
-			});
-		});
-	});
-	</script>
-
     <!-- ПОДВАЛ -->
     <footer class="footer">
         <div style="margin-bottom: 20px;">
@@ -1105,8 +1007,9 @@
         </p>
     </footer>
 
-    <!-- СКРИПТ ДЛЯ ПЛАВНОЙ ПРОКРУТКИ -->
+    
     <script>
+		// СКРИПТ ДЛЯ ПЛАВНОЙ ПРОКРУТКИ
         document.querySelectorAll('.btn').forEach(button => {
             button.addEventListener('click', function(e) {
                 e.preventDefault();
@@ -1128,6 +1031,7 @@
 			}
 		});
 		
+		/*
 		// Простой поиск
 		document.getElementById('dish-search').addEventListener('input', function(e) {
 			const searchTerm = e.target.value.toLowerCase();
@@ -1188,78 +1092,10 @@
 					updateResultsCounter();
 				});
 			});
-			
-
-			// ФИЛЬТРАЦИЯ ПО ТЕГАМ (БЕЗ ПОИСКА)
-			document.addEventListener('DOMContentLoaded', function() {
-				const filterButtons = document.querySelectorAll('.tag-filter');
-				const dishCards = document.querySelectorAll('.dish-card');
-				const resultsCounter = document.getElementById('results-counter');
-				
-				// Функция обновления счетчика видимых карточек
-				function updateResultsCounter() {
-					let visibleCount = 0;
-					dishCards.forEach(card => {
-						if (card.style.display !== 'none') {
-							visibleCount++;
-						}
-					});
-					
-					if (resultsCounter) {
-						resultsCounter.textContent = visibleCount;
-					}
-				}
-				
-				// Функция фильтрации
-				function filterDishes(filterValue) {
-					dishCards.forEach(card => {
-						if (filterValue === 'all') {
-							card.style.display = 'block';
-							// Плавное появление
-							setTimeout(() => {
-								card.style.opacity = '1';
-								card.style.transform = 'translateY(0)';
-							}, 50);
-						} else {
-							const cardTags = card.getAttribute('data-tag');
-							// Проверяем, содержит ли карточка нужный тег
-							if (cardTags && cardTags.includes(filterValue)) {
-								card.style.display = 'block';
-								// Плавное появление
-								setTimeout(() => {
-									card.style.opacity = '1';
-									card.style.transform = 'translateY(0)';
-								}, 50);
-							} else {
-								card.style.display = 'none';
-								card.style.opacity = '0';
-								card.style.transform = 'translateY(20px)';
-							}
-						}
-					});
-					
-					updateResultsCounter();
-				}
-				
-				// Обработчики кликов на кнопки фильтров
-				filterButtons.forEach(button => {
-					button.addEventListener('click', function() {
-						// Убираем активный класс у всех кнопок
-						filterButtons.forEach(btn => btn.classList.remove('active'));
-						// Добавляем активный класс текущей кнопке
-						this.classList.add('active');
-						
-						const filterValue = this.getAttribute('data-tag');
-						filterDishes(filterValue);
-					});
-				});
-				
-				// Инициализация - показываем все блюда и обновляем счетчик
-				updateResultsCounter();
-			});
 
 
 			// Поиск
+			
 			if (searchInput) {
 				searchInput.addEventListener('input', function(e) {
 					const searchTerm = e.target.value.toLowerCase().trim();
@@ -1297,6 +1133,175 @@
 				});
 			}
 		});
+		*/
+
+		// ФИЛЬТРАЦИЯ ПО ТЕГАМ (БЕЗ ПОИСКА)
+		document.addEventListener('DOMContentLoaded', function() {
+			const filterButtons = document.querySelectorAll('.tag-filter');
+			const dishCards = document.querySelectorAll('.dish-card');
+			const resultsCounter = document.getElementById('results-counter');
+			
+			// Функция обновления счетчика видимых карточек
+			function updateResultsCounter() {
+				let visibleCount = 0;
+				dishCards.forEach(card => {
+					if (card.style.display !== 'none') {
+						visibleCount++;
+					}
+				});
+				
+				if (resultsCounter) {
+					resultsCounter.textContent = visibleCount;
+				}
+			}
+			
+			// Функция фильтрации
+			function filterDishes(filterValue) {
+				dishCards.forEach(card => {
+					if (filterValue === 'all') {
+						card.style.display = 'block';
+						// Плавное появление
+						setTimeout(() => {
+							card.style.opacity = '1';
+							card.style.transform = 'translateY(0)';
+						}, 50);
+					} else {
+						const cardTags = card.getAttribute('data-tag');
+						// Проверяем, содержит ли карточка нужный тег
+						if (cardTags && cardTags.includes(filterValue)) {
+							card.style.display = 'block';
+							// Плавное появление
+							setTimeout(() => {
+								card.style.opacity = '1';
+								card.style.transform = 'translateY(0)';
+							}, 50);
+						} else {
+							card.style.display = 'none';
+							card.style.opacity = '0';
+							card.style.transform = 'translateY(20px)';
+						}
+					}
+				});
+				
+				updateResultsCounter();
+			}
+			
+			// Обработчики кликов на кнопки фильтров
+			filterButtons.forEach(button => {
+				button.addEventListener('click', function() {
+					// Убираем активный класс у всех кнопок
+					filterButtons.forEach(btn => btn.classList.remove('active'));
+					// Добавляем активный класс текущей кнопке
+					this.classList.add('active');
+					
+					const filterValue = this.getAttribute('data-tag');
+					filterDishes(filterValue);
+				});
+			});
+			
+			// Инициализация - показываем все блюда и обновляем счетчик
+			updateResultsCounter();
+		});
+
+
+		// ТАЙМЕР ОБРАТНОГО ОТСЧЁТА
+		function startCountdown() {
+			// Устанавливаем время окончания (например, 16:00 сегодня)
+			const endTime = new Date();
+			endTime.setHours(16, 0, 0, 0); // 16:00 сегодня
+			
+			// Если уже позже 16:00, устанавливаем на завтра
+			if (new Date() > endTime) {
+				endTime.setDate(endTime.getDate() + 1);
+			}
+			
+			function updateTimer() {
+				const now = new Date();
+				const timeLeft = endTime - now;
+				
+				if (timeLeft <= 0) {
+					// Время вышло
+					document.getElementById('hours').textContent = '00';
+					document.getElementById('minutes').textContent = '00';
+					document.getElementById('seconds').textContent = '00';
+					
+					document.querySelector('.timer-message').textContent = '⏰ ВРЕМЯ ВЫШЛО! Лаборатория света закрыта.';
+					document.querySelector('.timer-message').style.color = '#ff4444';
+					return;
+				}
+				
+				// Вычисляем часы, минуты, секунды
+				const hours = Math.floor(timeLeft / (1000 * 60 * 60));
+				const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+				const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+				
+				// Форматируем с ведущими нулями
+				document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
+				document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
+				document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
+				
+				// Меняем цвет при малом времени
+				if (hours === 0 && minutes < 30) {
+					document.querySelector('.timer-display').style.borderColor = '#ff4444';
+					document.querySelector('.time-value').forEach(el => el.style.color = '#ff4444');
+				}
+			}
+			
+			// Запускаем таймер сразу и каждую секунду
+			updateTimer();
+			setInterval(updateTimer, 1000);
+		}
+
+		// Анимация появления при скролле
+		const observer = new IntersectionObserver((entries) => {
+			entries.forEach(entry => {
+				if (entry.isIntersecting) {
+					entry.target.classList.add('revealed');
+					
+					// Запускаем анимацию строк по очереди
+					const lines = entry.target.querySelectorAll('.light-line');
+					lines.forEach((line, index) => {
+						setTimeout(() => {
+							line.style.animationPlayState = 'running';
+						}, index * 500 + 500);
+					});
+					
+					// Запускаем таймер
+					startCountdown();
+					
+					// Можно остановить наблюдение после первого показа
+					observer.unobserve(entry.target);
+				}
+			});
+		}, { 
+			threshold: 0.3,
+			rootMargin: '0px 0px -100px 0px' // Сработает чуть раньше
+		});
+
+		// Запускаем при загрузке
+		document.addEventListener('DOMContentLoaded', () => {
+				const easter = document.querySelector('.light-painting-easter');
+				if (easter) observer.observe(easter);
+				
+				// Добавляем звук при клике на примеры (опционально)
+				document.querySelectorAll('.example').forEach(example => {
+					example.addEventListener('click', function() {
+						// Лёгкий звук клика
+						const clickSound = new Audio('data:audio/wav;base64,UklGRigAAABXQVZFZm10IBIAAAABAAEAQB8AAEAfAAABAAgAZGF0YQ');
+						clickSound.volume = 0.1;
+						clickSound.play().catch(() => {});
+						
+						// Эффект "копирования в буфер"
+						this.style.background = '#00ff00';
+						this.style.color = '#000';
+						setTimeout(() => {
+							this.style.background = '';
+							this.style.color = '';
+						}, 300);
+					});
+				});
+			});
+
     </script>
 </body>
 </html>
