@@ -213,88 +213,352 @@
         }
 
 		/* СТИЛИ ДЛЯ ФИЛЬТРОВ И ПОИСКА */
-	.search-filter-container {
-		margin: 30px 0;
-	}
+		.search-filter-container {
+			margin: 30px 0;
+		}
 
-	.search-box {
-		margin-bottom: 25px;
-	}
+		.search-box {
+			margin-bottom: 25px;
+		}
 
-	#dish-search {
-		width: 100%;
-		padding: 16px 20px;
-		border-radius: 12px;
-		border: 2px solid #e1e5e9;
-		font-size: 1.1rem;
-		font-family: inherit;
-		transition: all 0.3s;
-		background: white;
-	}
+		#dish-search {
+			width: 100%;
+			padding: 16px 20px;
+			border-radius: 12px;
+			border: 2px solid #e1e5e9;
+			font-size: 1.1rem;
+			font-family: inherit;
+			transition: all 0.3s;
+			background: white;
+		}
 
-	#dish-search:focus {
-		outline: none;
-		border-color: #4776E6;
-		box-shadow: 0 0 0 3px rgba(71, 118, 230, 0.1);
-	}
+		#dish-search:focus {
+			outline: none;
+			border-color: #4776E6;
+			box-shadow: 0 0 0 3px rgba(71, 118, 230, 0.1);
+		}
 
-	.tag-filters {
-		display: flex;
-		flex-wrap: wrap;
-		gap: 12px;
-		margin-bottom: 30px;
-		justify-content: center;
-	}
+		.tag-filters {
+			display: flex;
+			flex-wrap: wrap;
+			gap: 12px;
+			margin-bottom: 30px;
+			justify-content: center;
+		}
 
-	.tag-filter {
-		padding: 12px 24px;
-		background: #f0f5ff;
-		border: 2px solid #d1d9e6;
-		border-radius: 25px;
-		cursor: pointer;
-		font-weight: 600;
-		color: #4776E6;
-		transition: all 0.3s;
-		font-size: 0.95rem;
-		display: flex;
-		align-items: center;
-		gap: 8px;
-	}
+		.tag-filter {
+			padding: 12px 24px;
+			background: #f0f5ff;
+			border: 2px solid #d1d9e6;
+			border-radius: 25px;
+			cursor: pointer;
+			font-weight: 600;
+			color: #4776E6;
+			transition: all 0.3s;
+			font-size: 0.95rem;
+			display: flex;
+			align-items: center;
+			gap: 8px;
+		}
 
-	.tag-filter:hover {
-		background: #e1e9ff;
-		transform: translateY(-2px);
-	}
+		.tag-filter:hover {
+			background: #e1e9ff;
+			transform: translateY(-2px);
+		}
 
-	.tag-filter.active {
-		background: #4776E6;
-		color: white;
-		border-color: #4776E6;
-		box-shadow: 0 4px 12px rgba(71, 118, 230, 0.2);
-	}
+		.tag-filter.active {
+			background: #4776E6;
+			color: white;
+			border-color: #4776E6;
+			box-shadow: 0 4px 12px rgba(71, 118, 230, 0.2);
+		}
 
-	/* Анимация для карточек при фильтрации */
-	.dish-card {
-		transition: all 0.4s ease;
-		opacity: 1;
-		transform: translateY(0);
-	}
+		/* Анимация для карточек при фильтрации */
+		.dish-card {
+			transition: all 0.4s ease;
+			opacity: 1;
+			transform: translateY(0);
+		}
 
-	.dish-card.hidden {
-		opacity: 0;
-		transform: translateY(20px);
-		height: 0;
-		margin: 0;
-		padding: 0;
-		overflow: hidden;
-	}
+		.dish-card.hidden {
+			opacity: 0;
+			transform: translateY(20px);
+			height: 0;
+			margin: 0;
+			padding: 0;
+			overflow: hidden;
+		}
 
-	.results-count {
-		text-align: center;
-		color: #7f8c8d;
-		margin-bottom: 20px;
-		font-size: 1.1rem;
-	}
+		.results-count {
+			text-align: center;
+			color: #7f8c8d;
+			margin-bottom: 20px;
+			font-size: 1.1rem;
+		}
+
+		.light-painting-easter {
+			background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 100%);
+			color: white;
+			border-radius: 20px;
+			padding: 40px;
+			margin: 50px auto;
+			max-width: 800px;
+			position: relative;
+			overflow: hidden;
+			border: 2px solid #00ff00;
+			box-shadow: 0 0 30px rgba(0, 255, 0, 0.2);
+		}
+
+		.light-painting-easter::before {
+			content: "";
+			position: absolute;
+			top: -50%;
+			left: -50%;
+			width: 200%;
+			height: 200%;
+			background: radial-gradient(circle, rgba(0,255,0,0.1) 0%, transparent 70%);
+			animation: pulse 4s infinite;
+		}
+
+		@keyframes pulse {
+			0% { transform: scale(1); opacity: 0.3; }
+			50% { transform: scale(1.1); opacity: 0.5; }
+			100% { transform: scale(1); opacity: 0.3; }
+		}
+
+		.light-canvas {
+			font-family: 'Courier New', monospace;
+			font-size: 1.2rem;
+			margin-bottom: 30px;
+			padding: 20px;
+			background: rgba(0,0,0,0.5);
+			border-radius: 10px;
+			border-left: 4px solid #00ff00;
+		}
+
+		.light-line {
+			opacity: 0;
+			animation: lightWrite 0.5s ease-out forwards;
+			animation-delay: var(--delay);
+			margin-bottom: 10px;
+			color: #00ff00;
+			text-shadow: 0 0 10px #00ff00;
+		}
+
+		@keyframes lightWrite {
+			to {
+				opacity: 1;
+				text-shadow: 0 0 15px #00ff00;
+			}
+		}
+
+		/* ТАЙМЕР */
+		.countdown-timer {
+			background: rgba(0, 0, 0, 0.7);
+			border: 2px solid #00ffff;
+			border-radius: 15px;
+			padding: 25px;
+			margin: 30px 0;
+			text-align: center;
+			box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
+		}
+
+		.timer-header {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			gap: 15px;
+			margin-bottom: 20px;
+		}
+
+		.timer-icon {
+			font-size: 2rem;
+			animation: pulse 2s infinite;
+		}
+
+		.timer-header h3 {
+			color: #00ffff;
+			margin: 0;
+			font-size: 1.3rem;
+			text-align: center;
+		}
+
+		.timer-display {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			gap: 15px;
+			margin: 25px 0;
+		}
+
+		.time-unit {
+			background: rgba(0, 0, 0, 0.8);
+			border-radius: 10px;
+			padding: 15px 20px;
+			min-width: 100px;
+			border: 2px solid #00ff00;
+		}
+
+		.time-value {
+			font-size: 3rem;
+			font-weight: bold;
+			font-family: 'Courier New', monospace;
+			color: #00ff00;
+			text-shadow: 0 0 10px #00ff00;
+			line-height: 1;
+		}
+
+		.time-label {
+			font-size: 0.9rem;
+			color: #aaa;
+			margin-top: 5px;
+			text-transform: uppercase;
+			letter-spacing: 1px;
+		}
+
+		.time-separator {
+			font-size: 3rem;
+			color: #00ffff;
+			font-weight: bold;
+			margin-bottom: 25px;
+			animation: blink 1s infinite;
+		}
+
+		@keyframes blink {
+			0%, 100% { opacity: 1; }
+			50% { opacity: 0.3; }
+		}
+
+		.timer-message {
+			color: #ffcc00;
+			font-size: 1.1rem;
+			margin-top: 15px;
+			font-weight: bold;
+		}
+
+		/* ОСТАЛЬНЫЕ ЭЛЕМЕНТЫ */
+		.easter-info {
+			text-align: center;
+			padding: 20px 0;
+		}
+
+		.easter-info h3 {
+			color: #00ff00;
+			font-size: 1.8rem;
+			margin-bottom: 15px;
+		}
+
+		.easter-info p {
+			line-height: 1.6;
+			margin-bottom: 15px;
+			font-size: 1.1rem;
+		}
+
+		.examples {
+			margin: 30px 0;
+			padding: 20px;
+			background: rgba(255, 255, 255, 0.05);
+			border-radius: 15px;
+		}
+
+		.examples h4 {
+			color: #ffcc00;
+			margin-bottom: 20px;
+			font-size: 1.4rem;
+		}
+
+		.example-grid {
+			display: grid;
+			grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+			gap: 15px;
+			margin-top: 20px;
+		}
+
+		.example {
+			background: rgba(0, 255, 255, 0.1);
+			border: 1px solid #00ffff;
+			border-radius: 8px;
+			padding: 15px;
+			font-family: 'Courier New', monospace;
+			font-size: 1.2rem;
+			transition: all 0.3s;
+		}
+
+		.example:hover {
+			background: rgba(0, 255, 255, 0.2);
+			transform: translateY(-5px);
+			box-shadow: 0 5px 15px rgba(0, 255, 255, 0.2);
+		}
+
+		.instructions {
+			background: rgba(255, 215, 0, 0.1);
+			border-left: 4px solid #ffd700;
+			padding: 20px;
+			border-radius: 10px;
+			margin-top: 25px;
+			text-align: left;
+		}
+
+		.instructions p {
+			margin-bottom: 10px;
+		}
+
+		/* Анимация появления при скролле */
+		.light-painting-easter {
+			opacity: 0;
+			transform: translateY(100px) rotateX(90deg);
+			transition: all 1.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+		}
+
+		.light-painting-easter.revealed {
+			opacity: 1;
+			transform: translateY(0) rotateX(0);
+		}
+
+		/* Адаптивность */
+		@media (max-width: 768px) {
+			.light-painting-easter {
+				padding: 25px;
+				margin: 30px 15px;
+			}
+			
+			.timer-display {
+				gap: 10px;
+			}
+			
+			.time-unit {
+				min-width: 80px;
+				padding: 10px 15px;
+			}
+			
+			.time-value {
+				font-size: 2.2rem;
+			}
+			
+			.timer-header h3 {
+				font-size: 1.1rem;
+			}
+			
+			.example-grid {
+				grid-template-columns: repeat(2, 1fr);
+			}
+		}
+
+		@media (max-width: 480px) {
+			.timer-display {
+				flex-direction: column;
+				gap: 10px;
+			}
+			
+			.time-separator {
+				display: none;
+			}
+			
+			.time-unit {
+				width: 100%;
+				max-width: 200px;
+			}
+		}
     </style>
 </head>
 <body>
@@ -315,18 +579,14 @@
 -->
 
 
-	<style>
-	
-	</style>
-
 	<div class="search-filter-container">
-		<!-- ПОИСК -->
+		<!-- ПОИСК 
 		<div class="search-box">
 			<input type="text" id="dish-search" 
 				   placeholder="🔍 Поиск по блюдам, ингредиентам, ID..." 
 				   aria-label="Поиск блюд">
 		</div>
-		
+		-->
 		<!-- ФИЛЬТРЫ -->
 		<div class="tag-filters">
 			<button class="tag-filter active" data-tag="all">
@@ -553,6 +813,69 @@
 			
 			<a href="baked_meat.html" class="btn">📖 BAKE meat_processor()</a>
 		</div>
+
+		<!-- 🥗 КУРИНЫЙ САЛАТ -->
+		<div class="dish-card" data-tag="salad chicken cold protein">
+			<span class="dish-icon">🥗</span>
+			<h2 class="dish-title">Куриный салат</h2>
+			<div class="dish-id">ID: SALAD_CHICKEN_001</div>
+			
+			<div class="dish-tags">
+				<span class="tag">SALAD</span>
+				<span class="tag">CHICKEN</span>
+				<span class="tag">PROTEIN</span>
+				<span class="tag">COLD</span>
+			</div>
+			
+			<p class="dish-description">
+				Сбалансированный protein array с куриным филе, яйцами и овощами.
+				Идеальный team lunch без food coma.
+			</p>
+			
+			<a href="chicken_salad.html" class="btn">📖 SELECT protein_salad()</a>
+		</div>
+
+		<!-- 🏹 ОХОТНИЧИЙ САЛАТ -->
+		<div class="dish-card" data-tag="salad meat cold heavy">
+			<span class="dish-icon">🏹</span>
+			<h2 class="dish-title">Охотничий салат</h2>
+			<div class="dish-id">ID: SALAD_HUNTER_001</div>
+			
+			<div class="dish-tags">
+				<span class="tag">MEAT</span>
+				<span class="tag">HEAVY</span>
+				<span class="tag">SALAD</span>
+				<span class="tag">COLD</span>
+			</div>
+			
+			<p class="dish-description">
+				Мясной экспресс для настоящих добытчиков. Колбаса, огурцы, горошек.
+				Энергии хватит на целый день кодинга.
+			</p>
+			
+			<a href="hunter_salad.html" class="btn">📖 EXEC hunt_salad()</a>
+		</div>
+
+		<!-- 🎣 РУЛЕТИКИ С КРАСНОЙ РЫБОЙ -->
+		<div class="dish-card" data-tag="snack fish cold premium">
+			<span class="dish-icon">🎣</span>
+			<h2 class="dish-title">Рулетики с красной рыбой</h2>
+			<div class="dish-id">ID: ROLLS_SALMON_001</div>
+			
+			<div class="dish-tags">
+				<span class="tag">PREMIUM</span>
+				<span class="tag">FISH</span>
+				<span class="tag">SNACK</span>
+				<span class="tag">COLD</span>
+			</div>
+			
+			<p class="dish-description">
+				Seafood royalty в удобном формате. Лосось, сливочный сыр, зелень.
+				Монолитная архитектура вкуса.
+			</p>
+			
+			<a href="salmon_rolls.html" class="btn">📖 ROLL salmon_package()</a>
+		</div>
         
     </div>
 	
@@ -626,279 +949,17 @@
 	</div>
 
 	<style>
-	.light-painting-easter {
-		background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 100%);
-		color: white;
-		border-radius: 20px;
-		padding: 40px;
-		margin: 50px auto;
-		max-width: 800px;
-		position: relative;
-		overflow: hidden;
-		border: 2px solid #00ff00;
-		box-shadow: 0 0 30px rgba(0, 255, 0, 0.2);
-	}
-
-	.light-painting-easter::before {
-		content: "";
-		position: absolute;
-		top: -50%;
-		left: -50%;
-		width: 200%;
-		height: 200%;
-		background: radial-gradient(circle, rgba(0,255,0,0.1) 0%, transparent 70%);
-		animation: pulse 4s infinite;
-	}
-
-	@keyframes pulse {
-		0% { transform: scale(1); opacity: 0.3; }
-		50% { transform: scale(1.1); opacity: 0.5; }
-		100% { transform: scale(1); opacity: 0.3; }
-	}
-
-	.light-canvas {
-		font-family: 'Courier New', monospace;
-		font-size: 1.2rem;
-		margin-bottom: 30px;
-		padding: 20px;
-		background: rgba(0,0,0,0.5);
-		border-radius: 10px;
-		border-left: 4px solid #00ff00;
-	}
-
-	.light-line {
-		opacity: 0;
-		animation: lightWrite 0.5s ease-out forwards;
-		animation-delay: var(--delay);
-		margin-bottom: 10px;
-		color: #00ff00;
-		text-shadow: 0 0 10px #00ff00;
-	}
-
-	@keyframes lightWrite {
-		to {
-			opacity: 1;
-			text-shadow: 0 0 15px #00ff00;
-		}
-	}
-
-	/* ТАЙМЕР */
-	.countdown-timer {
-		background: rgba(0, 0, 0, 0.7);
-		border: 2px solid #00ffff;
-		border-radius: 15px;
-		padding: 25px;
-		margin: 30px 0;
-		text-align: center;
-		box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
-	}
-
-	.timer-header {
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		gap: 15px;
-		margin-bottom: 20px;
-	}
-
-	.timer-icon {
-		font-size: 2rem;
-		animation: pulse 2s infinite;
-	}
-
-	.timer-header h3 {
-		color: #00ffff;
-		margin: 0;
-		font-size: 1.3rem;
-		text-align: center;
-	}
-
-	.timer-display {
-		display: flex;
-		justify-content: center;
-		align-items: center;
-		gap: 15px;
-		margin: 25px 0;
-	}
-
-	.time-unit {
-		background: rgba(0, 0, 0, 0.8);
-		border-radius: 10px;
-		padding: 15px 20px;
-		min-width: 100px;
-		border: 2px solid #00ff00;
-	}
-
-	.time-value {
-		font-size: 3rem;
-		font-weight: bold;
-		font-family: 'Courier New', monospace;
-		color: #00ff00;
-		text-shadow: 0 0 10px #00ff00;
-		line-height: 1;
-	}
-
-	.time-label {
-		font-size: 0.9rem;
-		color: #aaa;
-		margin-top: 5px;
-		text-transform: uppercase;
-		letter-spacing: 1px;
-	}
-
-	.time-separator {
-		font-size: 3rem;
-		color: #00ffff;
-		font-weight: bold;
-		margin-bottom: 25px;
-		animation: blink 1s infinite;
-	}
-
-	@keyframes blink {
-		0%, 100% { opacity: 1; }
-		50% { opacity: 0.3; }
-	}
-
-	.timer-message {
-		color: #ffcc00;
-		font-size: 1.1rem;
-		margin-top: 15px;
-		font-weight: bold;
-	}
-
-	/* ОСТАЛЬНЫЕ ЭЛЕМЕНТЫ */
-	.easter-info {
-		text-align: center;
-		padding: 20px 0;
-	}
-
-	.easter-info h3 {
-		color: #00ff00;
-		font-size: 1.8rem;
-		margin-bottom: 15px;
-	}
-
-	.easter-info p {
-		line-height: 1.6;
-		margin-bottom: 15px;
-		font-size: 1.1rem;
-	}
-
-	.examples {
-		margin: 30px 0;
-		padding: 20px;
-		background: rgba(255, 255, 255, 0.05);
-		border-radius: 15px;
-	}
-
-	.examples h4 {
-		color: #ffcc00;
-		margin-bottom: 20px;
-		font-size: 1.4rem;
-	}
-
-	.example-grid {
-		display: grid;
-		grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-		gap: 15px;
-		margin-top: 20px;
-	}
-
-	.example {
-		background: rgba(0, 255, 255, 0.1);
-		border: 1px solid #00ffff;
-		border-radius: 8px;
-		padding: 15px;
-		font-family: 'Courier New', monospace;
-		font-size: 1.2rem;
-		transition: all 0.3s;
-	}
-
-	.example:hover {
-		background: rgba(0, 255, 255, 0.2);
-		transform: translateY(-5px);
-		box-shadow: 0 5px 15px rgba(0, 255, 255, 0.2);
-	}
-
-	.instructions {
-		background: rgba(255, 215, 0, 0.1);
-		border-left: 4px solid #ffd700;
-		padding: 20px;
-		border-radius: 10px;
-		margin-top: 25px;
-		text-align: left;
-	}
-
-	.instructions p {
-		margin-bottom: 10px;
-	}
-
-	/* Анимация появления при скролле */
-	.light-painting-easter {
-		opacity: 0;
-		transform: translateY(100px) rotateX(90deg);
-		transition: all 1.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-	}
-
-	.light-painting-easter.revealed {
-		opacity: 1;
-		transform: translateY(0) rotateX(0);
-	}
-
-	/* Адаптивность */
-	@media (max-width: 768px) {
-		.light-painting-easter {
-			padding: 25px;
-			margin: 30px 15px;
-		}
-		
-		.timer-display {
-			gap: 10px;
-		}
-		
-		.time-unit {
-			min-width: 80px;
-			padding: 10px 15px;
-		}
-		
-		.time-value {
-			font-size: 2.2rem;
-		}
-		
-		.timer-header h3 {
-			font-size: 1.1rem;
-		}
-		
-		.example-grid {
-			grid-template-columns: repeat(2, 1fr);
-		}
-	}
-
-	@media (max-width: 480px) {
-		.timer-display {
-			flex-direction: column;
-			gap: 10px;
-		}
-		
-		.time-separator {
-			display: none;
-		}
-		
-		.time-unit {
-			width: 100%;
-			max-width: 200px;
-		}
-	}
+	
 	</style>
 
 	<script>
 	// ТАЙМЕР ОБРАТНОГО ОТСЧЁТА
 	function startCountdown() {
-		// Устанавливаем время окончания (например, 23:00 сегодня)
+		// Устанавливаем время окончания (например, 16:00 сегодня)
 		const endTime = new Date();
-		endTime.setHours(23, 0, 0, 0); // 23:00 сегодня
+		endTime.setHours(16, 0, 0, 0); // 16:00 сегодня
 		
-		// Если уже позже 23:00, устанавливаем на завтра
+		// Если уже позже 16:00, устанавливаем на завтра
 		if (new Date() > endTime) {
 			endTime.setDate(endTime.getDate() + 1);
 		}

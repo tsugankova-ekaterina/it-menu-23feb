@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🥗 Куриный салат | IT-Меню</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            background: #f8f9fa; color: #333;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6; padding: 20px; max-width: 800px; margin: 0 auto;
+            min-height: 100vh; display: flex; flex-direction: column;
+        }
+        .back-btn {
+            display: inline-flex; align-items: center; gap: 8px;
+            background: #6c757d; color: white; text-decoration: none;
+            padding: 12px 24px; border-radius: 8px; font-weight: 600;
+            margin-bottom: 30px; transition: background 0.3s; width: fit-content;
+        }
+        .back-btn:hover { background: #5a6268; }
+        .dish-header {
+            background: linear-gradient(135deg, #FFA07A 0%, #FF7F50 100%);
+            color: #333; border-radius: 15px; padding: 30px;
+            margin-bottom: 30px; box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        .dish-icon-large { font-size: 4rem; margin-bottom: 15px; text-align: center; }
+        .dish-name { color: #333; font-size: 2.5rem; margin-bottom: 10px; 
+                    font-weight: 800; text-align: center; }
+        .dish-meta { color: #666; font-size: 1.1rem; font-family: 'Courier New', monospace;
+                    margin-bottom: 20px; text-align: center; }
+        .info-block { background: white; border-radius: 12px; padding: 25px;
+                     margin-bottom: 25px; box-shadow: 0 3px 10px rgba(0,0,0,0.06); }
+        .info-title { color: #2c3e50; font-size: 1.5rem; margin-bottom: 20px;
+                     padding-bottom: 10px; border-bottom: 2px solid #f0f5ff;
+                     display: flex; align-items: center; gap: 10px; }
+        .info-title::before { content: "›"; color: #FF7F50; 
+                            font-weight: bold; font-size: 1.8rem; }
+        .ingredients-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; }
+        .ingredient-item { background: #f8f9fa; padding: 15px; border-radius: 8px;
+                          border-left: 4px solid #FF7F50; transition: transform 0.2s; }
+        .ingredient-item:hover { transform: translateY(-3px); }
+        .ingredient-name { font-weight: 700; color: #2c3e50; margin-bottom: 5px; font-size: 1.1rem; }
+        .ingredient-desc { color: #666; font-size: 0.95rem; }
+        .joke-box { background: #fff0f5; border-left: 4px solid #FF69B4;
+                   padding: 20px; border-radius: 8px; margin: 20px 0; }
+        .joke-title { color: #c2185b; font-weight: 700; margin-bottom: 10px;
+                     display: flex; align-items: center; gap: 10px; }
+        .tech-box { background: #fffaf0; border-left: 4px solid #FFA07A;
+                   padding: 20px; border-radius: 8px; font-family: 'Courier New', monospace;
+                   font-size: 1rem; line-height: 1.8; }
+        .tech-line { margin-bottom: 8px; }
+        .tech-key { color: #d2691e; font-weight: bold; }
+        .salad-types { display: flex; flex-wrap: wrap; gap: 15px; margin-top: 20px; }
+        .salad-type { flex: 1; min-width: 180px; background: #fff5ee; 
+                     padding: 15px; border-radius: 8px; border: 2px solid #FF7F50; }
+        .salad-type h4 { color: #d2691e; margin-bottom: 10px; }
+        @media (max-width: 768px) {
+            body { padding: 15px; } .dish-header { padding: 20px; }
+            .dish-name { font-size: 2rem; } .dish-icon-large { font-size: 3.5rem; }
+            .info-block { padding: 20px; } .ingredients-grid { grid-template-columns: 1fr; }
+            .salad-types { flex-direction: column; }
+        }
+        @media (max-width: 480px) {
+            .dish-name { font-size: 1.8rem; } .info-title { font-size: 1.3rem; }
+            .back-btn { width: 100%; justify-content: center; }
+        }
+    </style>
+</head>
+<body>
+    <a href="index.html" class="back-btn">← НАЗАД К МЕНЮ</a>
+    <div class="dish-header">
+        <span class="dish-icon-large">🥗</span>
+        <h1 class="dish-name">Куриный салат</h1>
+        <div class="dish-meta">ID: SALAD_CHICKEN_001 | Версия: 2.3.1 | Статус: 🐔 БЕЛКОВЫЙ</div>
+    </div>
+    <div class="info-block">
+        <h2 class="info-title">📦 Состав (Protein Array)</h2>
+        <div class="ingredients-grid">
+            <div class="ingredient-item"><div class="ingredient-name">Куриное филе</div><div class="ingredient-desc">Основной процессор, lean protein source</div></div>
+            <div class="ingredient-item"><div class="ingredient-name">Яйца варёные</div><div class="ingredient-desc">Дополнительный protein package</div></div>
+            <div class="ingredient-item"><div class="ingredient-name">Огурцы свежие/солёные</div><div class="ingredient-desc">Hydration modules, crisp texture</div></div>
+            <div class="ingredient-item"><div class="ingredient-name">Кукуруза консервированная</div><div class="ingredient-desc">Sweet data points, golden kernels</div></div>
+            <div class="ingredient-item"><div class="ingredient-name">Лук зелёный/репчатый</div><div class="ingredient-desc">Aromatic layers, flavor enhancers</div></div>
+            <div class="ingredient-item"><div class="ingredient-name">Майонез/йогурт</div><div class="ingredient-desc">Binding algorithm, sauce protocol</div></div>
+            <div class="ingredient-item"><div class="ingredient-name">Соль, перец, зелень</div><div class="ingredient-desc">System configuration, final tuning</div></div>
+        </div>
+    </div>
+    <div class="info-block">
+        <h2 class="info-title">🎛️ Варианты салата (Configurations)</h2>
+        <div class="salad-types">
+            <div class="salad-type">
+                <h4>🥗 Классический</h4>
+                <p>Курица + яйца + огурцы + кукуруза + майонез</p>
+                <small>Стандартная сборка</small>
+            </div>
+            <div class="salad-type">
+                <h4>🥬 Диетический</h4>
+                <p>Курица + овощи + греческий йогурт</p>
+                <small>Low-calorie edition</small>
+            </div>
+            <div class="salad-type">
+                <h4>🌶️ Пикантный</h4>
+                <p>С чесноком, горчицей, пряными травами</p>
+                <small>Для любителей острого</small>
+            </div>
+            <div class="salad-type">
+                <h4>🥓 Премиум</h4>
+                <p>С беконом, авокадо, кедровыми орешками</p>
+                <small>Gourmet version</small>
+            </div>
+        </div>
+    </div>
+    <div class="joke-box">
+        <h3 class="joke-title">💡 Почему куриный салат — идеальный team lunch?</h3>
+        <p>• <strong>Сбалансированный</strong> — белки, жиры, углеводы в идеальном ratio</p>
+        <p>• <strong>Быстро усваивается</strong> — не вызывает food coma после обеда</p>
+        <p>• <strong>Масштабируемый</strong> — легко увеличить порцию для всего отдела</p>
+        <p>• <strong>Совместимый</strong> — подходит для большинства диет (кроме веганских)</p>
+    </div>
+    <div class="info-block">
+        <h2 class="info-title">⚙️ Технические характеристики</h2>
+        <div class="tech-box">
+            <div class="tech-line"><span class="tech-key">Калорийность:</span> ~180-220 ккал/100g (в зависимости от соуса)</div>
+            <div class="tech-line"><span class="tech-key">Белок:</span> 15-20g на порцию (отличный protein score)</div>
+            <div class="tech-line"><span class="tech-key">Время приготовления:</span> 25-30 минут (включая варку курицы)</div>
+            <div class="tech-line"><span class="tech-key">Температура сервировки:</span> +4°C до +8°C (оптимально охлаждённый)</div>
+            <div class="tech-line"><span class="tech-key">Срок годности:</span> 24-48 часов в холодильнике</div>
+            <div class="tech-line"><span class="tech-key">Идеальные пары:</span> Хлеб, лаваш, крекеры, свежие овощи</div>
+            <div class="tech-line"><span class="tech-key">Особенность:</span> Вкус улучшается после 2-3 часов маринования</div>
+        </div>
+    </div>
+    <div class="info-block">
+        <h2 class="info-title">🎯 Процесс сборки</h2>
+        <div class="tech-box">
+            <div class="tech-line">1. Подготовка компонентов (ingredient preprocessing)</div>
+            <div class="tech-line">2. Нарезка кубиками (data chunking)</div>
+            <div class="tech-line">3. Смешивание (array merging)</div>
+            <div class="tech-line">4. Добавление соуса (sauce integration)</div>
+            <div class="tech-line">5. Охлаждение (system cooling)</div>
+            <div class="tech-line">6. Подача (final deployment)</div>
+        </div>
+    </div>
+    <div class="joke-box">
+        <h3 class="joke-title">⚠️ Предупреждение</h3>
+        <p>Этот салат обладает высокой "доедиваемостью".</p>
+        <p>Советуем брать порцию с запасом — желание добавки возникает в 87% случаев.</p>
+    </div>
+    <div style="margin-top: 40px; text-align: center;">
+        <a href="index.html" class="back-btn" style="background: linear-gradient(135deg, #FFA07A 0%, #FF7F50 100%); color: #333;">← ВЕРНУТЬСЯ К СПИСКУ БЛЮД</a>
+    </div>
+    <script>
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        document.querySelectorAll('.back-btn').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                e.preventDefault();
+                document.body.style.opacity = '0.9';
+                setTimeout(() => { window.location.href = this.getAttribute('href'); }, 150);
+            });
+        });
+    </script>
+</body>
+</html>

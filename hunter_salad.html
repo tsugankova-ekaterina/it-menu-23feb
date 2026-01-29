@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🏹 Охотничий салат | IT-Меню</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            background: #f8f9fa; color: #333;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6; padding: 20px; max-width: 800px; margin: 0 auto;
+            min-height: 100vh; display: flex; flex-direction: column;
+        }
+        .back-btn {
+            display: inline-flex; align-items: center; gap: 8px;
+            background: #6c757d; color: white; text-decoration: none;
+            padding: 12px 24px; border-radius: 8px; font-weight: 600;
+            margin-bottom: 30px; transition: background 0.3s; width: fit-content;
+        }
+        .back-btn:hover { background: #5a6268; }
+        .dish-header {
+            background: linear-gradient(135deg, #8B4513 0%, #A0522D 100%);
+            color: white; border-radius: 15px; padding: 30px;
+            margin-bottom: 30px; box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            position: relative;
+            overflow: hidden;
+        }
+        .dish-header::before {
+            content: "🏹";
+            position: absolute;
+            right: 20px;
+            top: 20px;
+            font-size: 3rem;
+            opacity: 0.3;
+        }
+        .dish-icon-large { font-size: 4rem; margin-bottom: 15px; text-align: center; }
+        .dish-name { color: white; font-size: 2.5rem; margin-bottom: 10px; 
+                    font-weight: 800; text-align: center; text-shadow: 1px 1px 3px rgba(0,0,0,0.3); }
+        .dish-meta { color: rgba(255,255,255,0.9); font-size: 1.1rem; 
+                    font-family: 'Courier New', monospace; margin-bottom: 20px; text-align: center; }
+        .info-block { background: white; border-radius: 12px; padding: 25px;
+                     margin-bottom: 25px; box-shadow: 0 3px 10px rgba(0,0,0,0.06); }
+        .info-title { color: #2c3e50; font-size: 1.5rem; margin-bottom: 20px;
+                     padding-bottom: 10px; border-bottom: 2px solid #f0f5ff;
+                     display: flex; align-items: center; gap: 10px; }
+        .info-title::before { content: "›"; color: #8B4513; 
+                            font-weight: bold; font-size: 1.8rem; }
+        .ingredients-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; }
+        .ingredient-item { background: #f8f9fa; padding: 15px; border-radius: 8px;
+                          border-left: 4px solid #8B4513; transition: transform 0.2s; }
+        .ingredient-item:hover { transform: translateY(-3px); }
+        .ingredient-name { font-weight: 700; color: #2c3e50; margin-bottom: 5px; font-size: 1.1rem; }
+        .ingredient-desc { color: #666; font-size: 0.95rem; }
+        .joke-box { background: #f5f5dc; border-left: 4px solid #d2b48c;
+                   padding: 20px; border-radius: 8px; margin: 20px 0; }
+        .joke-title { color: #8b4513; font-weight: 700; margin-bottom: 10px;
+                     display: flex; align-items: center; gap: 10px; }
+        .tech-box { background: #faebd7; border-left: 4px solid #a0522d;
+                   padding: 20px; border-radius: 8px; font-family: 'Courier New', monospace;
+                   font-size: 1rem; line-height: 1.8; }
+        .tech-line { margin-bottom: 8px; }
+        .tech-key { color: #8b4513; font-weight: bold; }
+        .hunter-badge { background: #8b4513; color: white; padding: 5px 15px;
+                       border-radius: 20px; font-size: 0.9rem; margin-left: 10px; }
+        .meat-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); 
+                    gap: 15px; margin-top: 20px; }
+        .meat-item { background: #fffaf0; padding: 15px; border-radius: 8px;
+                    border: 2px solid #d2691e; text-align: center; }
+        .meat-item h4 { color: #8b4513; margin-bottom: 10px; }
+        @media (max-width: 768px) {
+            body { padding: 15px; } .dish-header { padding: 20px; }
+            .dish-name { font-size: 2rem; } .dish-icon-large { font-size: 3.5rem; }
+            .info-block { padding: 20px; } .ingredients-grid { grid-template-columns: 1fr; }
+            .meat-grid { grid-template-columns: 1fr; }
+        }
+        @media (max-width: 480px) {
+            .dish-name { font-size: 1.8rem; } .info-title { font-size: 1.3rem; }
+            .back-btn { width: 100%; justify-content: center; }
+        }
+    </style>
+</head>
+<body>
+    <a href="index.html" class="back-btn">← НАЗАД К МЕНЮ</a>
+    <div class="dish-header">
+        <span class="dish-icon-large">🏹</span>
+        <h1 class="dish-name">Охотничий салат <span class="hunter-badge">MEAT FEAST</span></h1>
+        <div class="dish-meta">ID: SALAD_HUNTER_001 | Версия: 3.0.0 | Статус: 🍖 МЯСНОЙ ЭКСПРЕСС</div>
+    </div>
+    <div class="info-block">
+        <h2 class="info-title">📦 Трофеи (Protein Collection)</h2>
+        <div class="ingredients-grid">
+            <div class="ingredient-item"><div class="ingredient-name">Колбаса охотничья</div><div class="ingredient-desc">Основной трофей, smoked & spiced</div></div>
+            <div class="ingredient-item"><div class="ingredient-name">Колбаса сырокопчёная</div><div class="ingredient-desc">Второй трофей, aged & flavorful</div></div>
+            <div class="ingredient-item"><div class="ingredient-name">Огурцы маринованные</div><div class="ingredient-desc">Acid balance, crunch factor</div></div>
+            <div class="ingredient-item"><div class="ingredient-name">Лук репчатый</div><div class="ingredient-desc">Aromatic sharpness, flavor layer</div></div>
+            <div class="ingredient-item"><div class="ingredient-name">Горошек зелёный</div><div class="ingredient-desc">Sweet contrast, color pop</div></div>
+            <div class="ingredient-item"><div class="ingredient-name">Майонез</div><div class="ingredient-desc">Binding medium, richness source</div></div>
+            <div class="ingredient-item"><div class="ingredient-name">Пряности, зелень</div><div class="ingredient-desc">Forest herbs, final seasoning</div></div>
+        </div>
+    </div>
+    <div class="info-block">
+        <h2 class="info-title">🎯 Альтернативные трофеи (Meat Variations)</h2>
+        <div class="meat-grid">
+            <div class="meat-item">
+                <h4>🥓 Беконная версия</h4>
+                <p>С хрустящим беконом вместо колбасы</p>
+                <small>Smoky edition</small>
+            </div>
+            <div class="meat-item">
+                <h4>🍗 Куриная версия</h4>
+                <p>С копчёной куриной грудкой</p>
+                <small>Poultry variant</small>
+            </div>
+            <div class="meat-item">
+                <h4>🐮 Говяжья версия</h4>
+                <p>С вяленой говядиной</p>
+                <small>Beefy option</small>
+            </div>
+            <div class="meat-item">
+                <h4>🌭 Микс версия</h4>
+                <p>Все виды колбас вместе</p>
+                <small>Ultimate meat mix</small>
+            </div>
+        </div>
+    </div>
+    <div class="joke-box">
+        <h3 class="joke-title">💡 Почему "Охотничий" — салат для настоящих добытчиков?</h3>
+        <p>• <strong>Высокая калорийность</strong> — хватит энергии на целый день кодинга</p>
+        <p>• <strong>Белок в избытке</strong> — мышцы для мышления растут</p>
+        <p>• <strong>Копчёный вкус</strong> — как будто приготовлен у костра</p>
+        <p>• <strong>Мужской характер</strong> — никакой "салатной" лёгкости</p>
+    </div>
+    <div class="info-block">
+        <h2 class="info-title">⚙️ Технические характеристики</h2>
+        <div class="tech-box">
+            <div class="tech-line"><span class="tech-key">Плотность:</span> Высокая (heavy duty salad)</div>
+            <div class="tech-line"><span class="tech-key">Калорийность:</span> 250-300 ккал/100g (energy packed)</div>
+            <div class="tech-line"><span class="tech-key">Белок:</span> 12-15g на порцию (protein rich)</div>
+            <div class="tech-line"><span class="tech-key">Время сборки:</span> 15-20 минут (quick deploy)</div>
+            <div class="tech-line"><span class="tech-key">Температура сервировки:</span> +4°C до +10°C</div>
+            <div class="tech-line"><span class="tech-key">Идеальные пары:</span> Чёрный хлеб, горчица, пиво, квас</div>
+            <div class="tech-line"><span class="tech-key">Особенность:</span> Можно использовать как начинку для бутербродов</div>
+        </div>
+    </div>
+    <div class="info-block">
+        <h2 class="info-title">🏕️ Процесс "охоты" (приготовления)</h2>
+        <div class="tech-box">
+            <div class="tech-line">1. Подготовка "трофеев" (meat preparation)</div>
+            <div class="tech-line">2. Нарезка кубиками (dicing & slicing)</div>
+            <div class="tech-line">3. Сбор "улова" (mixing components)</div>
+            <div class="tech-line">4. Добавление "приправ костра" (seasoning)</div>
+            <div class="tech-line">5. "Засада" в холодильнике (chilling period)</div>
+            <div class="tech-line">6. "Добыча" на стол (serving)</div>
+        </div>
+    </div>
+    <div class="joke-box">
+        <h3 class="joke-title">⚠️ Предостережение для веганов</h3>
+        <p>Этот салат содержит 0% растений в философском смысле.</p>
+        <p>Даже огурцы здесь маринованные и пропитаны мясной энергией.</p>
+    </div>
+    <div style="margin-top: 40px; text-align: center;">
+        <a href="index.html" class="back-btn" style="background: linear-gradient(135deg, #8B4513 0%, #A0522D 100%);">← ВЕРНУТЬСЯ К СПИСКУ БЛЮД</a>
+    </div>
+    <script>
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        document.querySelectorAll('.back-btn').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                e.preventDefault();
+                document.body.style.opacity = '0.9';
+                setTimeout(() => { window.location.href = this.getAttribute('href'); }, 150);
+            });
+        });
+        
+        // Добавляем звук клика на мясные варианты
+        document.querySelectorAll('.meat-item').forEach(item => {
+            item.addEventListener('click', function() {
+                this.style.transform = 'scale(0.95)';
+                setTimeout(() => {
+                    this.style.transform = '';
+                }, 200);
+            });
+        });
+    </script>
+</body>
+</html>
