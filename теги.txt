@@ -1,0 +1,22 @@
+<!-- Уже созданные -->
+<div data-tag="salad cold vegetarian">🥗 Греческий салат</div>
+<div data-tag="snack fish cold">🌯 Рулеты с рыбой</div>
+<div data-tag="salad legacy classic">🥗 Оливье</div>
+<div data-tag="snack cheese cold">🧀 Сырная закуска</div>
+<div data-tag="salad premium seafood cold">🦐 Цезарь с креветками</div>
+<div data-tag="snack fingerfood cold">🍢 Канапе</div>
+<div data-tag="dessert healthy sweet">🥕 Морковный кекс</div>
+<div data-tag="dessert crispy sweet">🎪 Вафельные трубочки</div>
+<div data-tag="main meat hot protein">🥩 Мясо в духовке</div>
+
+<!-- Будущие -->
+<div data-tag="salad chicken cold">🥗 Куриный салат</div>
+<div data-tag="salad meat cold">🥗 Охотничий салат</div>
+<div data-tag="snack fish cold">🐟 Рулетики с красной рыбой</div>
+<div data-tag="salad fish cold legacy">🐟 Сельдь под шубой</div>
+<div data-tag="main chicken hot protein">🍗 Куриные котлеты</div>
+<div data-tag="main pastry hot">🥧 Пироги с капустой</div>
+<div data-tag="main rice hot sweet">🍚 Плов и чак-чак</div>
+<div data-tag="snack vegetable cold">🌯 Сырно-овощной рулет</div>
+<div data-tag="main pastry hot">🥧 Киш с курицей</div>
+<div data-tag="dessert pastry sweet">🍎 Яблочный пирог</div>
