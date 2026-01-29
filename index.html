@@ -946,7 +946,7 @@
 			<div class="timer-display">
 				<div class="time-unit">
 					<div class="time-value" id="hours">02</div>
-					<div class="time-label">часов</div>
+					<div class="time-label" id="hours-label">часов</div>
 				</div>
 				<div class="time-separator">:</div>
 				<div class="time-unit">
@@ -1203,7 +1203,7 @@
 			updateResultsCounter();
 		});
 
-
+/*
 		// ТАЙМЕР ОБРАТНОГО ОТСЧЁТА
 		function startCountdown() {
 			// Устанавливаем время окончания (например, 16:00 сегодня)
@@ -1277,6 +1277,64 @@
 			threshold: 0.3,
 			rootMargin: '0px 0px -100px 0px' // Сработает чуть раньше
 		});
+*/
+
+		function startCountdown() {
+			// Фиксированная дата праздника
+			const partyDate = new Date('2024-02-23T23:00:00'); // ⬅️ ИЗМЕНИ!
+			
+			if (new Date() > partyDate) {
+				showFinishedState();
+				return;
+			}
+			
+			function updateTimer() {
+				const now = new Date();
+				const timeLeft = partyDate - now;
+				
+				if (timeLeft <= 0) {
+					showFinishedState();
+					return;
+				}
+				
+				// Только часы, минуты, секунды (макс 23:59:59)
+				const totalHours = Math.floor(timeLeft / (1000 * 60 * 60));
+				const hours = totalHours % 24; // Не показываем больше 23 часов
+				const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+				const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+				
+				document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
+				document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
+				document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
+				
+				// Визуальные эффекты при малом времени
+				if (timeLeft < 60 * 60 * 1000) {
+					document.querySelector('.timer-display').style.animation = 'pulse 1s infinite';
+				}
+			}
+			
+			function showFinishedState() {
+				document.getElementById('hours').textContent = '00';
+				document.getElementById('minutes').textContent = '00';
+				document.getElementById('seconds').textContent = '00';
+				
+				document.querySelector('.timer-message').innerHTML = 
+					'🎉 ПРАЗДНИК ЗАВЕРШЁН!<br>Фотосессия light painting окончена.';
+				
+				// Останавливаем анимацию
+				const timer = document.querySelector('.timer-display');
+				if (timer) {
+					timer.style.animation = 'none';
+					timer.style.opacity = '0.5';
+				}
+			}
+			
+			updateTimer();
+			const interval = setInterval(updateTimer, 1000);
+			
+			// Возвращаем interval для очистки
+			return interval;
+		}
 
 		// Запускаем при загрузке
 		document.addEventListener('DOMContentLoaded', () => {
