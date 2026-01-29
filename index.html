@@ -568,8 +568,8 @@
         <p>Добро пожаловать в базу данных праздничных блюд. Выберите запрос:</p>
     </header>-->
 	<div class="header">
-    <h1>🖥️ FOOD API v2.4</h1>
-    <p>Добро пожаловать в базу данных праздничных блюд (доступно - <span id="dish-count"></span>). Выберите запрос:</p>
+		<h1>🖥️ FOOD API v2.4</h1>
+		<p>Добро пожаловать в базу данных праздничных блюд (доступно - <span id="dish-count"></span>). Выберите запрос:</p>
 	</div>
 <!--
 	<div class="search-box">
@@ -876,6 +876,48 @@
 			
 			<a href="salmon_rolls.html" class="btn">📖 ROLL salmon_package()</a>
 		</div>
+
+		<!-- 🐟 СЕЛЬДЬ ПОД ШУБОЙ -->
+		<div class="dish-card" data-tag="salad fish cold layered">
+			<span class="dish-icon">🐟</span>
+			<h2 class="dish-title">Сельдь под шубой</h2>
+			<div class="dish-id">ID: SALAD_SHUBA_001</div>
+			
+			<div class="dish-tags">
+				<span class="tag">7-LAYER</span>
+				<span class="tag">SALAD</span>
+				<span class="tag">FISH</span>
+				<span class="tag">LEGACY</span>
+			</div>
+			
+			<p class="dish-description">
+				Многослойная архитектура по аналогии с OSI model.
+				7 уровней вкуса от аппаратного (сельдь) до presentation (свёкла).
+			</p>
+			
+			<a href="shuba.html" class="btn">📖 DEPLOY layered_system()</a>
+		</div>
+
+		<!-- 🍗 КУРИНЫЕ КОТЛЕТЫ -->
+		<div class="dish-card" data-tag="main chicken hot protein">
+			<span class="dish-icon">🍗</span>
+			<h2 class="dish-title">Куриные котлеты & отбивные</h2>
+			<div class="dish-id">ID: MEAT_CHICKEN_001</div>
+			
+			<div class="dish-tags">
+				<span class="tag">BINARY CHOICE</span>
+				<span class="tag">CHICKEN</span>
+				<span class="tag">HOT</span>
+				<span class="tag">PROTEIN</span>
+			</div>
+			
+			<p class="dish-description">
+				Бинарный выбор: котлеты (микросервисы) vs отбивные (монолиты).
+				Рефакторинг мяса в оптимальную форму.
+			</p>
+			
+			<a href="chicken_cutlets.html" class="btn">📖 COMPILE meat_refactor()</a>
+		</div>
         
     </div>
 	
@@ -889,7 +931,7 @@
 			<div class="light-line" style="--delay: 2s">writeLight("Hello World");</div>
 			<div class="light-line" style="--delay: 2.5s">drawCircle(radius = "smile");</div>
 			<div class="light-line" style="--delay: 3s">paint.photo(memories);</div>
-			<div class="light-line" style="--delay: 3.5s">// 📍 Дилерская | 🎯 Весь вечер</div>
+			<div class="light-line" style="--delay: 3.5s">// 📍 Дилерская | 🎯 14:00 - 16:00</div>
 		</div>
 		
 		<!-- ТАЙМЕР ОБРАТНОГО ОТСЧЁТА -->

@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🍗 Куриные котлеты | IT-Меню</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            background: #f8f9fa; color: #333;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6; padding: 20px; max-width: 800px; margin: 0 auto;
+            min-height: 100vh; display: flex; flex-direction: column;
+        }
+        .back-btn {
+            display: inline-flex; align-items: center; gap: 8px;
+            background: #6c757d; color: white; text-decoration: none;
+            padding: 12px 24px; border-radius: 8px; font-weight: 600;
+            margin-bottom: 30px; transition: background 0.3s; width: fit-content;
+        }
+        .back-btn:hover { background: #5a6268; }
+        .dish-header {
+            background: linear-gradient(135deg, #FF8C00 0%, #FFA500 100%);
+            color: white; border-radius: 15px; padding: 30px;
+            margin-bottom: 30px; box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        .dish-icon-large { font-size: 4rem; margin-bottom: 15px; text-align: center; }
+        .dish-name { color: white; font-size: 2.5rem; margin-bottom: 10px; 
+                    font-weight: 800; text-align: center; }
+        .dish-meta { color: rgba(255,255,255,0.9); font-size: 1.1rem; 
+                    font-family: 'Courier New', monospace; margin-bottom: 20px; text-align: center; }
+        .info-block { background: white; border-radius: 12px; padding: 25px;
+                     margin-bottom: 25px; box-shadow: 0 3px 10px rgba(0,0,0,0.06); }
+        .info-title { color: #2c3e50; font-size: 1.5rem; margin-bottom: 20px;
+                     padding-bottom: 10px; border-bottom: 2px solid #f0f5ff;
+                     display: flex; align-items: center; gap: 10px; }
+        .info-title::before { content: "›"; color: #FF8C00; 
+                            font-weight: bold; font-size: 1.8rem; }
+        
+        /* СРАВНЕНИЕ КОТЛЕТ И ОТБИВНЫХ */
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 25px 0;
+            font-family: 'Courier New', monospace;
+        }
+        
+        .comparison-table th {
+            background: #FF8C00;
+            color: white;
+            padding: 15px;
+            text-align: left;
+        }
+        
+        .comparison-table td {
+            padding: 15px;
+            border-bottom: 1px solid #e1e5e9;
+        }
+        
+        .comparison-table tr:nth-child(even) {
+            background: #f8f9fa;
+        }
+        
+        .comparison-table .pros {
+            color: #28a745;
+            font-weight: bold;
+        }
+        
+        .comparison-table .cons {
+            color: #dc3545;
+            font-weight: bold;
+        }
+        
+        .code-block {
+            background: #2d2d2d;
+            color: #f8f8f2;
+            padding: 20px;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            margin: 20px 0;
+            overflow-x: auto;
+        }
+        
+        .code-keyword { color: #f92672; }
+        .code-string { color: #a6e22e; }
+        .code-comment { color: #75715e; }
+        
+        .joke-box { background: #fff3e0; border-left: 4px solid #FF9800;
+                   padding: 20px; border-radius: 8px; margin: 20px 0; }
+        .joke-title { color: #e65100; font-weight: 700; margin-bottom: 10px;
+                     display: flex; align-items: center; gap: 10px; }
+        .tech-box { background: #fffaf0; border-left: 4px solid #FFA500;
+                   padding: 20px; border-radius: 8px; font-family: 'Courier New', monospace;
+                   font-size: 1rem; line-height: 1.8; }
+        .tech-line { margin-bottom: 8px; }
+        .tech-key { color: #d84315; font-weight: bold; }
+        
+        @media (max-width: 768px) {
+            body { padding: 15px; } .dish-header { padding: 20px; }
+            .dish-name { font-size: 2rem; } .dish-icon-large { font-size: 3.5rem; }
+            .info-block { padding: 20px; }
+            .comparison-table { font-size: 0.9rem; }
+        }
+        @media (max-width: 480px) {
+            .dish-name { font-size: 1.8rem; } .info-title { font-size: 1.3rem; }
+            .back-btn { width: 100%; justify-content: center; }
+            .comparison-table { display: block; overflow-x: auto; }
+        }
+    </style>
+</head>
+<body>
+    <a href="index.html" class="back-btn">← НАЗАД К МЕНЮ</a>
+    
+    <div class="dish-header">
+        <span class="dish-icon-large">🍗</span>
+        <h1 class="dish-name">Куриные котлеты & отбивные</h1>
+        <div class="dish-meta">ID: MEAT_CHICKEN_001 | Версия: 2.0-BINARY | Статус: 🔥 ГОРЯЧИЙ ДЕПЛОЙ</div>
+    </div>
+    
+    <div class="info-block">
+        <h2 class="info-title">⚖️ Бинарный выбор: Котлеты vs Отбивные</h2>
+        
+        <table class="comparison-table">
+            <tr>
+                <th>Параметр</th>
+                <th>Котлеты (0)</th>
+                <th>Отбивные (1)</th>
+            </tr>
+            <tr>
+                <td><strong>Архитектура</strong></td>
+                <td>Микросервис (мелко рубленый)</td>
+                <td>Монолит (цельный кусок)</td>
+            </tr>
+            <tr>
+                <td><strong>Процессор</strong></td>
+                <td>Филе куриное + фарш</td>
+                <td>Цельное филе/грудка</td>
+            </tr>
+            <tr>
+                <td><strong>Алгоритм приготовления</strong></td>
+                <td>Формирование → Жарка</td>
+                <td>Отбивание → Жарка</td>
+            </tr>
+            <tr>
+                <td><strong>Плюсы</strong></td>
+                <td class="pros">Равномерная прожарка, сочность</td>
+                <td class="pros">Натуральная текстура, presentation</td>
+            </tr>
+            <tr>
+                <td><strong>Минусы</strong></td>
+                <td class="cons">Может рассыпаться (если плохо связан)</td>
+                <td class="cons">Может быть сухим (если пережарить)</td>
+            </tr>
+            <tr>
+                <td><strong>Использование</strong></td>
+                <td>С гарниром, в бутербродах</td>
+                <td>Как standalone блюдо</td>
+            </tr>
+            <tr>
+                <td><strong>Сложность приготовления</strong></td>
+                <td>Medium (нужно слепить)</td>
+                <td>Easy (просто отбить и жарить)</td>
+            </tr>
+        </table>
+    </div>
+    
+    <div class="info-block">
+        <h2 class="info-title">💻 Код приготовления (псевдокод)</h2>
+        
+        <div class="code-block">
+            <span class="code-comment">// Функция приготовления куриных котлет</span><br>
+            <span class="code-keyword">function</span> <span class="code-string">cookChickenCutlets</span>() {<br>
+            &nbsp;&nbsp;<span class="code-keyword">const</span> chicken = <span class="code-string">getChickenBreast()</span>;<br>
+            &nbsp;&nbsp;<span class="code-keyword">const</span> mince = <span class="code-string">grindToMince</span>(chicken);<br>
+            &nbsp;&nbsp;<span class="code-keyword">const</span> mixture = <span class="code-string">mix</span>(mince, <span class="code-string">"egg"</span>, <span class="code-string">"onion"</span>, <span class="code-string">"spices"</span>);<br>
+            &nbsp;&nbsp;<span class="code-keyword">const</span> patties = <span class="code-string">formPatties</span>(mixture);<br>
+            &nbsp;&nbsp;<span class="code-keyword">const</span> result = <span class="code-string">fry</span>(patties, <span class="code-string">"medium_heat"</span>, <span class="code-string">"7_min_each_side"</span>);<br>
+            &nbsp;&nbsp;<span class="code-keyword">return</span> result;<br>
+            }<br>
+            <br>
+            <span class="code-comment">// Функция приготовления отбивных</span><br>
+            <span class="code-keyword">function</span> <span class="code-string">cookChickenSteaks</span>() {<br>
+            &nbsp;&nbsp;<span class="code-keyword">const</span> steaks = <span class="code-string">sliceChickenBreast</span>();<br>
+            &nbsp;&nbsp;<span class="code-keyword">const</span> flattened = <span class="code-string">poundWithHammer</span>(steaks);<br>
+            &nbsp;&nbsp;<span class="code-keyword">const</span> marinated = <span class="code-string">marinate</span>(flattened, <span class="code-string">"30_min"</span>);<br>
+            &nbsp;&nbsp;<span class="code-keyword">const</span> result = <span class="code-string">fry</span>(marinated, <span class="code-string">"high_heat"</span>, <span class="code-string">"5_min_each_side"</span>);<br>
+            &nbsp;&nbsp;<span class="code-keyword">return</span> result;<br>
+            }<br>
+            <br>
+            <span class="code-comment">// Главная функция</span><br>
+            <span class="code-keyword">function</span> <span class="code-string">main</span>() {<br>
+            &nbsp;&nbsp;<span class="code-keyword">if</span> (<span class="code-string">userPreference</span> === <span class="code-string">"cutlets"</span>) {<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-string">cookChickenCutlets</span>();<br>
+            &nbsp;&nbsp;} <span class="code-keyword">else if</span> (<span class="code-string">userPreference</span> === <span class="code-string">"steaks"</span>) {<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-string">cookChickenSteaks</span>();<br>
+            &nbsp;&nbsp;} <span class="code-keyword">else</span> {<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-keyword">throw new</span> <span class="code-string">Error</span>(<span class="code-string">"Invalid choice. Use 'cutlets' or 'steaks'"</span>);<br>
+            &nbsp;&nbsp;}<br>
+            }
+        </div>
+    </div>
+    
+    <div class="joke-box">
+        <h3 class="joke-title">💡 Куриные котлеты как рефакторинг мяса</h3>
+        <p>• <strong>Декомпозиция</strong> — цельное мясо разбивается на мелкие части</p>
+        <p>• <strong>Рефакторинг</strong> — удаляются жилы и плёнки (технический долг)</p>
+        <p>• <strong>Инкапсуляция</strong> — все ингредиенты прячутся внутри котлеты</p>
+        <p>• <strong>Полиморфизм</strong> — одну и ту же котлету можно подать с разными гарнирами</p>
+        <p>• <strong>DRY принцип</strong> — не повторяй одни и те же специи в каждой котлете</p>
+    </div>
+    
+    <div class="info-block">
+        <h2 class="info-title">⚙️ Системные требования</h2>
+        <div class="tech-box">
+            <div class="tech-line"><span class="tech-key">Минимальные требования:</span> Сковорода, масло, средний огонь</div>
+            <div class="tech-line"><span class="tech-key">Рекомендуемые требования:</span> Гриль/духовка для health-conscious варианта</div>
+            <div class="tech-line"><span class="tech-key">Время компиляции:</span> 25-35 минут (включая подготовку)</div>
+            <div class="tech-line"><span class="tech-key">Потребление памяти:</span> ~200-250 ккал/100g (оптимизировано)</div>
+            <div class="tech-line"><span class="tech-key">Совместимость:</span> Все гарниры (картофель, рис, овощи, паста)</div>
+            <div class="tech-line"><span class="tech-key">Протокол сервировки:</span> Hot & Fresh (подавать сразу после приготовления)</div>
+        </div>
+    </div>
+    
+    <div class="info-block">
+        <h2 class="info-title">🐛 Распространённые ошибки и решения</h2>
+        <div class="tech-box">
+            <div class="tech-line"><span class="tech-key">Error:</span> Котлеты разваливаются на сковороде</div>
+            <div class="tech-line"><span class="tech-key">Solution:</span> Добавить больше яйца (binding agent) и дать постоять в холодильнике</div>
+            <div class="tech-line">&nbsp;</div>
+            <div class="tech-line"><span class="tech-key">Error:</span> Отбивные получились жёсткими</div>
+            <div class="tech-line"><span class="tech-key">Solution:</span> Не перебивать, использовать маринад, не пережаривать</div>
+            <div class="tech-line">&nbsp;</div>
+            <div class="tech-line"><span class="tech-key">Error:</span> Снаружи подгорело, внутри сырое</div>
+            <div class="tech-line"><span class="tech-key">Solution:</span> Уменьшить огонь, увеличить время приготовления</div>
+        </div>
+    </div>
+    
+    <div style="margin-top: 40px; text-align: center;">
+        <a href="index.html" class="back-btn" style="background: linear-gradient(135deg, #FF8C00 0%, #FFA500 100%);">← ВЕРНУТЬСЯ К СПИСКУ БЛЮД</a>
+    </div>
+    
+    <script>
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        document.querySelectorAll('.back-btn').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                e.preventDefault();
+                document.body.style.opacity = '0.9';
+                setTimeout(() => { window.location.href = this.getAttribute('href'); }, 150);
+            });
+        });
+        
+        // Интерактивность для таблицы сравнения
+        document.querySelectorAll('.comparison-table tr').forEach(row => {
+            row.addEventListener('mouseenter', function() {
+                this.style.backgroundColor = '#fff5e6';
+            });
+            row.addEventListener('mouseleave', function() {
+                if (this.rowIndex % 2 === 0) {
+                    this.style.backgroundColor = '#f8f9fa';
+                } else {
+                    this.style.backgroundColor = '';
+                }
+            });
+        });
+    </script>
+</body>
+</html>

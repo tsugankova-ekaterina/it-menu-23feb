@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🐟 Сельдь под шубой | IT-Меню</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            background: #f8f9fa; color: #333;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6; padding: 20px; max-width: 800px; margin: 0 auto;
+            min-height: 100vh; display: flex; flex-direction: column;
+        }
+        .back-btn {
+            display: inline-flex; align-items: center; gap: 8px;
+            background: #6c757d; color: white; text-decoration: none;
+            padding: 12px 24px; border-radius: 8px; font-weight: 600;
+            margin-bottom: 30px; transition: background 0.3s; width: fit-content;
+        }
+        .back-btn:hover { background: #5a6268; }
+        .dish-header {
+            background: linear-gradient(135deg, #4682B4 0%, #5F9EA0 100%);
+            color: white; border-radius: 15px; padding: 30px;
+            margin-bottom: 30px; box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            position: relative;
+            overflow: hidden;
+        }
+        .dish-header::before {
+            content: "LAYERED ARCHITECTURE";
+            position: absolute;
+            right: 20px;
+            top: 20px;
+            font-size: 0.8rem;
+            opacity: 0.3;
+            font-family: 'Courier New', monospace;
+            transform: rotate(90deg);
+            transform-origin: right top;
+        }
+        .dish-icon-large { font-size: 4rem; margin-bottom: 15px; text-align: center; }
+        .dish-name { color: white; font-size: 2.5rem; margin-bottom: 10px; 
+                    font-weight: 800; text-align: center; }
+        .dish-meta { color: rgba(255,255,255,0.9); font-size: 1.1rem; 
+                    font-family: 'Courier New', monospace; margin-bottom: 20px; text-align: center; }
+        .info-block { background: white; border-radius: 12px; padding: 25px;
+                     margin-bottom: 25px; box-shadow: 0 3px 10px rgba(0,0,0,0.06); }
+        .info-title { color: #2c3e50; font-size: 1.5rem; margin-bottom: 20px;
+                     padding-bottom: 10px; border-bottom: 2px solid #f0f5ff;
+                     display: flex; align-items: center; gap: 10px; }
+        .info-title::before { content: "›"; color: #4682B4; 
+                            font-weight: bold; font-size: 1.8rem; }
+        
+        /* СЛОИ САЛАТА */
+        .layers-container {
+            margin: 30px 0;
+            border-left: 3px solid #4682B4;
+            padding-left: 20px;
+        }
+        
+        .layer {
+            margin-bottom: 25px;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            border: 2px solid #e1e5e9;
+            position: relative;
+        }
+        
+        .layer::before {
+            content: "LAYER " attr(data-layer-number);
+            position: absolute;
+            top: -10px;
+            left: 20px;
+            background: #4682B4;
+            color: white;
+            padding: 3px 10px;
+            border-radius: 10px;
+            font-size: 0.8rem;
+            font-family: 'Courier New', monospace;
+        }
+        
+        .layer h4 {
+            color: #2c3e50;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .layer-ingredients {
+            color: #666;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+        
+        .joke-box { background: #e3f2fd; border-left: 4px solid #2196f3;
+                   padding: 20px; border-radius: 8px; margin: 20px 0; }
+        .joke-title { color: #1565c0; font-weight: 700; margin-bottom: 10px;
+                     display: flex; align-items: center; gap: 10px; }
+        .tech-box { background: #e8f4fc; border-left: 4px solid #4682B4;
+                   padding: 20px; border-radius: 8px; font-family: 'Courier New', monospace;
+                   font-size: 1rem; line-height: 1.8; }
+        .tech-line { margin-bottom: 8px; }
+        .tech-key { color: #2c5aa0; font-weight: bold; }
+        
+        @media (max-width: 768px) {
+            body { padding: 15px; } .dish-header { padding: 20px; }
+            .dish-name { font-size: 2rem; } .dish-icon-large { font-size: 3.5rem; }
+            .info-block { padding: 20px; }
+        }
+        @media (max-width: 480px) {
+            .dish-name { font-size: 1.8rem; } .info-title { font-size: 1.3rem; }
+            .back-btn { width: 100%; justify-content: center; }
+        }
+    </style>
+</head>
+<body>
+    <a href="index.html" class="back-btn">← НАЗАД К МЕНЮ</a>
+    
+    <div class="dish-header">
+        <span class="dish-icon-large">🐟</span>
+        <h1 class="dish-name">Сельдь под шубой</h1>
+        <div class="dish-meta">ID: SALAD_SHUBA_001 | Версия: 7-LAYER PROTOCOL | Статус: 🏗️ LAYERED ARCH</div>
+    </div>
+    
+    <div class="info-block">
+        <h2 class="info-title">🏗️ Многослойная архитектура (7-Layer Stack)</h2>
+        
+        <div class="layers-container">
+            <!-- СЛОЙ 7 -->
+            <div class="layer" data-layer-number="7">
+                <h4>🎨 Presentation Layer (Визуализация)</h4>
+                <div class="layer-ingredients">
+                    <strong>Свёкла + майонез</strong> — UI/UX слой. Отвечает за color scheme (#FF1493) 
+                    и user experience. Последний слой, который видит пользователь.
+                </div>
+            </div>
+            
+            <!-- СЛОЙ 6 -->
+            <div class="layer" data-layer-number="6">
+                <h4>🥚 Application Layer (Белоковая логика)</h4>
+                <div class="layer-ingredients">
+                    <strong>Яйца варёные</strong> — слой бизнес-логики. Содержит протеиновые алгоритмы 
+                    и выполняет основные вычисления вкуса.
+                </div>
+            </div>
+            
+            <!-- СЛОЙ 5 -->
+            <div class="layer" data-layer-number="5">
+                <h4>🥕 Transport Layer (Соединительный)</h4>
+                <div class="layer-ingredients">
+                    <strong>Морковь варёная</strong> — обеспечивает связь между слоями. 
+                    Содержит beta-carotene для улучшения передачи данных между вкусовыми рецепторами.
+                </div>
+            </div>
+            
+            <!-- СЛОЙ 4 -->
+            <div class="layer" data-layer-number="4">
+                <h4>🥔 Network Layer (Сетевая основа)</h4>
+                <div class="layer-ingredients">
+                    <strong>Картофель варёный</strong> — базовый сетевой слой. Обеспечивает стабильность 
+                    всей системы и распределение нагрузки.
+                </div>
+            </div>
+            
+            <!-- СЛОЙ 3 -->
+            <div class="layer" data-layer-number="3">
+                <h4>🐟 Data Link Layer (Соединение данных)</h4>
+                <div class="layer-ingredients">
+                    <strong>Майонезная прослойка</strong> — протокол связывания данных. Обеспечивает 
+                    надёжную передачу вкусовых пакетов между овощными слоями.
+                </div>
+            </div>
+            
+            <!-- СЛОЙ 2 -->
+            <div class="layer" data-layer-number="2">
+                <h4>🧅 Physical Layer (Физический интерфейс)</h4>
+                <div class="layer-ingredients">
+                    <strong>Лук репчатый</strong> — аппаратный слой. Обеспечивает физическое соединение 
+                    со следующими слоями через острый интерфейс.
+                </div>
+            </div>
+            
+            <!-- СЛОЙ 1 -->
+            <div class="layer" data-layer-number="1">
+                <h4>🐟 Hardware Layer (Аппаратное обеспечение)</h4>
+                <div class="layer-ingredients">
+                    <strong>Сельдь солёная</strong> — процессор системы. Основная вычислительная мощность, 
+                    содержит жирные кислоты Omega-3 для оптимизации нейронных связей.
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="joke-box">
+        <h3 class="joke-title">💡 Почему "Шуба" — идеальная архитектура?</h3>
+        <p>• <strong>Инкапсуляция</strong> — каждый слой скрывает реализацию предыдущего</p>
+        <p>• <strong>Модульность</strong> — можно заменить любой слой без breaking changes</p>
+        <p>• <strong>Слабое зацепление</strong> — слои взаимодействуют только через майонезный API</p>
+        <p>• <strong>Масштабируемость</strong> — можно добавлять новые слои (например, "яблочный")</p>
+        <p>• <strong>Обратная совместимость</strong> — работает с New Year's API 1970+</p>
+    </div>
+    
+    <div class="info-block">
+        <h2 class="info-title">⚙️ Спецификации системы</h2>
+        <div class="tech-box">
+            <div class="tech-line"><span class="tech-key">Архитектура:</span> 7-уровневая (по аналогии с OSI model)</div>
+            <div class="tech-line"><span class="tech-key">Протокол взаимодействия:</span> Mayonnaise-over-Vegetable</div>
+            <div class="tech-line"><span class="tech-key">Время компиляции:</span> 60-90 минут (зависит от производительности повара)</div>
+            <div class="tech-line"><span class="tech-key">Время на прохождение данных:</span> Instant (user сразу получает все слои)</div>
+            <div class="tech-line"><span class="tech-key">Пропускная способность:</span> Высокая (можно кормить целый отдел)</div>
+            <div class="tech-line"><span class="tech-key">Требования к железу:</span> Холодильник с поддержкой многослойности</div>
+            <div class="tech-line"><span class="tech-key">Рекомендуемый стек:</span> Вино/водка + черный хлеб (compatibility layer)</div>
+        </div>
+    </div>
+    
+    <div class="info-block">
+        <h2 class="info-title">🐛 Известные issues (и фиксы)</h2>
+        <div class="tech-box">
+            <div class="tech-line"><span class="tech-key">Issue #1:</span> Слой лука слишком острый</div>
+            <div class="tech-line"><span class="tech-key">Fix:</span> Вымочить в воде или заменить на зелёный лук</div>
+            <div class="tech-line">&nbsp;</div>
+            <div class="tech-line"><span class="tech-key">Issue #2:</span> Свёкла красит другие слои</div>
+            <div class="tech-line"><span class="tech-key">Fix:</span> Это не баг, а фича (естественный краситель)</div>
+            <div class="tech-line">&nbsp;</div>
+            <div class="tech-line"><span class="tech-key">Issue #3:</span> Система слишком высокая (много слоёв)</div>
+            <div class="tech-line"><span class="tech-key">Fix:</span> Оптимизировать толщину слоёв или использовать широкую посуду</div>
+        </div>
+    </div>
+    
+    <div class="joke-box">
+        <h3 class="joke-title">⚠️ Предупреждение для DevOps</h3>
+        <p>Не пытайтесь развернуть эту систему в production без предварительного 
+        тестирования в staging-холодильнике (24 часа при +4°C).</p>
+        <p>Помните: вкус улучшается со временем — это не memory leak, а feature!</p>
+    </div>
+    
+    <div style="margin-top: 40px; text-align: center;">
+        <a href="index.html" class="back-btn" style="background: linear-gradient(135deg, #4682B4 0%, #5F9EA0 100%);">← ВЕРНУТЬСЯ К СПИСКУ БЛЮД</a>
+    </div>
+    
+    <script>
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        document.querySelectorAll('.back-btn').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                e.preventDefault();
+                document.body.style.opacity = '0.9';
+                setTimeout(() => { window.location.href = this.getAttribute('href'); }, 150);
+            });
+        });
+        
+        // Анимация слоёв
+        document.addEventListener('DOMContentLoaded', () => {
+            const layers = document.querySelectorAll('.layer');
+            layers.forEach((layer, index) => {
+                setTimeout(() => {
+                    layer.style.opacity = '1';
+                    layer.style.transform = 'translateX(0)';
+                }, index * 200 + 300);
+            });
+        });
+    </script>
+</body>
+</html>
