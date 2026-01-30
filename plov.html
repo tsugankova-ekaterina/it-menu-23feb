@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🍚 Плов узбекский | IT-Меню</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            background: #f8f9fa; color: #333;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6; padding: 20px; max-width: 800px; margin: 0 auto;
+            min-height: 100vh; display: flex; flex-direction: column;
+        }
+        .back-btn {
+            display: inline-flex; align-items: center; gap: 8px;
+            background: #6c757d; color: white; text-decoration: none;
+            padding: 12px 24px; border-radius: 8px; font-weight: 600;
+            margin-bottom: 30px; transition: background 0.3s; width: fit-content;
+        }
+        .back-btn:hover { background: #5a6268; }
+        .dish-header {
+            background: linear-gradient(135deg, #D35400 0%, #E67E22 100%);
+            color: white; border-radius: 15px; padding: 30px;
+            margin-bottom: 30px; box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        .dish-icon-large { font-size: 4rem; margin-bottom: 15px; text-align: center; }
+        .dish-name { color: white; font-size: 2.5rem; margin-bottom: 10px; 
+                    font-weight: 800; text-align: center; }
+        .dish-meta { color: rgba(255,255,255,0.9); font-size: 1.1rem; 
+                    font-family: 'Courier New', monospace; margin-bottom: 20px; text-align: center; }
+        .info-block { background: white; border-radius: 12px; padding: 25px;
+                     margin-bottom: 25px; box-shadow: 0 3px 10px rgba(0,0,0,0.06); }
+        .info-title { color: #2c3e50; font-size: 1.5rem; margin-bottom: 20px;
+                     padding-bottom: 10px; border-bottom: 2px solid #f0f5ff;
+                     display: flex; align-items: center; gap: 10px; }
+        .info-title::before { content: "›"; color: #D35400; 
+                            font-weight: bold; font-size: 1.8rem; }
+        .ingredients-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; }
+        .ingredient-item { background: #f8f9fa; padding: 15px; border-radius: 8px;
+                          border-left: 4px solid #D35400; transition: transform 0.2s; }
+        .ingredient-item:hover { transform: translateY(-3px); }
+        .ingredient-name { font-weight: 700; color: #2c3e50; margin-bottom: 5px; font-size: 1.1rem; }
+        .ingredient-desc { color: #666; font-size: 0.95rem; }
+        .joke-box { background: #FBEEE6; border-left: 4px solid #D35400;
+                   padding: 20px; border-radius: 8px; margin: 20px 0; }
+        .joke-title { color: #A04000; font-weight: 700; margin-bottom: 10px;
+                     display: flex; align-items: center; gap: 10px; }
+        .tech-box { background: #FFF5EE; border-left: 4px solid #E67E22;
+                   padding: 20px; border-radius: 8px; font-family: 'Courier New', monospace;
+                   font-size: 1rem; line-height: 1.8; }
+        .tech-line { margin-bottom: 8px; }
+        .tech-key { color: #D35400; font-weight: bold; }
+        .rice-types { display: flex; flex-wrap: wrap; gap: 15px; margin-top: 20px; }
+        .rice-type { flex: 1; min-width: 180px; background: #FBEEE6; 
+                    padding: 15px; border-radius: 8px; border: 2px solid #D35400; }
+        .rice-type h4 { color: #A04000; margin-bottom: 10px; }
+        .layers-diagram { margin: 25px 0; padding: 20px; background: #FFF5EE; border-radius: 12px; }
+        .layer { padding: 10px; margin: 10px 0; border-radius: 6px; font-weight: bold; }
+        .layer-1 { background: #D35400; color: white; }
+        .layer-2 { background: #E67E22; color: white; margin-left: 20px; }
+        .layer-3 { background: #F39C12; color: white; margin-left: 40px; }
+        @media (max-width: 768px) {
+            body { padding: 15px; } .dish-header { padding: 20px; }
+            .dish-name { font-size: 2rem; } .dish-icon-large { font-size: 3.5rem; }
+            .info-block { padding: 20px; } .ingredients-grid { grid-template-columns: 1fr; }
+            .rice-types { flex-direction: column; }
+        }
+        @media (max-width: 480px) {
+            .dish-name { font-size: 1.8rem; } .info-title { font-size: 1.3rem; }
+            .back-btn { width: 100%; justify-content: center; }
+        }
+    </style>
+</head>
+<body>
+    <a href="index.html" class="back-btn">← НАЗАД К МЕНЮ</a>
+    <div class="dish-header">
+        <span class="dish-icon-large">🍚</span>
+        <h1 class="dish-name">Плов узбекский</h1>
+        <div class="dish-meta">ID: RICE_PLOV_001 | Версия: 3.0.1 | Статус: 🔥 ГОРЯЧИЙ ИЗ КАЗАНА</div>
+    </div>
+    
+    <!-- СЛОИСТАЯ АРХИТЕКТУРА -->
+    <div class="layers-diagram">
+        <h3 style="color: #D35400; margin-bottom: 15px;">🏗️ Слоистая архитектура плова</h3>
+        <div class="layer layer-1">⚫ Жир (Zhir) — фундаментальный слой</div>
+        <div class="layer layer-2">🥩 Мясо (Gosht) — протеиновый слой</div>
+        <div class="layer layer-3">🥕 Морковь (Sabzi) — овощной интерфейс</div>
+        <div class="layer layer-2">🍚 Рис (Guruch) — углеводное ядро</div>
+        <div class="layer layer-1">💧 Вода (Suv) — жидкая среда выполнения</div>
+    </div>
+    
+    <div class="info-block">
+        <h2 class="info-title">📦 Состав (Zhir-Gosht-Sabzi Stack)</h2>
+        <div class="ingredients-grid">
+            <div class="ingredient-item"><div class="ingredient-name">Рис девзира</div><div class="ingredient-desc">Core grain, holds shape perfectly</div></div>
+            <div class="ingredient-item"><div class="ingredient-name">Баранина курдючная</div><div class="ingredient-desc">Premium protein, fat-rendered</div></div>
+            <div class="ingredient-item"><div class="ingredient-name">Морковь жёлтая</div><div class="ingredient-desc">Carotene module, julienne cut</div></div>
+            <div class="ingredient-item"><div class="ingredient-name">Лук репчатый</div><div class="ingredient-desc">Flavor foundation, caramelized</div></div>
+            <div class="ingredient-item"><div class="ingredient-name">Курдючный жир</div><div class="ingredient-desc">Energy source, high-temperature</div></div>
+            <div class="ingredient-item"><div class="ingredient-name">Зира, барбарис</div><div class="ingredient-desc">Spice algorithms, authentic blend</div></div>
+        </div>
+    </div>
+    
+    <div class="info-block">
+        <h2 class="info-title">🍚 Типы риса (Grain Protocols)</h2>
+        <div class="rice-types">
+            <div class="rice-type">
+                <h4>🏺 Девзира</h4>
+                <p>Традиционный, ферганский</p>
+<small>Gold standard</small>
+            </div>
+            <div class="rice-type">
+                <h4>🌾 Басмати</h4>
+                <p>Ароматный, длиннозёрный</p>
+                <small>Indian edition</small>
+            </div>
+            <div class="rice-type">
+                <h4>⚪ Жасмин</h4>
+                <p>Нежный, тайский</p>
+                <small>Premium version</small>
+            </div>
+            <div class="rice-type">
+                <h4>🍚 Краснодарский</h4>
+                <p>Доступный, круглозёрный</p>
+                <small>Local build</small>
+            </div>
+        </div>
+    </div>
+    
+    <div class="joke-box">
+        <h3 class="joke-title">💡 Плов — это как распределённая система</h3>
+        <p>• <strong>Казан = Сервер</strong> — мощное железо для обработки</p>
+        <p>• <strong>Слои = Микросервисы</strong> — каждый выполняет свою функцию</p>
+        <p>• <strong>Пар = Облачные вычисления</strong> — обработка под давлением</p>
+        <p>• <strong>Узбекский шеф = DevOps</strong> — управляет всем процессом</p>
+    </div>
+    
+    <div class="info-block">
+        <h2 class="info-title">⚙️ Технические характеристики</h2>
+        <div class="tech-box">
+            <div class="tech-line"><span class="tech-key">Температура казана:</span> 180-200°C (optimal heat zone)</div>
+            <div class="tech-line"><span class="tech-key">Время приготовления:</span> 2-3 часа (including prep)</div>
+            <div class="tech-line"><span class="tech-key">Пропорции:</span> 1:1:1 мясо:рис:морковь (golden ratio)</div>
+            <div class="tech-line"><span class="tech-key">Паровая фаза:</span> 20-25 минут (steam processing)</div>
+            <div class="tech-line"><span class="tech-key">Порция:</span> 150г на человека (enterprise serving)</div>
+            <div class="tech-line"><span class="tech-key">Традиционные аксессуары:</span> Айран, лепёшки, зираб</div>
+            <div class="tech-line"><span class="tech-key">Критически важно:</span> Не мешать после закладки риса!</div>
+        </div>
+    </div>
+    
+    <div class="info-block">
+        <h2 class="info-title">👨‍🍳 Процесс приготовления (Казан-дэплой)</h2>
+        <div class="tech-box">
+            <div class="tech-line">1. Разогрев казана (preheating server)</div>
+            <div class="tech-line">2. Рендеринг жира (fat rendering phase)</div>
+            <div class="tech-line">3. Обжарка мяза и лука (protein processing)</div>
+            <div class="tech-line">4. Добавление моркови (vegetable layer deploy)</div>
+            <div class="tech-line">5. Заливка водой (liquid environment setup)</div>
+            <div class="tech-line">6. Закладка риса (grain core deployment)</div>
+            <div class="tech-line">7. Паровая обработка (steam compression)</div>
+            <div class="tech-line">8. Перемешивание и подача (final assembly)</div>
+        </div>
+    </div>
+    
+    <div class="joke-box">
+        <h3 class="joke-title">⚠️ Важные системные требования</h3>
+        <p>• <strong>Минимальные:</strong> Чугунный казан и желание</p>
+        <p>• <strong>Рекомендуемые:</strong> Узбекский шеф в качестве консультанта</p>
+        <p>• <strong>Оптимальные:</strong> Двор, мангал и дружная компания</p>
+        <p>• <strong>Обязательно:</strong> Не открывать крышку в паровой фазе!</p>
+    </div>
+    
+    <div style="margin-top: 40px; text-align: center;">
+        <a href="index.html" class="back-btn" style="background: linear-gradient(135deg, #D35400 0%, #E67E22 100%);">← ВЕРНУТЬСЯ К МЕНЮ</a>
+    </div>
+    
+    <script>
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        document.querySelectorAll('.back-btn').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                e.preventDefault();
+                document.body.style.opacity = '0.9';
+                setTimeout(() => { window.location.href = this.getAttribute('href'); }, 150);
+            });
+        });
+        
+        // Анимация слоёв
+        document.querySelectorAll('.layer').forEach((layer, index) => {
+            setTimeout(() => {
+                layer.style.opacity = '0';
+                layer.style.transform = 'translateY(20px)';
+                layer.style.transition = 'opacity 0.5s, transform 0.5s';
+                
+                setTimeout(() => {
+                    layer.style.opacity = '1';
+                    layer.style.transform = 'translateY(0)';
+                }, 100);
+            }, index * 200);
+        });
+    </script>
+</body>
+</html>

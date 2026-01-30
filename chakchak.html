@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🍯 Чак-чак | IT-Меню</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            background: #f8f9fa; color: #333;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6; padding: 20px; max-width: 800px; margin: 0 auto;
+            min-height: 100vh; display: flex; flex-direction: column;
+        }
+        .back-btn {
+            display: inline-flex; align-items: center; gap: 8px;
+            background: #6c757d; color: white; text-decoration: none;
+            padding: 12px 24px; border-radius: 8px; font-weight: 600;
+            margin-bottom: 30px; transition: background 0.3s; width: fit-content;
+        }
+        .back-btn:hover { background: #5a6268; }
+        .dish-header {
+            background: linear-gradient(135deg, #F39C12 0%, #F1C40F 100%);
+            color: white; border-radius: 15px; padding: 30px;
+            margin-bottom: 30px; box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        .dish-icon-large { font-size: 4rem; margin-bottom: 15px; text-align: center; }
+        .dish-name { color: white; font-size: 2.5rem; margin-bottom: 10px; 
+                    font-weight: 800; text-align: center; }
+        .dish-meta { color: rgba(255,255,255,0.9); font-size: 1.1rem; 
+                    font-family: 'Courier New', monospace; margin-bottom: 20px; text-align: center; }
+        .info-block { background: white; border-radius: 12px; padding: 25px;
+                     margin-bottom: 25px; box-shadow: 0 3px 10px rgba(0,0,0,0.06); }
+        .info-title { color: #2c3e50; font-size: 1.5rem; margin-bottom: 20px;
+                     padding-bottom: 10px; border-bottom: 2px solid #f0f5ff;
+                     display: flex; align-items: center; gap: 10px; }
+        .info-title::before { content: "›"; color: #F39C12; 
+                            font-weight: bold; font-size: 1.8rem; }
+        .ingredients-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; }
+        .ingredient-item { background: #f8f9fa; padding: 15px; border-radius: 8px;
+                          border-left: 4px solid #F39C12; transition: transform 0.2s; }
+        .ingredient-item:hover { transform: translateY(-3px); }
+        .ingredient-name { font-weight: 700; color: #2c3e50; margin-bottom: 5px; font-size: 1.1rem; }
+        .ingredient-desc { color: #666; font-size: 0.95rem; }
+        .joke-box { background: #FEF9E7; border-left: 4px solid #F1C40F;
+                   padding: 20px; border-radius: 8px; margin: 20px 0; }
+        .joke-title { color: #D68910; font-weight: 700; margin-bottom: 10px;
+                     display: flex; align-items: center; gap: 10px; }
+        .tech-box { background: #FFFDE7; border-left: 4px solid #F1C40F;
+                   padding: 20px; border-radius: 8px; font-family: 'Courier New', monospace;
+                   font-size: 1rem; line-height: 1.8; }
+        .tech-line { margin-bottom: 8px; }
+        .tech-key { color: #D68910; font-weight: bold; }
+        .honey-types { display: flex; flex-wrap: wrap; gap: 15px; margin-top: 20px; }
+        .honey-type { flex: 1; min-width: 180px; background: #FEF9E7; 
+                    padding: 15px; border-radius: 8px; border: 2px solid #F39C12; }
+        .honey-type h4 { color: #D68910; margin-bottom: 10px; }
+        .network-diagram { 
+            background: #FFFDE7;
+            border-radius: 12px;
+            padding: 25px;
+            margin: 25px 0;
+            text-align: center;
+            position: relative;
+        }
+        .node { 
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            background: #F39C12;
+            border-radius: 50%;
+            margin: 10px;
+            animation: pulse 2s infinite;
+            animation-delay: calc(var(--delay) * 0.2s);
+        }
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.8; }
+            50% { transform: scale(1.2); opacity: 1; }
+        }
+        @media (max-width: 768px) {
+            body { padding: 15px; } .dish-header { padding: 20px; }
+            .dish-name { font-size: 2rem; } .dish-icon-large { font-size: 3.5rem; }
+            .info-block { padding: 20px; } .ingredients-grid { grid-template-columns: 1fr; }
+            .honey-types { flex-direction: column; }
+        }
+        @media (max-width: 480px) {
+            .dish-name { font-size: 1.8rem; } .info-title { font-size: 1.3rem; }
+            .back-btn { width: 100%; justify-content: center; }
+        }
+    </style>
+</head>
+<body>
+    <a href="index.html" class="back-btn">← НАЗАД К МЕНЮ</a>
+    <div class="dish-header">
+        <span class="dish-icon-large">🍯</span>
+        <h1 class="dish-name">Чак-чак</h1>
+        <div class="dish-meta">ID: DESSERT_CHAK_001 | Версия: 2.0.3 | Статус: 🍯 СЛАДКАЯ СЕТЬ</div>
+    </div>
+    
+    <!-- СЕТЕВАЯ ДИАГРАММА -->
+    <div class="network-diagram">
+        <h3 style="color: #D68910; margin-bottom: 20px;">🕸️ Распределённая сеть чак-чака</h3>
+        <div style="display: flex; justify-content: center; flex-wrap: wrap;">
+            <div class="node" style="--delay: 1"></div>
+            <div class="node" style="--delay: 2"></div>
+            <div class="node" style="--delay: 3"></div>
+            <div class="node" style="--delay: 4"></div>
+            <div class="node" style="--delay: 5"></div>
+            <div class="node" style="--delay: 6"></div>
+            <div class="node" style="--delay: 7"></div>
+            <div class="node" style="--delay: 8"></div>
+        </div>
+        <p style="color: #666; margin-top: 15px;"><em>Каждый узел соединён медовым протоколом</em></p>
+    </div>
+    
+    <div class="info-block">
+        <h2 class="info-title">📦 Состав (Honey-Network Stack)</h2>
+        <div class="ingredients-grid">
+            <div class="ingredient-item"><div class="ingredient-name">Мука высший сорт</div><div class="ingredient-desc">Base framework, fine-grained</div></div>
+            <div class="ingredient-item"><div class="ingredient-name">Яйца деревенские</div><div class="ingredient-desc">Binding agent, protein-rich</div></div>
+            <div class="ingredient-item"><div class="ingredient-name">Мёд цветочный</div><div class="ingredient-desc">Network protocol, sticky & sweet</div></div>
+            <div class="ingredient-item"><div class="ingredient-name">Сахар белый</div><div class="ingredient-desc">Sweetness amplifier, crystal</div></div>
+            <div class="ingredient-item"><div class="ingredient-name">Масло сливочное</div><div class="ingredient-desc">Fat layer, richness module</div></div>
+            <div class="ingredient-item"><div class="ingredient-name">Сода пищевая</div><div class="ingredient-desc">Leavening agent, puff module</div></div>
+        </div>
+    </div>
+    
+    <div class="info-block">
+        <h2 class="info-title">🍯 Типы мёда (Protocol Versions)</h2>
+        <div class="honey-types">
+            <div class="honey-type">
+                <h4>🌸 Цветочный</h4>
+                <p>Классический, мягкий</p>
+                <small>Standard protocol</small>
+            </div>
+            <div class="honey-type">
+                <h4>🌻 Подсолнечный</h4>
+                <p>Яркий, насыщенный</p>
+                <small>High-performance</small>
+            </div>
+            <div class="honey-type">
+                <h4>🌿 Гречишный</h4>
+                <p>Тёмный, терпкий</p>
+                <small>Enterprise edition</small>
+            </div>
+            <div class="honey-type">
+                <h4>🌱 Липовый</h4>
+                <p>Ароматный, светлый</p>
+                <small>Premium version</small>
+            </div>
+        </div>
+    </div>
+    
+    <div class="joke-box">
+        <h3 class="joke-title">💡 Чак-чак — это распределённая система</h3>
+        <p>• <strong>Каждый шарик = Нода</strong> — независимый, но связанный</p>
+        <p>• <strong>Мёд = Сетевой протокол</strong> — соединяет все компоненты</p>
+        <p>• <strong>Форма = Топология сети</strong> — обычно горка или гнездо</p>
+        <p>• <strong>Орехи = Дополнительные сервисы</strong> — опциональные модули</p>
+    </div>
+    
+    <div class="info-block">
+        <h2 class="info-title">⚙️ Технические характеристики</h2>
+        <div class="tech-box">
+            <div class="tech-line"><span class="tech-key">Температура жарки:</span> 170-180°C (golden brown target)</div>
+            <div class="tech-line"><span class="tech-key">Время приготовления:</span> 1.5-2 часа (assembly time)</div>
+            <div class="tech-line"><span class="tech-key">Консистенция теста:</span> Крутое, как для пельменей</div>
+            <div class="tech-line"><span class="tech-key">Сиропная фаза:</span> Мёд + сахар, нагреть до нитки</div>
+            <div class="tech-line"><span class="tech-key">Форм-фактор:</span> Горка, гнездо или произвольная форма</div>
+            <div class="tech-line"><span class="tech-key">Рекомендуемые add-ons:</span> Грецкие орехи, фундук, миндаль</div>
+            <div class="tech-line"><span class="tech-key">Критически важно:</span> Не пережарить тесто в масле!</div>
+        </div>
+    </div>
+    
+    <div class="info-block">
+        <h2 class="info-title">👩‍🍳 Процесс сборки (Network Assembly)</h2>
+        <div class="tech-box">
+            <div class="tech-line">1. Приготовление теста (node creation)</div>
+            <div class="tech-line">2. Формовка шариков/палочек (node shaping)</div>
+            <div class="tech-line">3. Обжарка в масле (node activation)</div>
+            <div class="tech-line">4. Приготовление сиропа (protocol preparation)</div>
+            <div class="tech-line">5. Смешивание с сиропом (network binding)</div>
+            <div class="tech-line">6. Формовка конструкции (topology setup)</div>
+            <div class="tech-line">7. Остывание и затвердевание (system cooling)</div>
+            <div class="tech-line">8. Украшение орехами (optional services)</div>
+        </div>
+    </div>
+    
+    <div class="joke-box">
+        <h3 class="joke-title">⚠️ Особенности работы с сетью</h3>
+        <p>• <strong>Мёд должен быть тёплым</strong> — как хорошо настроенный API</p>
+        <p>• <strong>Шарики не должны слипаться раньше времени</strong> — избегать race conditions</p>
+        <p>• <strong>Хранить в прохладном месте</strong> — предотвращает network collapse</p>
+        <p>• <strong>Лучше всего на следующий день</strong> — система стабилизируется</p>
+    </div>
+    
+    <div style="margin-top: 40px; text-align: center;">
+        <a href="index.html" class="back-btn" style="background: linear-gradient(135deg, #F39C12 0%, #F1C40F 100%);">← ВЕРНУТЬСЯ К МЕНЮ</a>
+    </div>
+    
+    <script>
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        document.querySelectorAll('.back-btn').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                e.preventDefault();
+                document.body.style.opacity = '0.9';
+                setTimeout(() => { window.location.href = this.getAttribute('href'); }, 150);
+            });
+        });
+        
+        // Создаём больше "нод" для сети
+        const networkContainer = document.querySelector('.network-diagram');
+        if (networkContainer) {
+            const nodesContainer = networkContainer.querySelector('div[style*="display: flex"]');
+            if (nodesContainer) {
+                // Удаляем существующие ноды
+                nodesContainer.innerHTML = '';
+                
+                // Создаём сеть из 20 нод
+                for (let i = 0; i < 20; i++) {
+                    const node = document.createElement('div');
+                    node.className = 'node';
+                    node.style.setProperty('--delay', i);
+                    node.style.animationDelay = `${i * 0.2}s`;
+                    nodesContainer.appendChild(node);
+                }
+            }
+        }
+    </script>
+</body>
+</html>
