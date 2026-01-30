@@ -4,136 +4,153 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>🥟 Пироги с капустой и яйцом | IT-Меню</title>
-    <link rel="stylesheet" href="css/styles.css">
     <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            background: #f8f9fa; color: #333;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6; padding: 20px; max-width: 800px; margin: 0 auto;
+            min-height: 100vh; display: flex; flex-direction: column;
+        }
+        .back-btn {
+            display: inline-flex; align-items: center; gap: 8px;
+            background: #6c757d; color: white; text-decoration: none;
+            padding: 12px 24px; border-radius: 8px; font-weight: 600;
+            margin-bottom: 30px; transition: background 0.3s; width: fit-content;
+        }
+        .back-btn:hover { background: #5a6268; }
         .dish-header {
-            border-left: 6px solid #8B4513;
+            background: linear-gradient(135deg, #FF9800 0%, #F57C00 100%);
+            color: white; border-radius: 15px; padding: 30px;
+            margin-bottom: 30px; box-shadow: 0 5px 15px rgba(0,0,0,0.1);
         }
-        
-        .ingredient-item {
-            border-left: 4px solid #8B4513;
+        .dish-icon-large { font-size: 4rem; margin-bottom: 15px; text-align: center; }
+        .dish-name { color: white; font-size: 2.5rem; margin-bottom: 10px; 
+                    font-weight: 800; text-align: center; }
+        .dish-meta { color: rgba(255,255,255,0.9); font-size: 1.1rem; 
+                    font-family: 'Courier New', monospace; margin-bottom: 20px; text-align: center; }
+        .info-block { background: white; border-radius: 12px; padding: 25px;
+                     margin-bottom: 25px; box-shadow: 0 3px 10px rgba(0,0,0,0.06); }
+        .info-title { color: #2c3e50; font-size: 1.5rem; margin-bottom: 20px;
+                     padding-bottom: 10px; border-bottom: 2px solid #f0f5ff;
+                     display: flex; align-items: center; gap: 10px; }
+        .info-title::before { content: "›"; color: #FF9800; 
+                            font-weight: bold; font-size: 1.8rem; }
+        .ingredients-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; }
+        .ingredient-item { background: #f8f9fa; padding: 15px; border-radius: 8px;
+                          border-left: 4px solid #FF9800; transition: transform 0.2s; }
+        .ingredient-item:hover { transform: translateY(-3px); }
+        .ingredient-name { font-weight: 700; color: #2c3e50; margin-bottom: 5px; font-size: 1.1rem; }
+        .ingredient-desc { color: #666; font-size: 0.95rem; }
+        .joke-box { background: #FFF3E0; border-left: 4px solid #FF9800;
+                   padding: 20px; border-radius: 8px; margin: 20px 0; }
+        .joke-title { color: #E65100; font-weight: 700; margin-bottom: 10px;
+                     display: flex; align-items: center; gap: 10px; }
+        .tech-box { background: #FFF8E1; border-left: 4px solid #F57C00;
+                   padding: 20px; border-radius: 8px; font-family: 'Courier New', monospace;
+                   font-size: 1rem; line-height: 1.8; }
+        .tech-line { margin-bottom: 8px; }
+        .tech-key { color: #E65100; font-weight: bold; }
+        .pie-types { display: flex; flex-wrap: wrap; gap: 15px; margin-top: 20px; }
+        .pie-type { flex: 1; min-width: 180px; background: #FFF3E0; 
+                    padding: 15px; border-radius: 8px; border: 2px solid #FF9800; }
+        .pie-type h4 { color: #E65100; margin-bottom: 10px; }
+        @media (max-width: 768px) {
+            body { padding: 15px; } .dish-header { padding: 20px; }
+            .dish-name { font-size: 2rem; } .dish-icon-large { font-size: 3.5rem; }
+            .info-block { padding: 20px; } .ingredients-grid { grid-template-columns: 1fr; }
+            .pie-types { flex-direction: column; }
         }
-        
-        .tech-box {
-            border-left: 4px solid #D2691E;
-        }
-        
-        .joke-box {
-            border-left: 4px solid #FF8C00;
-            background: #FFF3E0;
-        }
-        
-        .special-note {
-            background: #E8F5E9;
-            border-left: 4px solid #4CAF50;
-            padding: 20px;
-            border-radius: 8px;
-            margin: 20px 0;
+        @media (max-width: 480px) {
+            .dish-name { font-size: 1.8rem; } .info-title { font-size: 1.3rem; }
+            .back-btn { width: 100%; justify-content: center; }
         }
     </style>
 </head>
 <body>
-    <!-- КНОПКА НАЗАД -->
     <a href="index.html" class="back-btn">← НАЗАД К МЕНЮ</a>
-    
-    <!-- ЗАГОЛОВОК БЛЮДА -->
     <div class="dish-header">
         <span class="dish-icon-large">🥟</span>
         <h1 class="dish-name">Пироги с капустой и яйцом</h1>
         <div class="dish-meta">ID: PIE_CABBAGE_001 | Версия: 2.1.7 | Статус: 🔥 ГОРЯЧИЕ</div>
     </div>
-    
-    <!-- ИНГРЕДИЕНТЫ -->
     <div class="info-block">
-        <h2 class="info-title">📦 Состав (Ingredients Package)</h2>
+        <h2 class="info-title">📦 Состав (Dough & Filling)</h2>
         <div class="ingredients-grid">
-            <div class="ingredient-item">
-                <div class="ingredient-name">Тесто (Dough 2.0)</div>
-                <div class="ingredient-desc">Слоёное, версия: flaky</div>
+            <div class="ingredient-item"><div class="ingredient-name">Тесто дрожжевое</div><div class="ingredient-desc">Base wrapper, fluffy & airy</div></div>
+            <div class="ingredient-item"><div class="ingredient-name">Капуста белокочанная</div><div class="ingredient-desc">Core filling, slow-cooked</div></div>
+            <div class="ingredient-item"><div class="ingredient-name">Яйца куриные</div><div class="ingredient-desc">Protein module, hard-boiled</div></div>
+            <div class="ingredient-item"><div class="ingredient-name">Лук репчатый</div><div class="ingredient-desc">Flavor layer, caramelized</div></div>
+            <div class="ingredient-item"><div class="ingredient-name">Укроп свежий</div><div class="ingredient-desc">Aromatic package, fresh herbs</div></div>
+            <div class="ingredient-item"><div class="ingredient-name">Специи</div><div class="ingredient-desc">Spice algorithms, black pepper & salt</div></div>
+        </div>
+    </div>
+    <div class="info-block">
+        <h2 class="info-title">🥟 Типы пирогов (Form Factors)</h2>
+        <div class="pie-types">
+            <div class="pie-type">
+                <h4>🥟 Закрытые</h4>
+                <p>Классические, начинка внутри</p>
+                <small>Full encapsulation</small>
             </div>
-            <div class="ingredient-item">
-                <div class="ingredient-name">Капуста тушёная</div>
-                <div class="ingredient-desc">протокол: slow-cook</div>
+            <div class="pie-type">
+                <h4>🥮 Открытые</h4>
+                <p>С просветом сверху</p>
+                <small>View of filling</small>
             </div>
-            <div class="ingredient-item">
-                <div class="ingredient-name">Яйца варёные</div>
-                <div class="ingredient-desc">core: protein-rich</div>
+            <div class="pie-type">
+                <h4>🥠 Маленькие</h4>
+                <p>Пирожки на один укус</p>
+                <small>Bite-sized</small>
             </div>
-            <div class="ingredient-item">
-                <div class="ingredient-name">Лук обжаренный</div>
-                <div class="ingredient-desc">ароматизатор: caramelized</div>
-            </div>
-            <div class="ingredient-item">
-                <div class="ingredient-name">Специи пакет</div>
-                <div class="ingredient-desc">модуль: flavor-spices-v1</div>
-            </div>
-            <div class="ingredient-item">
-                <div class="ingredient-name">Масло сливочное</div>
-                <div class="ingredient-desc">интерфейс: glaze</div>
+            <div class="pie-type">
+                <h4>🥧 Большие</h4>
+                <p>Пирог на компанию</p>
+                <small>Family size</small>
             </div>
         </div>
     </div>
-    
-    <!-- IT-ШУТКА -->
     <div class="joke-box">
-        <h3 class="joke-title">🤖 Почему программисты любят пироги?</h3>
-        <p>• <strong>Инкапсуляция</strong> — начинка надёжно запакована</p>
-        <p>• <strong>Слоистая архитектура</strong> — тесто + начинка + тесто</p>
-        <p>• <strong>Portable</strong> — можно есть без остановки работы</p>
-        <p>• <strong>Backup</strong> — всегда есть резервная копия (второй пирог)</p>
+        <h3 class="joke-title">💡 Почему пироги как хороший код?</h3>
+        <p>• <strong>Инкапсуляция</strong> — начинка защищена тестом</p>
+        <p>• <strong>Повторное использование</strong> — одна начинка, много пирогов</p>
+        <p>• <strong>Модульность</strong> — каждый пирог независимая единица</p>
+        <p>• <strong>Горячее обновление</strong> — прямо из духовки</p>
     </div>
-    
-    <!-- ТЕХНИЧЕСКИЕ ДЕТАЛИ -->
     <div class="info-block">
         <h2 class="info-title">⚙️ Технические характеристики</h2>
         <div class="tech-box">
-            <div class="tech-line"><span class="tech-key">API:</span> Hand-held 1.0</div>
-            <div class="tech-line"><span class="tech-key">Температура сервировки:</span> 65-75°C</div>
-            <div class="tech-line"><span class="tech-key">Время compile:</span> 40 минут</div>
-            <div class="tech-line"><span class="tech-key">Energy consumption:</span> 220 ккал/ед.</div>
-            <div class="tech-line"><span class="tech-key">Комплектация:</span> Штучно или пакетно</div>
-            <div class="tech-line"><span class="tech-key">Совместимость:</span> Чай ✅ | Кофе ✅ | Компот ✅</div>
-            <div class="tech-line"><span class="tech-key">Документация:</span> <a href="#" style="color: #D2691E;">reheat_instructions.pdf</a></div>
+            <div class="tech-line"><span class="tech-key">Время выпечки:</span> 25-30 минут при 180°C</div>
+            <div class="tech-line"><span class="tech-key">Вес единицы:</span> 80-100 грамм</div>
+            <div class="tech-line"><span class="tech-key">Калорийность:</span> ~220 ккал/шт</div>
+            <div class="tech-line"><span class="tech-key">Температура подачи:</span> 60-70°C (тёплые)</div>
+            <div class="tech-line"><span class="tech-key">Рекомендуемые соусы:</span> Сметана, йогурт</div>
+            <div class="tech-line"><span class="tech-key">Срок хранения:</span> 48 часов в холодильнике</div>
+            <div class="tech-line"><span class="tech-key">Особенность:</span> Тесто должно подняться 2 раза</div>
         </div>
     </div>
-    
-    <!-- ОСОБЕННОСТИ -->
-    <div class="special-note">
-        <h3 style="color: #2E7D32; margin-bottom: 15px;">🎯 Уникальные особенности</h3>
-        <p><strong>Адаптивный размер:</strong> Подстраивается под голод пользователя</p>
-        <p><strong>Кросс-платформенность:</strong> Работает на завтрак, обед и ужин</p>
-        <p><strong>Оффлайн-режим:</strong> Не требует подогрева (но рекомендуется)</p>
-        <p><strong>Open Source:</strong> Рецепт можно форкнуть и модифицировать</p>
+    <div class="info-block">
+        <h2 class="info-title">👨‍🍳 Процесс приготовления</h2>
+        <div class="tech-box">
+            <div class="tech-line">1. Приготовление теста (dough preparation)</div>
+            <div class="tech-line">2. Подготовка начинки (filling assembly)</div>
+            <div class="tech-line">3. Формовка пирогов (shaping process)</div>
+            <div class="tech-line">4. Выпечка 30 минут (baking phase)</div>
+            <div class="tech-line">5. Остывание 10 минут (cooling period)</div>
+            <div class="tech-line">6. Подача горячими (serving hot)</div>
+        </div>
     </div>
-    
-    <!-- ПРЕДУПРЕЖДЕНИЕ -->
-    <div class="joke-box">
-        <h3 class="joke-title">⚠️ Системные требования</h3>
-        <p>• <strong>Минимальные:</strong> 1 голодный разработчик</p>
-        <p>• <strong>Рекомендуемые:</strong> Чайник + чашка</p>
-        <p>• <strong>Оптимальные:</strong> Дружеская компания + беседа</p>
-        <p>• <strong>Критические:</strong> Не оставлять без присмотра - могут исчезнуть</p>
-    </div>
-    
-    <!-- КНОПКА НАЗАД ВНИЗУ -->
     <div style="margin-top: 40px; text-align: center;">
-        <a href="index.html" class="back-btn" style="background: #8B4513;">← ВЕРНУТЬСЯ К СПИСКУ БЛЮД</a>
+        <a href="index.html" class="back-btn" style="background: linear-gradient(135deg, #FF9800 0%, #F57C00 100%);">← ВЕРНУТЬСЯ К СПИСКУ БЛЮД</a>
     </div>
-    
-    <script src="js/script.js"></script>
     <script>
-        // Дополнительные скрипты для этой страницы
-        document.addEventListener('DOMContentLoaded', function() {
-            // Анимация для иконки пирога
-            const pieIcon = document.querySelector('.dish-icon-large');
-            if (pieIcon) {
-                setInterval(() => {
-                    pieIcon.style.transform = 'scale(1.1)';
-                    setTimeout(() => {
-                        pieIcon.style.transform = 'scale(1)';
-                    }, 300);
-                }, 3000);
-            }
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        document.querySelectorAll('.back-btn').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                e.preventDefault();
+                document.body.style.opacity = '0.9';
+                setTimeout(() => { window.location.href = this.getAttribute('href'); }, 150);
+            });
         });
     </script>
 </body>
