@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🍎 Яблочный пирог | IT-Меню</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            background: #f8f9fa; color: #333;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6; padding: 20px; max-width: 800px; margin: 0 auto;
+            min-height: 100vh; display: flex; flex-direction: column;
+        }
+        .back-btn {
+            display: inline-flex; align-items: center; gap: 8px;
+            background: #6c757d; color: white; text-decoration: none;
+            padding: 12px 24px; border-radius: 8px; font-weight: 600;
+            margin-bottom: 30px; transition: background 0.3s; width: fit-content;
+        }
+        .back-btn:hover { background: #5a6268; }
+        .dish-header {
+            background: linear-gradient(135deg, #E74C3C 0%, #EC7063 100%);
+            color: white; border-radius: 15px; padding: 30px;
+            margin-bottom: 30px; box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        .dish-icon-large { font-size: 4rem; margin-bottom: 15px; text-align: center; }
+        .dish-name { color: white; font-size: 2.5rem; margin-bottom: 10px; 
+                    font-weight: 800; text-align: center; }
+        .dish-meta { color: rgba(255,255,255,0.9); font-size: 1.1rem; 
+                    font-family: 'Courier New', monospace; margin-bottom: 20px; text-align: center; }
+        .info-block { background: white; border-radius: 12px; padding: 25px;
+                     margin-bottom: 25px; box-shadow: 0 3px 10px rgba(0,0,0,0.06); }
+        .info-title { color: #2c3e50; font-size: 1.5rem; margin-bottom: 20px;
+                     padding-bottom: 10px; border-bottom: 2px solid #f0f5ff;
+                     display: flex; align-items: center; gap: 10px; }
+        .info-title::before { content: "›"; color: #E74C3C; 
+                            font-weight: bold; font-size: 1.8rem; }
+        .ingredients-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; }
+        .ingredient-item { background: #f8f9fa; padding: 15px; border-radius: 8px;
+                          border-left: 4px solid #E74C3C; transition: transform 0.2s; }
+        .ingredient-item:hover { transform: translateY(-3px); }
+        .ingredient-name { font-weight: 700; color: #2c3e50; margin-bottom: 5px; font-size: 1.1rem; }
+        .ingredient-desc { color: #666; font-size: 0.95rem; }
+        .joke-box { background: #FDEDEC; border-left: 4px solid #E74C3C;
+                   padding: 20px; border-radius: 8px; margin: 20px 0; }
+        .joke-title { color: #CB4335; font-weight: 700; margin-bottom: 10px;
+                     display: flex; align-items: center; gap: 10px; }
+        .tech-box { background: #FBEEE6; border-left: 4px solid #EC7063;
+                   padding: 20px; border-radius: 8px; font-family: 'Courier New', monospace;
+                   font-size: 1rem; line-height: 1.8; }
+        .tech-line { margin-bottom: 8px; }
+        .tech-key { color: #CB4335; font-weight: bold; }
+        .apple-types { display: flex; flex-wrap: wrap; gap: 15px; margin-top: 20px; }
+        .apple-type { flex: 1; min-width: 180px; background: #FDEDEC; 
+                     padding: 15px; border-radius: 8px; border: 2px solid #E74C3C; }
+        .apple-type h4 { color: #CB4335; margin-bottom: 10px; }
+        .pie-animation {
+            text-align: center;
+            margin: 25px 0;
+            padding: 25px;
+            background: #FBEEE6;
+            border-radius: 12px;
+            position: relative;
+        }
+        .apple-emoji {
+            font-size: 2.5rem;
+            display: inline-block;
+            animation: appleFall 3s ease-in-out infinite;
+            animation-delay: calc(var(--delay) * 0.3s);
+        }
+        @keyframes appleFall {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(20px) rotate(180deg); }
+        }
+        .oven-status {
+            background: #F2D7D5;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+            text-align: center;
+            font-family: 'Courier New', monospace;
+            border: 2px dashed #E74C3C;
+        }
+        @media (max-width: 768px) {
+            body { padding: 15px; } .dish-header { padding: 20px; }
+            .dish-name { font-size: 2rem; } .dish-icon-large { font-size: 3.5rem; }
+            .info-block { padding: 20px; } .ingredients-grid { grid-template-columns: 1fr; }
+            .apple-types { flex-direction: column; }
+        }
+        @media (max-width: 480px) {
+            .dish-name { font-size: 1.8rem; } .info-title { font-size: 1.3rem; }
+            .back-btn { width: 100%; justify-content: center; }
+        }
+    </style>
+</head>
+<body>
+    <a href="index.html" class="back-btn">← НАЗАД К МЕНЮ</a>
+    <div class="dish-header">
+        <span class="dish-icon-large">🍎</span>
+        <h1 class="dish-name">Яблочный пирог</h1>
+        <div class="dish-meta">ID: PIE_APPLE_001 | Версия: 2.0.1 | Статус: 🏡 HOMEMADE CLASSIC</div>
+    </div>
+    
+    <!-- АНИМАЦИЯ ЯБЛОК -->
+    <div class="pie-animation">
+        <h3 style="color: #CB4335; margin-bottom: 20px;">🍎 Apple Core Processing...</h3>
+        <div style="display: flex; justify-content: center; gap: 20px;">
+            <span class="apple-emoji" style="--delay: 0">🍎</span>
+            <span class="apple-emoji" style="--delay: 1">🍏</span>
+            <span class="apple-emoji" style="--delay: 2">🍎</span>
+            <span class="apple-emoji" style="--delay: 3">🍏</span>
+        </div>
+        <div style="color: #666; margin-top: 15px; font-size: 0.9rem;">
+            <em>// Процесс подготовки apple slices...</em>
+        </div>
+    </div>
+    
+    <!-- СТАТУС ДУХОВКИ -->
+    <div class="oven-status">
+        🔥 ДУХОВКА: 180°C | ТАЙМЕР: 40 мин | СТАТУС: BAKING...
+    </div>
+    
+    <div class="info-block">
+        <h2 class="info-title">📦 Состав (Apple Core Stack)</h2>
+        <div class="ingredients-grid">
+            <div class="ingredient-item"><div class="ingredient-name">Яблоки кисло-сладкие</div><div class="ingredient-desc">Core fruit, peeled & sliced</div></div>
+            <div class="ingredient-item"><div class="ingredient-name">Тесто песочное</div><div class="ingredient-desc">Buttery crust, crumbly base</div></div>
+            <div class="ingredient-item"><div class="ingredient-name">Сахар коричневый</div><div class="ingredient-desc">Caramel notes, depth of flavor</div></div>
+            <div class="ingredient-item"><div class="ingredient-name">Корица молотая</div><div class="ingredient-desc">Warm spice algorithm, aromatic</div></div>
+            <div class="ingredient-item"><div class="ingredient-name">Мука пшеничная</div><div class="ingredient-desc">Thickening agent, structure</div></div>
+            <div class="ingredient-item"><div class="ingredient-name">Сливочное масло</div><div class="ingredient-desc">Richness module, flaky texture</div></div>
+        </div>
+    </div>
+    
+    <div class="info-block">
+        <h2 class="info-title">🍎 Типы яблок (Apple Variants)</h2>
+        <div class="apple-types">
+            <div class="apple-type">
+                <h4>🍏 Гренни Смит</h4>
+                <p>Кислые, держат форму</p>
+                <small>Firm & tart</small>
+            </div>
+            <div class="apple-type">
+                <h4>🍎 Гала</h4>
+                <p>Сладкие, ароматные</p>
+                <small>Sweet & juicy</small>
+            </div>
+            <div class="apple-type">
+                <h4>🍏 Фуджи</h4>
+                <p>Хрустящие, очень сладкие</p>
+                <small>Crispy sweet</small>
+            </div>
+            <div class="apple-type">
+                <h4>🍎 Антоновка</h4>
+                <p>Классические русские</p>
+                <small>Traditional</small>
+            </div>
+        </div>
+    </div>
+    
+    <div class="joke-box">
+        <h3 class="joke-title">💡 Яблочный пирог — это как компиляция</h3>
+        <p>• <strong>Яблоки = Исходный код</strong> — сырой материал для обработки</p>
+        <p>• <strong>Тесто = Компилятор</strong> — обрабатывает и структурирует</p>
+        <p>• <strong>Духовка = Сборка</strong> — превращает в готовый продукт</p>
+        <p>• <strong>Запах = Логи</strong> — сообщает о процессе компиляции</p>
+    </div>
+    
+    <div class="info-block">
+        <h2 class="info-title">⚙️ Технические характеристики</h2>
+        <div class="tech-box">
+            <div class="tech-line"><span class="tech-key">Температура выпечки:</span> 180°C (standard pie temperature)</div>
+            <div class="tech-line"><span class="tech-key">Время приготовления:</span> 40-50 минут (golden brown target)</div>
+            <div class="tech-line"><span class="tech-key">Толщина теста:</span> 3-4 мм (optimal crust thickness)</div>
+            <div class="tech-line"><span class="tech-key">Толщина яблок:</span> 5-7 мм slices (consistent layer)</div>
+            <div class="tech-line"><span class="tech-key">Калорийность:</span> ~280 ккал/100г (sweet reward)</div>
+            <div class="tech-line"><span class="tech-key">Идеальные аккомпанементы:</span> Ванильное мороженое, взбитые сливки</div>
+            <div class="tech-line"><span class="tech-key">Базовая проверка:</span> Сухая зубочистка = готово</div>
+        </div>
+    </div>
+    
+    <div class="info-block">
+        <h2 class="info-title">👩‍🍳 Процесс приготовления (Pie Compilation)</h2>
+        <div class="tech-box">
+            <div class="tech-line">1. Приготовление теста (crust compilation)</div>
+            <div class="tech-line">2. Чистка и нарезка яблок (apple processing)</div>
+            <div class="tech-line">3. Смешивание с сахаром и корицей (spice integration)</div>
+            <div class="tech-line">4. Формовка нижнего коржа (base layer deployment)</div>
+            <div class="tech-line">5. Выкладка яблочного слоя (fruit layer assembly)</div>
+            <div class="tech-line">6. Формовка верхнего коржа (top layer installation)</div>
+            <div class="tech-line">7. Выпечка 40 минут (baking execution)</div>
+            <div class="tech-line">8. Остывание 1 час (cooling & stabilization)</div>
+        </div>
+    </div>
+    
+    <div class="info-block">
+        <h2 class="info-title">🔄 Вариации рецепта (Code Forks)</h2>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px;">
+            <div style="background: #FDEDEC; padding: 20px; border-radius: 10px; border: 2px solid #E74C3C;">
+                <h4 style="color: #CB4335; margin-bottom: 10px;">🥧 Открытый пирог</h4>
+                <p>Без верхнего коржа. Open-source edition.</p>
+            </div>
+            <div style="background: #FDEDEC; padding: 20px; border-radius: 10px; border: 2px solid #E74C3C;">
+                <h4 style="color: #CB4335; margin-bottom: 10px;">🧇 Крошка</h4>
+                <p>С песочной крошкой сверху. Crumb topping.</p>
+            </div>
+            <div style="background: #FDEDEC; padding: 20px; border-radius: 10px; border: 2px solid #E74C3C;">
+                <h4 style="color: #CB4335; margin-bottom: 10px;">🌰 С орехами</h4>
+                <p>С грецкими орехами. Nutty extension.</p>
+            </div>
+            <div style="background: #FDEDEC; padding: 20px; border-radius: 10px; border: 2px solid #E74C3C;">
+                <h4 style="color: #CB4335; margin-bottom: 10px;">🍇 С изюмом</h4>
+                <p>С изюмом и клюквой. Berry patch.</p>
+            </div>
+        </div>
+    </div>
+    
+    <div class="joke-box">
+        <h3 class="joke-title">⚠️ Важные системные заметки</h3>
+        <p>• <strong>Яблоки должны выделить сок</strong> — естественный процесс sugar release</p>
+        <p>• <strong>Делать вентиляционные отверстия</strong> — предотвратить steam pressure build-up</p>
+        <p>• <strong>Дать полностью остыть</strong> — filling продолжает густеть после выпечки</p>
+        <p>• <strong>Лучше на второй день</strong> — flavors полностью integrate</p>
+    </div>
+    
+    <div style="margin-top: 40px; text-align: center;">
+        <a href="index.html" class="back-btn" style="background: linear-gradient(135deg, #E74C3C 0%, #EC7063 100%);">← ВЕРНУТЬСЯ К МЕНЮ</a>
+    </div>
+    
+    <script>
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        document.querySelectorAll('.back-btn').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                e.preventDefault();
+                document.body.style.opacity = '0.9';
+                setTimeout(() => { window.location.href = this.getAttribute('href'); }, 150);
+            });
+        });
+        
+        // Анимация падающих яблок
+        const apples = document.querySelectorAll('.apple-emoji');
+        apples.forEach(apple => {
+            // Рандомная задержка для каждого яблока
+            const randomDelay = Math.random() * 2;
+            apple.style.animationDelay = `${randomDelay}s`;
+        });
+        
+        // Таймер духовки
+        const ovenStatus = document.querySelector('.oven-status');
+        let minutes = 40;
+        let seconds = 0;
+        
+        const updateTimer = () => {
+            if (seconds === 0) {
+                if (minutes === 0) {
+                    ovenStatus.textContent = "✅ ДУХОВКА: ВЫКЛ | ТАЙМЕР: 00:00 | СТАТУС: READY TO SERVE!";
+                    ovenStatus.style.background = "#D5F4E6";
+                    ovenStatus.style.borderColor = "#52BE80";
+                    return;
+                }
+                minutes--;
+                seconds = 59;
+            } else {
+                seconds--;
+            }
+            
+            const minStr = minutes.toString().padStart(2, '0');
+            const secStr = seconds.toString().padStart(2, '0');
+            ovenStatus.textContent = `🔥 ДУХОВКА: 180°C | ТАЙМЕР: ${minStr}:${secStr} | СТАТУС: BAKING...`;
+        };
+        
+        // Запускаем таймер каждую секунду
+        const timerInterval = setInterval(updateTimer, 1000);
+        
+        // Эффект при наведении на типы яблок
+        document.querySelectorAll('.apple-type').forEach(type => {
+            type.addEventListener('mouseenter', function() {
+                this.style.transform = 'scale(1.05)';
+            });
+            
+            type.addEventListener('mouseleave', function() {
+                this.style.transform = 'scale(1)';
+            });
+        });
+    </script>
+</body>
+</html>
