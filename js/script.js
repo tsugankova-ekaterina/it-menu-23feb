@@ -272,7 +272,7 @@ const observer = new IntersectionObserver((entries) => {
 // ТАЙМЕР ОБРАТНОГО ОТСЧЁТА ДО КОНЦА ПРАЗДНИКА
 function startCountdown() {
     // Фиксированная дата праздника
-    const partyDate = new Date('2026-01-30T09:00:00'); // ⬅️ ИЗМЕНИ!
+    const partyDate = new Date('2026-02-23T16:00:00'); // ⬅️ ИЗМЕНИ!
     
     if (new Date() > partyDate) {
         showFinishedState();
