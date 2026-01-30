@@ -1279,10 +1279,10 @@
 			rootMargin: '0px 0px -100px 0px' // Сработает чуть раньше
 		});
 
-
+		// ТАЙМЕР ОБРАТНОГО ОТСЧЁТА ДО КОНЦА ПРАЗДНИКА
 		function startCountdown() {
 			// Фиксированная дата праздника
-			const partyDate = new Date('2024-02-23T23:00:00'); // ⬅️ ИЗМЕНИ!
+			const partyDate = new Date('2026-01-30T9:00:00'); // ⬅️ ИЗМЕНИ!
 			
 			if (new Date() > partyDate) {
 				showFinishedState();
@@ -1319,6 +1319,9 @@
 				document.getElementById('minutes').textContent = '00';
 				document.getElementById('seconds').textContent = '00';
 				
+				document.querySelector('.timer-header').innerHTML = 
+					'<span class="timer-icon">⏰</span><h3>ЛАБОРАТОРИЯ СВЕТА ЗАКРЫТА</h3>';
+
 				document.querySelector('.timer-message').innerHTML = 
 					'🎉 ПРАЗДНИК ЗАВЕРШЁН!<br>Фотосессия light painting окончена.';
 				
