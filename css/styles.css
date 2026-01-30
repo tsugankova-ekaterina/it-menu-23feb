@@ -1,0 +1,554 @@
+/* СБРОС И БАЗОВЫЕ СТИЛИ */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+    background: #f8f9fa;
+    color: #333;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+    line-height: 1.6;
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* ШАПКА */
+.header {
+    background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+    color: white;
+    padding: 25px;
+    border-radius: 15px;
+    margin-bottom: 30px;
+    text-align: center;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.header h1 {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+    font-family: 'Courier New', monospace;
+}
+
+.header p {
+    font-size: 1.2rem;
+    opacity: 0.9;
+}
+
+/* КОНТЕЙНЕР БЛЮД */
+.dishes-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 25px;
+    margin-bottom: 40px;
+}
+
+/* КАРТОЧКА БЛЮДА */
+.dish-card {
+    background: white;
+    border-radius: 12px;
+    padding: 25px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+    border: 1px solid #e1e5e9;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.dish-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+}
+
+.dish-icon {
+    font-size: 2.8rem;
+    margin-bottom: 15px;
+    display: block;
+}
+
+.dish-title {
+    color: #2c3e50;
+    font-size: 1.8rem;
+    margin-bottom: 10px;
+    font-weight: 700;
+}
+
+.dish-id {
+    background: #e8f4fc;
+    color: #2575fc;
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-family: 'Courier New', monospace;
+    font-size: 0.95rem;
+    display: inline-block;
+    margin-bottom: 15px;
+    font-weight: bold;
+}
+
+.dish-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 20px;
+}
+
+.tag {
+    background: #f0f5ff;
+    color: #4a6bff;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+.dish-description {
+    color: #555;
+    font-size: 1.1rem;
+    margin-bottom: 25px;
+    line-height: 1.7;
+}
+
+/* КНОПКА */
+.btn {
+    display: inline-block;
+    background: linear-gradient(to right, #4776E6, #8E54E9);
+    color: white;
+    text-decoration: none;
+    padding: 14px 28px;
+    border-radius: 8px;
+    font-weight: 700;
+    font-size: 1.1rem;
+    text-align: center;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s;
+    width: 100%;
+    font-family: 'Courier New', monospace;
+}
+
+.btn:hover {
+    background: linear-gradient(to right, #3a64d4, #7d47d8);
+    box-shadow: 0 4px 12px rgba(142, 84, 233, 0.3);
+}
+
+/* ПОДВАЛ */
+.footer {
+    text-align: center;
+    padding: 25px;
+    margin-top: 40px;
+    color: #7f8c8d;
+    border-top: 2px solid #eaeaea;
+    font-size: 1rem;
+}
+
+.api-status {
+    background: #d4edda;
+    color: #155724;
+    padding: 12px;
+    border-radius: 8px;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-family: 'Courier New', monospace;
+}
+
+.status-dot {
+    width: 12px;
+    height: 12px;
+    background: #28a745;
+    border-radius: 50%;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% { opacity: 1; }
+    50% { opacity: 0.5; }
+    100% { opacity: 1; }
+}
+
+/* МОБИЛЬНАЯ АДАПТАЦИЯ */
+@media (max-width: 768px) {
+    body {
+        padding: 15px;
+    }
+    
+    .header h1 {
+        font-size: 2rem;
+    }
+    
+    .dishes-container {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    
+    .dish-card {
+        padding: 20px;
+    }
+    
+    .dish-title {
+        font-size: 1.6rem;
+    }
+    
+    .btn {
+        padding: 16px 24px;
+        font-size: 1.05rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .header {
+        padding: 20px 15px;
+    }
+    
+    .header h1 {
+        font-size: 1.8rem;
+    }
+    
+    .dish-icon {
+        font-size: 2.5rem;
+    }
+}
+
+/* СТИЛИ ДЛЯ ФИЛЬТРОВ И ПОИСКА */
+.search-filter-container {
+    margin: 30px 0;
+}
+
+.search-box {
+    margin-bottom: 25px;
+}
+
+#dish-search {
+    width: 100%;
+    padding: 16px 20px;
+    border-radius: 12px;
+    border: 2px solid #e1e5e9;
+    font-size: 1.1rem;
+    font-family: inherit;
+    transition: all 0.3s;
+    background: white;
+}
+
+#dish-search:focus {
+    outline: none;
+    border-color: #4776E6;
+    box-shadow: 0 0 0 3px rgba(71, 118, 230, 0.1);
+}
+
+.tag-filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 30px;
+    justify-content: center;
+}
+
+.tag-filter {
+    padding: 12px 24px;
+    background: #f0f5ff;
+    border: 2px solid #d1d9e6;
+    border-radius: 25px;
+    cursor: pointer;
+    font-weight: 600;
+    color: #4776E6;
+    transition: all 0.3s;
+    font-size: 0.95rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.tag-filter:hover {
+    background: #e1e9ff;
+    transform: translateY(-2px);
+}
+
+.tag-filter.active {
+    background: #4776E6;
+    color: white;
+    border-color: #4776E6;
+    box-shadow: 0 4px 12px rgba(71, 118, 230, 0.2);
+}
+
+/* Анимация для карточек при фильтрации */
+.dish-card {
+    transition: all 0.4s ease;
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.dish-card.hidden {
+    opacity: 0;
+    transform: translateY(20px);
+    height: 0;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+.results-count {
+    text-align: center;
+    color: #7f8c8d;
+    margin-bottom: 20px;
+    font-size: 1.1rem;
+}
+
+.light-painting-easter {
+    background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 100%);
+    color: white;
+    border-radius: 20px;
+    padding: 40px;
+    margin: 50px auto;
+    max-width: 800px;
+    position: relative;
+    overflow: hidden;
+    border: 2px solid #00ff00;
+    box-shadow: 0 0 30px rgba(0, 255, 0, 0.2);
+}
+
+.light-painting-easter::before {
+    content: "";
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(0,255,0,0.1) 0%, transparent 70%);
+    animation: pulse 4s infinite;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); opacity: 0.3; }
+    50% { transform: scale(1.1); opacity: 0.5; }
+    100% { transform: scale(1); opacity: 0.3; }
+}
+
+.light-canvas {
+    font-family: 'Courier New', monospace;
+    font-size: 1.2rem;
+    margin-bottom: 30px;
+    padding: 20px;
+    background: rgba(0,0,0,0.5);
+    border-radius: 10px;
+    border-left: 4px solid #00ff00;
+}
+
+.light-line {
+    opacity: 0;
+    animation: lightWrite 0.5s ease-out forwards;
+    animation-delay: var(--delay);
+    margin-bottom: 10px;
+    color: #00ff00;
+    text-shadow: 0 0 10px #00ff00;
+}
+
+@keyframes lightWrite {
+    to {
+        opacity: 1;
+        text-shadow: 0 0 15px #00ff00;
+    }
+}
+
+/* ТАЙМЕР */
+.countdown-timer {
+    background: rgba(0, 0, 0, 0.7);
+    border: 2px solid #00ffff;
+    border-radius: 15px;
+    padding: 25px;
+    margin: 30px 0;
+    text-align: center;
+    box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
+}
+
+.timer-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.timer-icon {
+    font-size: 2rem;
+    animation: pulse 2s infinite;
+}
+
+.timer-header h3 {
+    color: #00ffff;
+    margin: 0;
+    font-size: 1.3rem;
+    text-align: center;
+}
+
+.timer-display {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    margin: 25px 0;
+}
+
+.time-unit {
+    background: rgba(0, 0, 0, 0.8);
+    border-radius: 10px;
+    padding: 15px 20px;
+    min-width: 100px;
+    border: 2px solid #00ff00;
+}
+
+.time-value {
+    font-size: 3rem;
+    font-weight: bold;
+    font-family: 'Courier New', monospace;
+    color: #00ff00;
+    text-shadow: 0 0 10px #00ff00;
+    line-height: 1;
+}
+
+.time-label {
+    font-size: 0.9rem;
+    color: #aaa;
+    margin-top: 5px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.time-separator {
+    font-size: 3rem;
+    color: #00ffff;
+    font-weight: bold;
+    margin-bottom: 25px;
+    animation: blink 1s infinite;
+}
+
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+}
+
+.timer-message {
+    color: #ffcc00;
+    font-size: 1.1rem;
+    margin-top: 15px;
+    font-weight: bold;
+}
+
+/* ОСТАЛЬНЫЕ ЭЛЕМЕНТЫ */
+.easter-info {
+    text-align: center;
+    padding: 20px 0;
+}
+
+.easter-info h3 {
+    color: #00ff00;
+    font-size: 1.8rem;
+    margin-bottom: 15px;
+}
+
+.easter-info p {
+    line-height: 1.6;
+    margin-bottom: 15px;
+    font-size: 1.1rem;
+}
+
+.examples {
+    margin: 30px 0;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 15px;
+}
+
+.examples h4 {
+    color: #ffcc00;
+    margin-bottom: 20px;
+    font-size: 1.4rem;
+}
+
+.example-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.example {
+    background: rgba(0, 255, 255, 0.1);
+    border: 1px solid #00ffff;
+    border-radius: 8px;
+    padding: 15px;
+    font-family: 'Courier New', monospace;
+    font-size: 1.2rem;
+    transition: all 0.3s;
+}
+
+.example:hover {
+    background: rgba(0, 255, 255, 0.2);
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0, 255, 255, 0.2);
+}
+
+.instructions {
+    background: rgba(255, 215, 0, 0.1);
+    border-left: 4px solid #ffd700;
+    padding: 20px;
+    border-radius: 10px;
+    margin-top: 25px;
+    text-align: left;
+}
+
+.instructions p {
+    margin-bottom: 10px;
+}
+
+/* Анимация появления при скролле */
+.light-painting-easter {
+    opacity: 0;
+    transform: translateY(100px) rotateX(90deg);
+    transition: all 1.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.light-painting-easter.revealed {
+    opacity: 1;
+    transform: translateY(0) rotateX(0);
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+    .light-painting-easter {
+        padding: 25px;
+        margin: 30px 15px;
+    }
+    
+    .timer-display {
+        gap: 10px;
+    }
+    
+    .time-unit {
+        min-width: 80px;
+        padding: 10px 15px;
+    }
+    
+    .time-value {
+        font-size: 2.2rem;
+    }
+    
+    .timer-header h3 {
+        font-size: 1.1rem;
+    }
+    
+    .example-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 480px) {
+    .timer-display {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .time-separator {
+        display: none;
+    }
+    
+    .time-unit {
+        width: 100%;
+        max-width: 200px;
+    }
+}
