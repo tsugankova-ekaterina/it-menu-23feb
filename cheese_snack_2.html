@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🧀 Сырная закуска | IT-Меню</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            background: #f8f9fa; color: #333;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6; padding: 20px; max-width: 800px; margin: 0 auto;
+            min-height: 100vh; display: flex; flex-direction: column;
+        }
+        .back-btn {
+            display: inline-flex; align-items: center; gap: 8px;
+            background: #6c757d; color: white; text-decoration: none;
+            padding: 12px 24px; border-radius: 8px; font-weight: 600;
+            margin-bottom: 30px; transition: background 0.3s; width: fit-content;
+        }
+        .back-btn:hover { background: #5a6268; }
+        .dish-header {
+            background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
+            color: #333; border-radius: 15px; padding: 30px;
+            margin-bottom: 30px; box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        .dish-icon-large { 
+            font-size: 4rem; 
+            margin-bottom: 15px; 
+            text-align: center;
+        }
+        .dish-name { 
+            color: #333; 
+            font-size: 2.5rem; 
+            margin-bottom: 10px; 
+            font-weight: 800; 
+            text-align: center;
+        }
+        .dish-meta { 
+            color: #666; 
+            font-size: 1.1rem; 
+            font-family: 'Courier New', monospace;
+            margin-bottom: 20px; 
+            text-align: center; 
+        }
+        .info-block { 
+            background: white; 
+            border-radius: 12px; 
+            padding: 25px;
+            margin-bottom: 25px; 
+            box-shadow: 0 3px 10px rgba(0,0,0,0.06);
+        }
+        .info-title { 
+            color: #2c3e50; 
+            font-size: 1.5rem; 
+            margin-bottom: 20px;
+            padding-bottom: 10px; 
+            border-bottom: 2px solid #f0f5ff;
+            display: flex; 
+            align-items: center; 
+            gap: 10px; 
+        }
+        .info-title::before { 
+            content: "›"; 
+            color: #FFD700; 
+            font-weight: bold; 
+            font-size: 1.8rem; 
+        }
+        .ingredients-grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); 
+            gap: 15px; 
+        }
+        .ingredient-item { 
+            background: #f8f9fa; 
+            padding: 15px; 
+            border-radius: 8px;
+            border-left: 4px solid #FFD700; 
+        }
+        .ingredient-name { 
+            font-weight: 700; 
+            color: #2c3e50; 
+            margin-bottom: 5px; 
+            font-size: 1.1rem; 
+        }
+        .ingredient-desc { 
+            color: #666; 
+            font-size: 0.95rem; 
+        }
+        .joke-box { 
+            background: #FFF9E6; 
+            border-left: 4px solid #FFC107;
+            padding: 20px; 
+            border-radius: 8px; 
+            margin: 20px 0; 
+        }
+        .joke-title { 
+            color: #E65100; 
+            font-weight: 700; 
+            margin-bottom: 10px;
+            display: flex; 
+            align-items: center; 
+            gap: 10px; 
+        }
+        .cheese-fact {
+            background: linear-gradient(135deg, #FFF3E0 0%, #FFECB3 100%);
+            border: 2px solid #FF9800;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            text-align: center;
+        }
+        .cheese-fact-title {
+            color: #FF9800;
+            font-weight: bold;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        .tap-hint {
+            background: #4b6584;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            margin-top: 15px;
+            display: inline-block;
+        }
+        @media (max-width: 768px) {
+            body { padding: 15px; } 
+            .dish-header { padding: 20px; }
+            .dish-name { font-size: 2rem; } 
+            .dish-icon-large { font-size: 3.5rem; }
+            .info-block { padding: 20px; } 
+            .ingredients-grid { grid-template-columns: 1fr; }
+        }
+        @media (max-width: 480px) {
+            .dish-name { font-size: 1.8rem; } 
+            .info-title { font-size: 1.3rem; }
+            .back-btn { width: 100%; justify-content: center; }
+        }
+    </style>
+</head>
+<body>
+    <a href="index.html" class="back-btn">← НАЗАД К МЕНЮ</a>
+    <div class="dish-header">
+        <span class="dish-icon-large">🧀</span>
+        <h1 class="dish-name">Сырная закуска</h1>
+        <div class="dish-meta">ID: SNACK_CHEESE_001 | Версия: 2.1.0 | Статус: 🧊 ОХЛАЖДЁННАЯ ГОТОВНОСТЬ</div>
+    </div>
+    
+    <div class="info-block">
+        <h2 class="info-title">📦 СОСТАВ (Сырная мегаструктура)</h2>
+        <div class="ingredients-grid">
+            <div class="ingredient-item">
+                <div class="ingredient-name">1 кг сыра</div>
+                <div class="ingredient-desc">Твёрдый, как deadline в пятницу</div>
+            </div>
+            <div class="ingredient-item">
+                <div class="ingredient-name">Яйца варёные</div>
+                <div class="ingredient-desc">Белковый резерв, emergency supply</div>
+            </div>
+            <div class="ingredient-item">
+                <div class="ingredient-name">Майонез</div>
+                <div class="ingredient-desc">Связующее звено, как хороший тимлид</div>
+            </div>
+            <div class="ingredient-item">
+                <div class="ingredient-name">Чеснок</div>
+                <div class="ingredient-desc">Антивирусная защита для иммунитета</div>
+            </div>
+            <div class="ingredient-item">
+                <div class="ingredient-name">Свежая зелень</div>
+                <div class="ingredient-desc">UI украшение, зелёные коммиты</div>
+            </div>
+            <div class="ingredient-item">
+                <div class="ingredient-name">Белый хлеб</div>
+                <div class="ingredient-desc">Транспортный протокол для сыра</div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="joke-box">
+        <h3 class="joke-title">🧠 ГЕНИАЛЬНАЯ МАТЕМАТИКА</h3>
+        <p>Если 1 программист = 1 сырная закуска</p>
+        <p>То 10 программистов = 10 сырных закусок</p>
+        <p>Но! 10 программистов × пиво = 0 сырных закусок</p>
+        <p style="margin-top: 10px; font-weight: bold;">Вывод: пиво — опасный делитель!</p>
+    </div>
+    
+    <div class="cheese-fact" id="cheeseFact">
+        <div class="cheese-fact-title">
+            <span>🧀</span>
+            <span>СЫРНЫЙ ФАКТ #23</span>
+        </div>
+        <p><strong>В мире IT сыр выполняет ту же функцию, что кофе:</strong></p>
+        <p>Утром — будит мозг</p>
+        <p>Днём — поддерживает productivity</p>
+        <p>Вечером — награда за выживший день</p>
+        <div class="tap-hint" id="tapHint">НАЖМИ ДЛЯ НОВОГО ФАКТА</div>
+    </div>
+    
+    <div class="joke-box">
+        <h3 class="joke-title">⚠️ СЕРЬЁЗНОЕ ПРЕДУПРЕЖДЕНИЕ</h3>
+        <p>• <strong>Не оставлять на ночь</strong> — утром будет только крошки</p>
+        <p>• <strong>Хранить отдельно от коллег</strong> — предотвращает несанкционированный доступ</p>
+        <p>• <strong>Не сочетать с красным вином</strong> — может вызвать философские дискуссии о сыре</p>
+        <p>• <strong>После употребления</strong> — возможно желание написать код на швейцарском диалекте</p>
+    </div>
+    
+    <div style="margin-top: 40px; text-align: center;">
+        <a href="index.html" class="back-btn" style="background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%); color: #333; font-weight: bold;">← ВЕРНУТЬСЯ К СПИСКУ БЛЮД</a>
+    </div>
+    
+    <script>
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        document.querySelectorAll('.back-btn').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                e.preventDefault();
+                document.body.style.opacity = '0.9';
+                setTimeout(() => { window.location.href = this.getAttribute('href'); }, 150);
+            });
+        });
+        
+        // Сырные факты для тапа (работает на мобилках!)
+        const cheeseFacts = [
+            {
+                title: "СЫРНЫЙ ФАКТ #1",
+                content: "Сыр созревает дольше, чем некоторые проекты! Пармезан зреет 2 года — как senior разработчик!"
+            },
+            {
+                title: "СЫРНЫЙ ФАКТ #2", 
+                content: "В Древнем Риме сыром платили легионерам. Сегодня им платят программистам... ну почти!"
+            },
+            {
+                title: "СЫРНЫЙ ФАКТ #3",
+                content: "В Швейцарии дыры в сыре — это не баги, а фичи! Особенность производства, а не ошибка."
+            },
+            {
+                title: "СЫРНЫЙ ФАКТ #4",
+                content: "Сырный фондю — первый прототип облачных вычислений! Все макают в один общий 'сервер'."
+            },
+            {
+                title: "СЫРНЫЙ ФАКТ #5",
+                content: "1 кг сыра = 100 грамм белка. Это как 10 протеиновых батончиков, но вкуснее и честнее!"
+            }
+        ];
+        
+        let currentFactIndex = 0;
+        const cheeseFactElement = document.getElementById('cheeseFact');
+        const tapHintElement = document.getElementById('tapHint');
+        
+        function showNextFact() {
+            currentFactIndex = (currentFactIndex + 1) % cheeseFacts.length;
+            const fact = cheeseFacts[currentFactIndex];
+            
+            cheeseFactElement.querySelector('.cheese-fact-title span:last-child').textContent = fact.title;
+            cheeseFactElement.querySelector('p:first-child strong').textContent = fact.content;
+            
+            // Анимация
+            cheeseFactElement.style.transform = 'scale(0.95)';
+            cheeseFactElement.style.transition = 'transform 0.2s';
+            
+            setTimeout(() => {
+                cheeseFactElement.style.transform = 'scale(1)';
+            }, 200);
+        }
+        
+        // Работает по тапу/клику
+        cheeseFactElement.addEventListener('click', showNextFact);
+        cheeseFactElement.style.cursor = 'pointer';
+        
+        // Показываем подсказку только на мобилках
+        if ('ontouchstart' in window) {
+            tapHintElement.style.display = 'inline-block';
+        } else {
+            tapHintElement.textContent = 'КЛИКНИ ДЛЯ НОВОГО ФАКТА';
+            tapHintElement.style.display = 'inline-block';
+        }
+    </script>
+</body>
+</html>
