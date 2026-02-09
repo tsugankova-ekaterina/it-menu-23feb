@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🥗 Греческий салат | IT-Меню</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            background: #f8f9fa;
+            color: #333;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            line-height: 1.6;
+            padding: 20px;
+            max-width: 800px;
+            margin: 0 auto;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: #6c757d;
+            color: white;
+            text-decoration: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-weight: 600;
+            margin-bottom: 30px;
+            transition: background 0.3s;
+            width: fit-content;
+        }
+        
+        .back-btn:hover {
+            background: #5a6268;
+        }
+        
+        .dish-header {
+            background: linear-gradient(135deg, #27ae60 0%, #2ecc71 100%);
+            color: white;
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .dish-icon-large {
+            font-size: 4rem;
+            margin-bottom: 15px;
+            display: block;
+            text-align: center;
+        }
+        
+        .dish-name {
+            color: white;
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            font-weight: 800;
+            text-align: center;
+        }
+        
+        .dish-meta {
+            color: rgba(255,255,255,0.9);
+            font-size: 1.1rem;
+            font-family: 'Courier New', monospace;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .info-block {
+            background: white;
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 25px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.06);
+        }
+        
+        .info-title {
+            color: #2c3e50;
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #f0f5ff;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .info-title::before {
+            content: "›";
+            color: #27ae60;
+            font-weight: bold;
+            font-size: 1.8rem;
+        }
+        
+        .ingredients-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
+        
+        .ingredient-item {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 4px solid #27ae60;
+            transition: transform 0.2s;
+        }
+        
+        .ingredient-item:hover {
+            transform: translateY(-3px);
+        }
+        
+        .ingredient-name {
+            font-weight: 700;
+            color: #2c3e50;
+            margin-bottom: 5px;
+            font-size: 1.1rem;
+        }
+        
+        .ingredient-desc {
+            color: #666;
+            font-size: 0.95rem;
+        }
+        
+        .joke-box {
+            background: #e8f8f5;
+            border-left: 4px solid #27ae60;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        
+        .joke-title {
+            color: #148f77;
+            font-weight: 700;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .holiday-note {
+            background: linear-gradient(135deg, #4b6584 0%, #3867d6 100%);
+            color: white;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 20px 0;
+            text-align: center;
+            border: 2px solid #2c3e50;
+            font-style: italic;
+        }
+        
+        @media (max-width: 768px) {
+            body { padding: 15px; }
+            .dish-header { padding: 20px; }
+            .dish-name { font-size: 2rem; }
+            .dish-icon-large { font-size: 3.5rem; }
+            .info-block { padding: 20px; }
+            .ingredients-grid { grid-template-columns: 1fr; }
+        }
+        
+        @media (max-width: 480px) {
+            .dish-name { font-size: 1.8rem; }
+            .info-title { font-size: 1.3rem; }
+            .back-btn { width: 100%; justify-content: center; }
+        }
+    </style>
+</head>
+<body>
+    <a href="index.html" class="back-btn">← НАЗАД К МЕНЮ</a>
+    
+    <div class="dish-header">
+        <span class="dish-icon-large">🥗</span>
+        <h1 class="dish-name">Греческий салат</h1>
+        <div class="dish-meta">ID: SALAD_GRK_001 | Версия: 3.1.4 | Статус: ✅ СВЕЖЕЕ</div>
+    </div>
+    
+     <div class="info-block">
+        <h2 class="info-title">📦 СОСТАВ (Боевой расчёт)</h2>
+        <div class="ingredients-grid">
+            <div class="ingredient-item">
+                <div class="ingredient-name">Помидоры</div>
+                <div class="ingredient-desc">Сочные, как успешный деплой</div>
+            </div>
+            <div class="ingredient-item">
+                <div class="ingredient-name">Огурцы</div>
+                <div class="ingredient-desc">Хрустящие, как новая фича</div>
+            </div>
+            <div class="ingredient-item">
+                <div class="ingredient-name">Болгарский перец</div>
+                <div class="ingredient-desc">Яркий, как удачный код-ревью</div>
+            </div>
+            <div class="ingredient-item">
+                <div class="ingredient-name">Красный лук</div>
+                <div class="ingredient-desc">Острый, как deadline</div>
+            </div>
+            <div class="ingredient-item">
+                <div class="ingredient-name">Сыр Сиртаки</div>
+                <div class="ingredient-desc">Солёный, как опытный тимлид</div>
+            </div>
+            <div class="ingredient-item">
+                <div class="ingredient-name">Маслины</div>
+                <div class="ingredient-desc">Как чёрные скобки в коде</div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="joke-box">
+        <h3 class="joke-title">🤔 Зачем этот салат айтишнику?</h3>
+        <p>• <strong>Для очистки кэша</strong> — готовит систему к основным блюдам</p>
+        <p>• <strong>Повышает coverage здоровья</strong> — +15% к витаминам</p>
+        <p>• <strong>Как пре-коммит</strong> — обязательный этап перед "мясным" коммитом</p>
+    </div>
+    
+    <!-- ПРАЗДНИЧНАЯ ЗАМЕТКА (короткая) -->
+    <div class="holiday-note">
+        🎖️ С 23 февраля! Этот салат — как хороший солдат: всегда свеж, готов к бою с голодом и не подводит в ответственный момент!
+    </div>
+    
+    <div class="joke-box">
+        <h3 class="joke-title">⚠️ Важное предупреждение</h3>
+        <p>При частом употреблении может вызвать желание:</p>
+        <p>• Купить билет в Грецию</p>
+		<p>• Научиться танцевать сиртаки</p>
+		<p>• Переименовать переменные на греческий</p>
+    </div>
+    
+    <div style="margin-top: 40px; text-align: center;">
+        <a href="index.html" class="back-btn" style="background: linear-gradient(135deg, #27ae60 0%, #2ecc71 100%);">← ВЕРНУТЬСЯ К СПИСКУ БЛЮД</a>
+    </div>
+    
+    <script>
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        document.querySelectorAll('.back-btn').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                e.preventDefault();
+                document.body.style.opacity = '0.9';
+                setTimeout(() => {
+                    window.location.href = this.getAttribute('href');
+                }, 150);
+            });
+        });
+    </script>
+</body>
+</html>
