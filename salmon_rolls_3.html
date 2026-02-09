@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎣 Рулетики с красной рыбой | IT-Меню</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            background: #f8f9fa; color: #333;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6; padding: 20px; max-width: 800px; margin: 0 auto;
+            min-height: 100vh; display: flex; flex-direction: column;
+        }
+        .back-btn {
+            display: inline-flex; align-items: center; gap: 8px;
+            background: #6c757d; color: white; text-decoration: none;
+            padding: 12px 24px; border-radius: 8px; font-weight: 600;
+            margin-bottom: 30px; transition: background 0.3s; width: fit-content;
+        }
+        .back-btn:hover { background: #5a6268; }
+        .dish-header {
+            background: linear-gradient(135deg, #00b4db 0%, #0083b0 100%);
+            color: white; border-radius: 15px; padding: 30px;
+            margin-bottom: 30px; box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        .dish-icon-large { font-size: 4rem; margin-bottom: 15px; text-align: center; }
+        .dish-name { color: white; font-size: 2.5rem; margin-bottom: 10px; 
+                    font-weight: 800; text-align: center; }
+        .dish-meta { color: rgba(255,255,255,0.9); font-size: 1.1rem; 
+                    font-family: 'Courier New', monospace; margin-bottom: 20px; text-align: center; }
+        .info-block { background: white; border-radius: 12px; padding: 25px;
+                     margin-bottom: 25px; box-shadow: 0 3px 10px rgba(0,0,0,0.06); }
+        .info-title { color: #2c3e50; font-size: 1.5rem; margin-bottom: 20px;
+                     padding-bottom: 10px; border-bottom: 2px solid #f0f5ff;
+                     display: flex; align-items: center; gap: 10px; }
+        .info-title::before { content: "›"; color: #00b4db; 
+                            font-weight: bold; font-size: 1.8rem; }
+        .ingredients-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; }
+        .ingredient-item { background: #f8f9fa; padding: 15px; border-radius: 8px;
+                          border-left: 4px solid #00b4db; transition: transform 0.2s; }
+        .ingredient-item:hover { transform: translateY(-3px); }
+        .ingredient-name { font-weight: 700; color: #2c3e50; margin-bottom: 5px; font-size: 1.1rem; }
+        .ingredient-desc { color: #666; font-size: 0.95rem; }
+        .joke-box { background: #e3f2fd; border-left: 4px solid #00b4db;
+                   padding: 20px; border-radius: 8px; margin: 20px 0; }
+        .joke-title { color: #0d47a1; font-weight: 700; margin-bottom: 10px;
+                     display: flex; align-items: center; gap: 10px; }
+        .premium-badge {
+            background: linear-gradient(135deg, #FFD700, #FFA500);
+            color: #333;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+            display: inline-block;
+            margin-left: 10px;
+            font-size: 0.9rem;
+            animation: shine 2s infinite;
+        }
+        @keyframes shine {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.8; }
+        }
+        @media (max-width: 768px) {
+            body { padding: 15px; } .dish-header { padding: 20px; }
+            .dish-name { font-size: 2rem; } .dish-icon-large { font-size: 3.5rem; }
+            .info-block { padding: 20px; } .ingredients-grid { grid-template-columns: 1fr; }
+        }
+        @media (max-width: 480px) {
+            .dish-name { font-size: 1.8rem; } .info-title { font-size: 1.3rem; }
+            .back-btn { width: 100%; justify-content: center; }
+        }
+    </style>
+</head>
+<body>
+    <a href="index.html" class="back-btn">← НАЗАД К МЕНЮ</a>
+    <div class="dish-header">
+        <span class="dish-icon-large">🎣</span>
+        <h1 class="dish-name">Рулетики с красной рыбой <span class="premium-badge">PREMIUM</span></h1>
+        <div class="dish-meta">ID: ROLLS_SALMON_001 | Версия: 2.0.1 | Статус: 🍣 SUSHI-GRADE</div>
+    </div>
+    
+    <div class="info-block">
+        <h2 class="info-title">📦 СОСТАВ (Морской спецназ)</h2>
+        <div class="ingredients-grid">
+            <div class="ingredient-item">
+                <div class="ingredient-name">Красная рыба слабосолёная</div>
+                <div class="ingredient-desc">Лосось или форель, выловленный в северных морях</div>
+            </div>
+            <div class="ingredient-item">
+                <div class="ingredient-name">Сливочный сыр</div>
+                <div class="ingredient-desc">Кремовый, как удачный деплой на Friday</div>
+            </div>
+            <div class="ingredient-item">
+                <div class="ingredient-name">Лаваш армянский</div>
+                <div class="ingredient-desc">Тонкая обёртка — надёжный wrapper</div>
+            </div>
+            <div class="ingredient-item">
+                <div class="ingredient-name">Свежая зелень</div>
+                <div class="ingredient-desc">Укроп для аромата, как комментарии в коде</div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="joke-box">
+        <h3 class="joke-title">🎯 ПОЧЕМУ ЭТО ИДЕАЛЬНАЯ ЗАКУСКА ДЛЯ АЙТИШНИКА?</h3>
+        <p>• <strong>Не требует разогрева</strong> — можно есть прямо во время созвона</p>
+        <p>• <strong>Портативный формат</strong> — одна рука занята мышкой, другая — рулетиком</p>
+        <p>• <strong>Бесконфликтный мерж</strong> — рыба и сыр идеально сочетаются</p>
+        <p>• <strong>Повышает IQ</strong> — омега-3 для мозговых штурмов</p>
+    </div>
+    
+    <div class="joke-box" style="background: #FFF3E0; border-left-color: #FF9800;">
+        <h3 class="joke-title" style="color: #E65100;">💡 ИСТОРИЧЕСКИЙ ФАКТ</h3>
+        <p>В древние времена (до удалёнки) эти рулетики называли "суши для ленивых".</p>
+        <p>Сегодня они — must have любого IT-ивента. Не требуют палочек, не капают соусом на клавиатуру.</p>
+        <p>Идеальный баланс между "вкусно" и "не испачкать монитор".</p>
+    </div>
+    
+    <div class="joke-box">
+        <h3 class="joke-title">⚠️ ПРЕДУПРЕЖДЕНИЕ О БЕЗОПАСНОСТИ</h3>
+        <p>• Не оставлять без присмотра — могут быть украдены коллегами</p>
+        <p>• Не хранить рядом с монитором — провоцирует внеочередные перекусы</p>
+        <p>• Рекомендуется употреблять с зелёным чаем — для баланса productivity</p>
+        <p>• После употребления может возникнуть желание написать код с норвежским акцентом</p>
+    </div>
+    
+    <div style="margin-top: 40px; text-align: center;">
+        <a href="index.html" class="back-btn" style="background: linear-gradient(135deg, #00b4db 0%, #0083b0 100%);">← ВЕРНУТЬСЯ К СПИСКУ БЛЮД</a>
+    </div>
+    
+    <script>
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        document.querySelectorAll('.back-btn').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                e.preventDefault();
+                document.body.style.opacity = '0.9';
+                setTimeout(() => { window.location.href = this.getAttribute('href'); }, 150);
+            });
+        });
+        
+        // Анимация для premium бейджа
+        const badge = document.querySelector('.premium-badge');
+        if (badge) {
+            setInterval(() => {
+                badge.style.transform = 'scale(1.05)';
+                setTimeout(() => {
+                    badge.style.transform = 'scale(1)';
+                }, 300);
+            }, 2000);
+        }
+    </script>
+</body>
+</html>
