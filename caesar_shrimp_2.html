@@ -215,7 +215,7 @@
         </div>
         <p>Креветки — морские чистильщики. Они фильтруют воду и поддерживают экосистему в порядке.</p>
         <p><strong>Как системные администраторы:</strong> незаметно работают, чтобы всё было чисто и работало.</p>
-        <div class="tap-hint" id="tapHint">ТЫКНИ ДЛЯ НОВОГО ФАКТА</div>
+        <div class="tap-hint" id="tapHint">НАЖМИ ДЛЯ НОВОГО ФАКТА</div>
     </div>
 
     <div class="joke-box">
@@ -275,20 +275,17 @@
         const tapHint = document.getElementById('tapHint');
         
         function showNextFact() {
-            currentFactIndex = (currentFactIndex + 1) % cheeseFacts.length;
-            const fact = cheeseFacts[currentFactIndex];
+            currentFactIndex = (currentFactIndex + 1) % shrimpFact.length;
+            const fact = shrimpFacts[currentFactIndex];
             
             // Обновляем заголовок
-            cheeseFactElement.querySelector('.cheese-fact-title span:last-child').textContent = fact.title;
+            FactElement.querySelector('.fact-title span:last-child').textContent = fact.title;
             
             // Обновляем содержимое
-            const contentHTML = `<p><strong>${fact.content}</strong></p>
-                                <p>Утром — будит мозг</p>
-                                <p>Днём — поддерживает productivity</p>
-                                <p>Вечером — награда за выживший день</p>`;
+            const contentHTML = `<p><strong>${fact.content}</strong></p>`;
             
             // Находим элемент после заголовка и заменяем его содержимое
-            const titleElement = cheeseFactElement.querySelector('.cheese-fact-title');
+            const titleElement = FactElement.querySelector('.fact-title');
             let nextElement = titleElement.nextElementSibling;
             
             // Удаляем старые параграфы
@@ -302,11 +299,11 @@
             titleElement.insertAdjacentHTML('afterend', contentHTML);
             
             // Анимация
-            cheeseFactElement.style.transform = 'scale(0.95)';
-            cheeseFactElement.style.transition = 'transform 0.2s';
+            FactElement.style.transform = 'scale(0.95)';
+            FactElement.style.transition = 'transform 0.2s';
             
             setTimeout(() => {
-                cheeseFactElement.style.transform = 'scale(1)';
+                FactElement.style.transform = 'scale(1)';
             }, 200);
         }
         
