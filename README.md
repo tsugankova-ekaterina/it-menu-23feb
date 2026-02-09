@@ -1,2 +1,2 @@
 
-QR creator: https://www.qr-code-generator.com/
+QR creator: https://www.qrcode-monkey.com/
