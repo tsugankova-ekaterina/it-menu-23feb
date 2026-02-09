@@ -23,6 +23,21 @@
             background: linear-gradient(135deg, #00b4db 0%, #0083b0 100%);
             color: white; border-radius: 15px; padding: 30px;
             margin-bottom: 30px; box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            position: relative;
+            overflow: hidden;
+        }
+        .defender-badge {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: linear-gradient(135deg, #ff6b6b 0%, #ff8e53 100%);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 0.9rem;
+            transform: rotate(5deg);
+            box-shadow: 0 3px 10px rgba(0,0,0,0.2);
         }
         .dish-icon-large { font-size: 4rem; margin-bottom: 15px; text-align: center; }
         .dish-name { color: white; font-size: 2.5rem; margin-bottom: 10px; 
@@ -37,31 +52,118 @@
         .info-title::before { content: "›"; color: #00b4db; 
                             font-weight: bold; font-size: 1.8rem; }
         .ingredients-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; }
-        .ingredient-item { background: #f8f9fa; padding: 15px; border-radius: 8px;
-                          border-left: 4px solid #00b4db; transition: transform 0.2s; }
-        .ingredient-item:hover { transform: translateY(-3px); }
+        .ingredient-item { 
+            background: #f8f9fa; 
+            padding: 15px; 
+            border-radius: 8px;
+            border-left: 4px solid #00b4db; 
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+        .ingredient-item:hover { 
+            transform: translateY(-3px); 
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
         .ingredient-name { font-weight: 700; color: #2c3e50; margin-bottom: 5px; font-size: 1.1rem; }
         .ingredient-desc { color: #666; font-size: 0.95rem; }
-        .joke-box { background: #e3f2fd; border-left: 4px solid #2196f3;
-                   padding: 20px; border-radius: 8px; margin: 20px 0; }
-        .joke-title { color: #0d47a1; font-weight: 700; margin-bottom: 10px;
-                     display: flex; align-items: center; gap: 10px; }
-        .tech-box { background: #e8f4fc; border-left: 4px solid #0083b0;
-                   padding: 20px; border-radius: 8px; font-family: 'Courier New', monospace;
-                   font-size: 1rem; line-height: 1.8; }
-        .tech-line { margin-bottom: 8px; }
-        .tech-key { color: #005b82; font-weight: bold; }
-        .premium-badge { background: #ffd700; color: #333; padding: 5px 15px;
-                        border-radius: 20px; font-weight: bold; display: inline-block;
-                        margin-left: 10px; font-size: 0.8rem; }
+        .ingredient-qty { 
+            display: inline-block;
+            background: #e3f2fd;
+            color: #0d47a1;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            margin-left: 5px;
+            font-family: 'Courier New', monospace;
+        }
+        .joke-box { 
+            background: #e3f2fd; 
+            border-left: 4px solid #2196f3;
+            padding: 20px; 
+            border-radius: 8px; 
+            margin: 20px 0; 
+            position: relative;
+        }
+        .joke-box.military {
+            background: #fff3e0;
+            border-left-color: #ff9800;
+        }
+        .joke-title { 
+            color: #0d47a1; 
+            font-weight: 700; 
+            margin-bottom: 10px;
+            display: flex; 
+            align-items: center; 
+            gap: 10px; 
+        }
+        .joke-title.military {
+            color: #e65100;
+        }
+        .tech-box { 
+            background: #e8f4fc; 
+            border-left: 4px solid #0083b0;
+            padding: 20px; 
+            border-radius: 8px; 
+            font-size: 1rem; 
+            line-height: 1.8; 
+        }
+        .tech-line { margin-bottom: 8px; display: flex; align-items: baseline; }
+        .tech-key { color: #005b82; font-weight: bold; min-width: 180px; }
+        .fact-box {
+            background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+            border: 2px solid #2196f3;
+        }
+        .fact-title {
+            color: #1565c0;
+            font-weight: bold;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .tap-hint {
+            background: #2196f3;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            margin-top: 15px;
+            display: inline-block;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        .tap-hint:hover {
+            background: #1976d2;
+        }
+        .premium-badge { 
+            background: linear-gradient(135deg, #ffd700 0%, #ffa500 100%); 
+            color: #333; 
+            padding: 5px 15px;
+            border-radius: 20px; 
+            font-weight: bold; 
+            display: inline-block;
+            margin-left: 10px; 
+            font-size: 0.8rem; 
+        }
+        .interactive {
+            transition: all 0.3s;
+        }
+        .interactive:active {
+            transform: scale(0.98);
+        }
         @media (max-width: 768px) {
             body { padding: 15px; } .dish-header { padding: 20px; }
             .dish-name { font-size: 2rem; } .dish-icon-large { font-size: 3.5rem; }
             .info-block { padding: 20px; } .ingredients-grid { grid-template-columns: 1fr; }
+            .tech-key { min-width: 140px; }
         }
         @media (max-width: 480px) {
             .dish-name { font-size: 1.8rem; } .info-title { font-size: 1.3rem; }
             .back-btn { width: 100%; justify-content: center; }
+            .defender-badge { position: relative; top: 0; right: 0; margin-bottom: 15px; display: inline-block; }
         }
     </style>
 </head>
@@ -106,7 +208,7 @@
         <p>• <strong>Императорский</strong> — требует уважительного отношения</p>
     </div>
 
-     <div class="fact-box" id="shrimpFact">
+    <div class="fact-box" id="shrimpFact">
         <div class="fact-title">
             <span>🦐</span>
             <span>ФАКТ О КРЕВЕТКАХ #1</span>
