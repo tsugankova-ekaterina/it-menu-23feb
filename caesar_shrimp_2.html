@@ -275,19 +275,38 @@
         const tapHint = document.getElementById('tapHint');
         
         function showNextFact() {
-            currentFactIndex = (currentFactIndex + 1) % shrimpFacts.length;
-            const fact = shrimpFacts[currentFactIndex];
+            currentFactIndex = (currentFactIndex + 1) % cheeseFacts.length;
+            const fact = cheeseFacts[currentFactIndex];
             
-            factElement.querySelector('.fact-title span:last-child').textContent = fact.title;
-            factElement.querySelector('p:first-child').textContent = fact.content;
-            factElement.querySelector('p:last-child strong').textContent = fact.analogy;
+            // Обновляем заголовок
+            cheeseFactElement.querySelector('.cheese-fact-title span:last-child').textContent = fact.title;
+            
+            // Обновляем содержимое
+            const contentHTML = `<p><strong>${fact.content}</strong></p>
+                                <p>Утром — будит мозг</p>
+                                <p>Днём — поддерживает productivity</p>
+                                <p>Вечером — награда за выживший день</p>`;
+            
+            // Находим элемент после заголовка и заменяем его содержимое
+            const titleElement = cheeseFactElement.querySelector('.cheese-fact-title');
+            let nextElement = titleElement.nextElementSibling;
+            
+            // Удаляем старые параграфы
+            while (nextElement && nextElement.tagName === 'P') {
+                const toRemove = nextElement;
+                nextElement = nextElement.nextElementSibling;
+                toRemove.remove();
+            }
+            
+            // Добавляем новые параграфы
+            titleElement.insertAdjacentHTML('afterend', contentHTML);
             
             // Анимация
-            factElement.style.transform = 'scale(0.98)';
-            factElement.style.transition = 'transform 0.2s';
+            cheeseFactElement.style.transform = 'scale(0.95)';
+            cheeseFactElement.style.transition = 'transform 0.2s';
             
             setTimeout(() => {
-                factElement.style.transform = 'scale(1)';
+                cheeseFactElement.style.transform = 'scale(1)';
             }, 200);
         }
         
