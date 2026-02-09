@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎣 Рулетики с красной рыбой | IT-Меню</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            background: #f8f9fa; color: #333;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6; padding: 20px; max-width: 800px; margin: 0 auto;
+            min-height: 100vh; display: flex; flex-direction: column;
+        }
+        .back-btn {
+            display: inline-flex; align-items: center; gap: 8px;
+            background: #6c757d; color: white; text-decoration: none;
+            padding: 12px 24px; border-radius: 8px; font-weight: 600;
+            margin-bottom: 30px; transition: background 0.3s; width: fit-content;
+        }
+        .back-btn:hover { background: #5a6268; }
+        .dish-header {
+            background: linear-gradient(135deg, #00b4db 0%, #0083b0 100%);
+            color: white; border-radius: 15px; padding: 30px;
+            margin-bottom: 30px; box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        .dish-icon-large { font-size: 4rem; margin-bottom: 15px; text-align: center; }
+        .dish-name { color: white; font-size: 2.5rem; margin-bottom: 10px; 
+                    font-weight: 800; text-align: center; }
+        .dish-meta { color: rgba(255,255,255,0.9); font-size: 1.1rem; 
+                    font-family: 'Courier New', monospace; margin-bottom: 20px; text-align: center; }
+        .info-block { background: white; border-radius: 12px; padding: 25px;
+                     margin-bottom: 25px; box-shadow: 0 3px 10px rgba(0,0,0,0.06); }
+        .info-title { color: #2c3e50; font-size: 1.5rem; margin-bottom: 20px;
+                     padding-bottom: 10px; border-bottom: 2px solid #f0f5ff;
+                     display: flex; align-items: center; gap: 10px; }
+        .info-title::before { content: "›"; color: #00b4db; 
+                            font-weight: bold; font-size: 1.8rem; }
+        .ingredients-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; }
+        .ingredient-item { background: #f8f9fa; padding: 15px; border-radius: 8px;
+                          border-left: 4px solid #00b4db; transition: transform 0.2s; }
+        .ingredient-item:hover { transform: translateY(-3px); }
+        .ingredient-name { font-weight: 700; color: #2c3e50; margin-bottom: 5px; font-size: 1.1rem; }
+        .ingredient-desc { color: #666; font-size: 0.95rem; }
+        .joke-box { background: #e3f2fd; border-left: 4px solid #00b4db;
+                   padding: 20px; border-radius: 8px; margin: 20px 0; }
+        .joke-title { color: #0d47a1; font-weight: 700; margin-bottom: 10px;
+                     display: flex; align-items: center; gap: 10px; }
+        .holiday-note {
+            background: linear-gradient(135deg, #4b6584 0%, #3867d6 100%);
+            color: white;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 20px 0;
+            text-align: center;
+            border: 2px solid #2c3e50;
+            font-style: italic;
+        }
+        @media (max-width: 768px) {
+            body { padding: 15px; } .dish-header { padding: 20px; }
+            .dish-name { font-size: 2rem; } .dish-icon-large { font-size: 3.5rem; }
+            .info-block { padding: 20px; } .ingredients-grid { grid-template-columns: 1fr; }
+        }
+        @media (max-width: 480px) {
+            .dish-name { font-size: 1.8rem; } .info-title { font-size: 1.3rem; }
+            .back-btn { width: 100%; justify-content: center; }
+        }
+    </style>
+</head>
+<body>
+    <a href="index.html" class="back-btn">← НАЗАД К МЕНЮ</a>
+    <div class="dish-header">
+        <span class="dish-icon-large">🎣</span>
+        <h1 class="dish-name">Рулетики с красной рыбой</h1>
+        <div class="dish-meta">ID: ROLLS_SALMON_001 | Версия: 2.0.1 | Статус: ⭐ PREMIUM DELIVERY</div>
+    </div>
+    
+    <div class="info-block">
+        <h2 class="info-title">📦 СОСТАВ (Морская архитектура)</h2>
+        <div class="ingredients-grid">
+            <div class="ingredient-item">
+                <div class="ingredient-name">Красная рыба слабосолёная</div>
+                <div class="ingredient-desc">Лосось или форель, premium quality</div>
+            </div>
+            <div class="ingredient-item">
+                <div class="ingredient-name">Сливочный сыр</div>
+                <div class="ingredient-desc">Кремовый, нежный, как облако</div>
+            </div>
+            <div class="ingredient-item">
+                <div class="ingredient-name">Лаваш армянский</div>
+                <div class="ingredient-desc">Тонкая обёртка, гибкая база</div>
+            </div>
+            <div class="ingredient-item">
+                <div class="ingredient-name">Свежая зелень</div>
+                <div class="ingredient-desc">Укроп, петрушка — ароматный слой</div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="joke-box">
+        <h3 class="joke-title">🤔 Почему эти рулетики — must have для айтишника?</h3>
+        <p>• <strong>Морской коммит</strong> — свежий, как только что выловленный код</p>
+        <p>• <strong>Premium зависимость</strong> — требует качественных ингредиентов</p>
+        <p>• <strong>Быстрый деплой</strong> — собираются быстрее, чем спринт</p>
+        <p>• <strong>Элегантная архитектура</strong> — слоистая, как хороший дизайн</p>
+    </div>
+    
+    <!-- ПРАЗДНИЧНАЯ ЗАМЕТКА -->
+    <div class="holiday-note">
+        🎖️ С 23 февраля! Эти рулетики — как награда после успешного "морского" деплоя: элитные, сытные и всегда попадают в цель!
+    </div>
+    
+    <div class="joke-box">
+        <h3 class="joke-title">⚠️ Важное предупреждение</h3>
+        <p>При частом употреблении может вызвать желание:</p>
+        <p>• Переехать в Норвегию к лососям</p>
+		<p>• Начать говорить с акцентом рыботорговца</p>
+		<p>• Переименовать переменные в fish_style</p>
+    </div>
+    
+    <div style="margin-top: 40px; text-align: center;">
+        <a href="index.html" class="back-btn" style="background: linear-gradient(135deg, #00b4db 0%, #0083b0 100%);">← ВЕРНУТЬСЯ К СПИСКУ БЛЮД</a>
+    </div>
+    
+    <script>
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        document.querySelectorAll('.back-btn').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                e.preventDefault();
+                document.body.style.opacity = '0.9';
+                setTimeout(() => { window.location.href = this.getAttribute('href'); }, 150);
+            });
+        });
+    </script>
+</body>
+</html>
