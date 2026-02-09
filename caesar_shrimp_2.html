@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🦐 Цезарь с креветками | IT-Меню</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            background: #f8f9fa; color: #333;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6; padding: 20px; max-width: 800px; margin: 0 auto;
+            min-height: 100vh; display: flex; flex-direction: column;
+        }
+        .back-btn {
+            display: inline-flex; align-items: center; gap: 8px;
+            background: #6c757d; color: white; text-decoration: none;
+            padding: 12px 24px; border-radius: 8px; font-weight: 600;
+            margin-bottom: 30px; transition: background 0.3s; width: fit-content;
+        }
+        .back-btn:hover { background: #5a6268; }
+        .dish-header {
+            background: linear-gradient(135deg, #00b4db 0%, #0083b0 100%);
+            color: white; border-radius: 15px; padding: 30px;
+            margin-bottom: 30px; box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        .dish-icon-large { font-size: 4rem; margin-bottom: 15px; text-align: center; }
+        .dish-name { color: white; font-size: 2.5rem; margin-bottom: 10px; 
+                    font-weight: 800; text-align: center; }
+        .dish-meta { color: rgba(255,255,255,0.9); font-size: 1.1rem; 
+                    font-family: 'Courier New', monospace; margin-bottom: 20px; text-align: center; }
+        .info-block { background: white; border-radius: 12px; padding: 25px;
+                     margin-bottom: 25px; box-shadow: 0 3px 10px rgba(0,0,0,0.06); }
+        .info-title { color: #2c3e50; font-size: 1.5rem; margin-bottom: 20px;
+                     padding-bottom: 10px; border-bottom: 2px solid #f0f5ff;
+                     display: flex; align-items: center; gap: 10px; }
+        .info-title::before { content: "›"; color: #00b4db; 
+                            font-weight: bold; font-size: 1.8rem; }
+        .ingredients-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; }
+        .ingredient-item { background: #f8f9fa; padding: 15px; border-radius: 8px;
+                          border-left: 4px solid #00b4db; transition: transform 0.2s; }
+        .ingredient-item:hover { transform: translateY(-3px); }
+        .ingredient-name { font-weight: 700; color: #2c3e50; margin-bottom: 5px; font-size: 1.1rem; }
+        .ingredient-desc { color: #666; font-size: 0.95rem; }
+        .joke-box { background: #e3f2fd; border-left: 4px solid #2196f3;
+                   padding: 20px; border-radius: 8px; margin: 20px 0; }
+        .joke-title { color: #0d47a1; font-weight: 700; margin-bottom: 10px;
+                     display: flex; align-items: center; gap: 10px; }
+        .tech-box { background: #e8f4fc; border-left: 4px solid #0083b0;
+                   padding: 20px; border-radius: 8px; font-family: 'Courier New', monospace;
+                   font-size: 1rem; line-height: 1.8; }
+        .tech-line { margin-bottom: 8px; }
+        .tech-key { color: #005b82; font-weight: bold; }
+        .premium-badge { background: #ffd700; color: #333; padding: 5px 15px;
+                        border-radius: 20px; font-weight: bold; display: inline-block;
+                        margin-left: 10px; font-size: 0.8rem; }
+        @media (max-width: 768px) {
+            body { padding: 15px; } .dish-header { padding: 20px; }
+            .dish-name { font-size: 2rem; } .dish-icon-large { font-size: 3.5rem; }
+            .info-block { padding: 20px; } .ingredients-grid { grid-template-columns: 1fr; }
+        }
+        @media (max-width: 480px) {
+            .dish-name { font-size: 1.8rem; } .info-title { font-size: 1.3rem; }
+            .back-btn { width: 100%; justify-content: center; }
+        }
+    </style>
+</head>
+<body>
+    <a href="index.html" class="back-btn">← НАЗАД К МЕНЮ</a>
+    <div class="dish-header">
+        <span class="dish-icon-large">🦐</span>
+        <h1 class="dish-name">Цезарь с креветками <span class="premium-badge">PREMIUM</span></h1>
+        <div class="dish-meta">ID: SALAD_CAESAR_001 | Версия: 3.0.1 | Статус: ⭐ ПРЕМИУМ</div>
+    </div>
+    <div class="info-block">
+        <h2 class="info-title">📦 Состав (Premium Stack)</h2>
+        <div class="ingredients-grid">
+            <div class="ingredient-item">
+                <div class="ingredient-name">Креветки</div>
+                <div class="ingredient-desc">Морские спецназовцы - быстрые, эффективные и готовы к действию</div></div>
+            <div class="ingredient-item">
+                <div class="ingredient-name">Листья салата</div>
+                <div class="ingredient-desc">Base framework, crisp & fresh</div></div>
+            <div class="ingredient-item">
+                <div class="ingredient-name">Помидоры черри</div>
+                <div class="ingredient-desc">Разведчики-невидимки - маленькие, но очень важные</div></div>
+            <div class="ingredient-item">
+                <div class="ingredient-name">Сухарики домашние</div>
+                <div class="ingredient-desc">Хрустящая броня - обеспечивает защиту от пресности</div></div>
+            <div class="ingredient-item">
+                <div class="ingredient-name">Сыр твердый</div>
+                <div class="ingredient-desc">Тяжёлая артиллерия - мощный вкусовой удар</div></div>
+            <div class="ingredient-item">
+                <div class="ingredient-name">Соусный отдел</div>
+                <div class="ingredient-desc">Оливковое масло, лимон, горчица, специи - штаб управления вкусом</div></div>
+            <div class="ingredient-item">
+                <div class="ingredient-name">Чеснок, лимон</div>
+                <div class="ingredient-desc">Антивирусная программа для иммунитета</div></div>
+        </div>
+    </div>
+    <div class="joke-box">
+        <h3 class="joke-title">💡 Цезарь — салат для тимлидов</h3>
+        <p>• <strong>Дорогой</strong> — как senior-разработчик</p>
+        <p>• <strong>Сложный в сборке</strong> — но результат того стоит</p>
+        <p>• <strong>Креветки = морепродукты</strong> — как морской контейнер в логистике</p>
+        <p>• <strong>Императорский</strong> — требует уважительного отношения</p>
+    </div>
+
+     <div class="fact-box" id="shrimpFact">
+        <div class="fact-title">
+            <span>🦐</span>
+            <span>ФАКТ О КРЕВЕТКАХ #1</span>
+        </div>
+        <p>Креветки — морские чистильщики. Они фильтруют воду и поддерживают экосистему в порядке.</p>
+        <p><strong>Как системные администраторы:</strong> незаметно работают, чтобы всё было чисто и работало.</p>
+        <div class="tap-hint" id="tapHint">ТЫКНИ ДЛЯ НОВОГО ФАКТА</div>
+    </div>
+
+    <div class="joke-box">
+        <h3 class="joke-title">💡 ИНТЕРЕСНЫЕ НАБЛЮДЕНИЯ</h3>
+        <p><strong>Этот салат — как успешный проект:</strong></p>
+        <p>1. <strong>Дорогие компоненты</strong> — но результат того стоит</p>
+        <p>2. <strong>Требует подготовки</strong> — нельзя сделать на скорую руку</p>
+        <p>3. <strong>Визуально эффектный</strong> — производит впечатление</p>
+        <p>4. <strong>Нравится всем</strong> — от стажёра до директора</p>
+        <p style="margin-top: 10px; font-style: italic;">Идеально для праздничного стола — выглядит солидно и вкусно!</p>
+    </div>
+
+    <div style="margin-top: 40px; text-align: center;">
+        <a href="index.html" class="back-btn" style="background: linear-gradient(135deg, #00b4db 0%, #0083b0 100%);">← ВЕРНУТЬСЯ К СПИСКУ БЛЮД</a>
+    </div>
+    <script>
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        document.querySelectorAll('.back-btn').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                e.preventDefault();
+                document.body.style.opacity = '0.9';
+                setTimeout(() => { window.location.href = this.getAttribute('href'); }, 150);
+            });
+        });
+
+         // Факты о креветках для интерактива
+        const shrimpFacts = [
+            {
+                title: "ФАКТ О КРЕВЕТКАХ #1",
+                content: "Креветки — морские чистильщики. Они фильтруют воду и поддерживают экосистему в порядке.",
+                analogy: "Как системные администраторы: незаметно работают, чтобы всё было чисто и работало."
+            },
+            {
+                title: "ФАКТ О КРЕВЕТКАХ #2",
+                content: "Креветки могут плавать задом наперёд. Резкий гребок хвостом — и они отступают.",
+                analogy: "Как откат релиза: иногда нужно быстро отступить, чтобы избежать проблем."
+            },
+            {
+                title: "ФАКТ О КРЕВЕТКАХ #3",
+                content: "У креветок 10 ног, но они умеют ими мастерски пользоваться.",
+                analogy: "Как разработчик на 10 разных языках программирования: важно не количество, а умение."
+            },
+            {
+                title: "ФАКТ О КРЕВЕТКАХ #4",
+                content: "Креветки меняют панцирь по мере роста. Старый становится тесен — нужен новый.",
+                analogy: "Как апгрейд серверов: старое железо не справляется — пора обновляться."
+            },
+            {
+                title: "ФАКТ О КРЕВЕТКАХ #23",
+                content: "Креветки — символ морской силы. Быстрые, манёвренные и всегда готовы к действию.",
+                analogy: "Как команда быстрого реагирования в IT: оперативно решают любые проблемы."
+            }
+        ];
+        
+        let currentFactIndex = 0;
+        const factElement = document.getElementById('shrimpFact');
+        const tapHint = document.getElementById('tapHint');
+        
+        function showNextFact() {
+            currentFactIndex = (currentFactIndex + 1) % shrimpFacts.length;
+            const fact = shrimpFacts[currentFactIndex];
+            
+            factElement.querySelector('.fact-title span:last-child').textContent = fact.title;
+            factElement.querySelector('p:first-child').textContent = fact.content;
+            factElement.querySelector('p:last-child strong').textContent = fact.analogy;
+            
+            // Анимация
+            factElement.style.transform = 'scale(0.98)';
+            factElement.style.transition = 'transform 0.2s';
+            
+            setTimeout(() => {
+                factElement.style.transform = 'scale(1)';
+            }, 200);
+        }
+        
+        // Интерактивность
+        factElement.addEventListener('click', showNextFact);
+        factElement.style.cursor = 'pointer';
+        
+        // Клик на ингредиенты
+        document.querySelectorAll('.ingredient-item').forEach(item => {
+            item.addEventListener('click', function() {
+                this.style.backgroundColor = '#e3f2fd';
+                this.style.borderLeftColor = '#2196f3';
+                
+                setTimeout(() => {
+                    this.style.backgroundColor = '';
+                    this.style.borderLeftColor = '';
+                }, 300);
+            });
+        });
+        
+        // Подсказка для мобильных устройств
+        if ('ontouchstart' in window) {
+            tapHint.textContent = 'НАЖМИ ДЛЯ НОВОГО ФАКТА';
+        }
+
+
+    </script>
+</body>
+</html>
