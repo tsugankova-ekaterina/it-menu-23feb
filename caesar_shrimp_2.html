@@ -124,6 +124,13 @@
             align-items: center;
             gap: 10px;
         }
+        .fact-content {
+            margin-bottom: 10px;
+        }
+        .fact-analogy {
+            font-weight: bold;
+            color: #0d47a1;
+        }
         .tap-hint {
             background: #2196f3;
             color: white;
@@ -211,10 +218,12 @@
     <div class="fact-box" id="shrimpFact">
         <div class="fact-title">
             <span>🦐</span>
-            <span>ФАКТ О КРЕВЕТКАХ #1</span>
+            <span id="factTitle">ФАКТ О КРЕВЕТКАХ #1</span>
         </div>
-        <p>Креветки — морские чистильщики. Они фильтруют воду и поддерживают экосистему в порядке.</p>
-        <p><strong>Как системные администраторы:</strong> незаметно работают, чтобы всё было чисто и работало.</p>
+        <div id="factContent">
+            <p class="fact-content">Креветки — морские чистильщики. Они фильтруют воду и поддерживают экосистему в порядке.</p>
+            <p class="fact-analogy">Как системные администраторы: незаметно работают, чтобы всё было чисто и работало.</p>
+        </div>
         <div class="tap-hint" id="tapHint">НАЖМИ ДЛЯ НОВОГО ФАКТА</div>
     </div>
 
@@ -231,8 +240,11 @@
     <div style="margin-top: 40px; text-align: center;">
         <a href="index.html" class="back-btn" style="background: linear-gradient(135deg, #00b4db 0%, #0083b0 100%);">← ВЕРНУТЬСЯ К СПИСКУ БЛЮД</a>
     </div>
+    
     <script>
         window.scrollTo({ top: 0, behavior: 'smooth' });
+        
+        // Плавный переход при клике на кнопку "назад"
         document.querySelectorAll('.back-btn').forEach(btn => {
             btn.addEventListener('click', function(e) {
                 e.preventDefault();
@@ -241,7 +253,7 @@
             });
         });
 
-         // Факты о креветках для интерактива
+        // Факты о креветках для интерактива
         const shrimpFacts = [
             {
                 title: "ФАКТ О КРЕВЕТКАХ #1",
@@ -272,43 +284,34 @@
         
         let currentFactIndex = 0;
         const factElement = document.getElementById('shrimpFact');
+        const factTitleElement = document.getElementById('factTitle');
+        const factContentElement = document.getElementById('factContent');
         const tapHint = document.getElementById('tapHint');
         
         function showNextFact() {
-            currentFactIndex = (currentFactIndex + 1) % shrimpFact.length;
+            // Исправлено: было shrimpFact.length, должно быть shrimpFacts.length
+            currentFactIndex = (currentFactIndex + 1) % shrimpFacts.length;
             const fact = shrimpFacts[currentFactIndex];
             
-            // Обновляем заголовок
-            FactElement.querySelector('.fact-title span:last-child').textContent = fact.title;
-            
             // Обновляем содержимое
-            const contentHTML = `<p><strong>${fact.content}</strong></p>`;
-            
-            // Находим элемент после заголовка и заменяем его содержимое
-            const titleElement = FactElement.querySelector('.fact-title');
-            let nextElement = titleElement.nextElementSibling;
-            
-            // Удаляем старые параграфы
-            while (nextElement && nextElement.tagName === 'P') {
-                const toRemove = nextElement;
-                nextElement = nextElement.nextElementSibling;
-                toRemove.remove();
-            }
-            
-            // Добавляем новые параграфы
-            titleElement.insertAdjacentHTML('afterend', contentHTML);
+            factTitleElement.textContent = fact.title;
+            factContentElement.innerHTML = `
+                <p class="fact-content">${fact.content}</p>
+                <p class="fact-analogy">${fact.analogy}</p>
+            `;
             
             // Анимация
-            FactElement.style.transform = 'scale(0.95)';
-            FactElement.style.transition = 'transform 0.2s';
+            factElement.style.transform = 'scale(0.95)';
+            factElement.style.transition = 'transform 0.2s';
             
             setTimeout(() => {
-                FactElement.style.transform = 'scale(1)';
+                factElement.style.transform = 'scale(1)';
             }, 200);
         }
         
-        // Интерактивность
+        // Интерактивность для фактов
         factElement.addEventListener('click', showNextFact);
+        tapHint.addEventListener('click', showNextFact);
         factElement.style.cursor = 'pointer';
         
         // Клик на ингредиенты
@@ -319,16 +322,15 @@
                 
                 setTimeout(() => {
                     this.style.backgroundColor = '';
-                    this.style.borderLeftColor = '';
+                    this.style.borderLeftColor = '#00b4db';
                 }, 300);
             });
         });
         
         // Подсказка для мобильных устройств
         if ('ontouchstart' in window) {
-            tapHint.textContent = 'НАЖМИ ДЛЯ НОВОГО ФАКТА';
+            tapHint.textContent = 'ТАПНИ ДЛЯ НОВОГО ФАКТА';
         }
-
 
     </script>
 </body>
