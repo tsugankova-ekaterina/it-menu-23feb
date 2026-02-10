@@ -283,6 +283,32 @@
         const factContentElement = document.getElementById('factContent');
         const tapHint = document.getElementById('tapHint');
         
+
+        function showNextFact() {
+            currentFactIndex = (currentFactIndex + 1) % shrimpFacts.length;
+            const fact = shrimpFacts[currentFactIndex];
+            
+            // Просто полностью заменяем содержимое
+            factElement.innerHTML = `
+                <div class="fact-title">
+                    <span>🦐</span>
+                    <span>${fact.title}</span>
+                </div>
+                <div>
+                    <p class="fact-content">${fact.content}</p>
+                    <p class="fact-analogy">${fact.analogy}</p>
+                </div>
+                <div class="tap-hint" id="tapHint">НАЖМИ ДЛЯ НОВОГО ФАКТА</div>
+            `;
+            
+            // Перепривязываем обработчик клика к новому элементу
+            factElement.querySelector('#tapHint').addEventListener('click', showNextFact);
+            
+            // Анимация
+            factElement.style.transform = 'scale(0.95)';
+            setTimeout(() => factElement.style.transform = 'scale(1)', 200);
+        }
+        /*
         function showNextFact() {
             // Исправлено: было shrimpFact.length, должно быть shrimpFacts.length
             currentFactIndex = (currentFactIndex + 1) % shrimpFacts.length;
@@ -302,7 +328,7 @@
             setTimeout(() => {
                 factElement.style.transform = 'scale(1)';
             }, 200);
-        }
+        }*/
         
         // Интерактивность для фактов
         factElement.addEventListener('click', showNextFact);
