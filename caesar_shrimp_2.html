@@ -290,7 +290,7 @@
         
         function showNextFact() {
             // Исправлено: было shrimpFact.length, должно быть shrimpFacts.length
-            currentFactIndex = (currentFactIndex + 1) % shrimpFacts.length;
+            currentFactIndex = (currentFactIndex + 1);// % shrimpFacts.length;
             const fact = shrimpFacts[currentFactIndex];
             
             // Обновляем содержимое
