@@ -253,6 +253,68 @@
             });
         });
 
+        
+        // Факты о креветках для интерактива
+        const shrimpFacts = [
+            {
+                title: "ФАКТ О КРЕВЕТКАХ #1",
+                content: "Креветки — морские чистильщики. Они фильтруют воду и поддерживают экосистему в порядке.",
+                analogy: "Как системные администраторы: незаметно работают, чтобы всё было чисто и работало."
+            },
+            {
+                title: "ФАКТ О КРЕВЕТКАХ #2",
+                content: "Креветки могут плавать задом наперёд. Резкий гребок хвостом — и они отступают.",
+                analogy: "Как откат релиза: иногда нужно быстро отступить, чтобы избежать проблем."
+            },
+            {
+                title: "ФАКТ О КРЕВЕТКАХ #3",
+                content: "У креветок 10 ног, но они умеют ими мастерски пользоваться.",
+                analogy: "Как разработчик на 10 разных языках программирования: важно не количество, а умение."
+            },
+            {
+                title: "ФАКТ О КРЕВЕТКАХ #4",
+                content: "Креветки меняют панцирь по мере роста. Старый становится тесен — нужен новый.",
+                analogy: "Как апгрейд серверов: старое железо не справляется — пора обновляться."
+            }
+        ];
+
+        let currentFactIndex = 0;
+        const factElement = document.getElementById('shrimpFact');
+
+        function showNextFact() {
+            // Увеличиваем индекс, но не перезаписываем весь HTML
+            currentFactIndex = (currentFactIndex + 1) % shrimpFacts.length;
+            const fact = shrimpFacts[currentFactIndex];
+            
+            // Просто обновляем текст в существующих элементах
+            factTitleElement.textContent = fact.title;
+            factContentElement.innerHTML = `
+                <p class="fact-content">${fact.content}</p>
+                <p class="fact-analogy">${fact.analogy}</p>
+            `;
+            
+            // Анимация
+            factElement.style.transform = 'scale(0.95)';
+            factElement.style.transition = 'transform 0.2s';
+            setTimeout(() => factElement.style.transform = 'scale(1)', 200);
+        }
+
+        // Находим элементы после загрузки страницы
+        const factTitleElement = document.getElementById('factTitle');
+        const factContentElement = document.getElementById('factContent');
+        const tapHint = document.getElementById('tapHint');
+
+        // Добавляем обработчики
+        factElement.addEventListener('click', showNextFact);
+        if (tapHint) {
+            tapHint.addEventListener('click', showNextFact);
+        }
+        factElement.style.cursor = 'pointer';
+
+        // Подсказка для мобильных устройств
+        if ('ontouchstart' in window && tapHint) {
+            tapHint.textContent = 'ТАПНИ ДЛЯ НОВОГО ФАКТА';
+        }
         // Факты о креветках для интерактива
         /*const shrimpFacts = [
             {
@@ -283,60 +345,6 @@
         const factContentElement = document.getElementById('factContent');
         const tapHint = document.getElementById('tapHint');
         
-
-
-
-        // Факты о креветках для интерактива
-        const shrimpFacts = [
-            {
-                title: "ФАКТ О КРЕВЕТКАХ #1",
-                content: "Креветки — морские чистильщики. Они фильтруют воду и поддерживают экосистему в порядке.",
-                analogy: "Как системные администраторы: незаметно работают, чтобы всё было чисто и работало."
-            },
-            {
-                title: "ФАКТ О КРЕВЕТКАХ #2",
-                content: "Креветки могут плавать задом наперёд. Резкий гребок хвостом — и они отступают.",
-                analogy: "Как откат релиза: иногда нужно быстро отступить, чтобы избежать проблем."
-            },
-            {
-                title: "ФАКТ О КРЕВЕТКАХ #3",
-                content: "У креветок 10 ног, но они умеют ими мастерски пользоваться.",
-                analogy: "Как разработчик на 10 разных языках программирования: важно не количество, а умение."
-            },
-            {
-                title: "ФАКТ О КРЕВЕТКАХ #4",
-                content: "Креветки меняют панцирь по мере роста. Старый становится тесен — нужен новый.",
-                analogy: "Как апгрейд серверов: старое железо не справляется — пора обновляться."
-            }
-        ];
-
-        let currentFactIndex = -1; // Начинаем с -1, потому что первый факт уже показан
-        const factElement = document.getElementById('shrimpFact');
-
-        function showNextFact() {
-            currentFactIndex = (currentFactIndex + 1) % shrimpFacts.length;
-            const fact = shrimpFacts[currentFactIndex];
-            
-            // Обновляем только текст
-            document.getElementById('factTitle').textContent = fact.title;
-            document.getElementById('factContent').innerHTML = `
-                <p class="fact-content">${fact.content}</p>
-                <p class="fact-analogy">${fact.analogy}</p>
-            `;
-            
-            // Анимация
-            factElement.style.transform = 'scale(0.95)';
-            setTimeout(() => factElement.style.transform = 'scale(1)', 200);
-        }
-
-        // Вешаем обработчики
-        factElement.addEventListener('click', showNextFact);
-        document.getElementById('tapHint').addEventListener('click', showNextFact);
-
-        // Мобильная подсказка
-        if ('ontouchstart' in window) {
-            document.getElementById('tapHint').textContent = 'ТАПНИ ДЛЯ НОВОГО ФАКТА';
-        }
 
 /*
         function showNextFact() {
