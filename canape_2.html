@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🍢 Канапе | IT-Меню</title>
+    <style>
+        /* ===== ВСЕ СТАРЫЕ СТИЛИ ОСТАЮТСЯ ===== */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            background: #f8f9fa; color: #333;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6; padding: 20px; max-width: 800px; margin: 0 auto;
+            min-height: 100vh; display: flex; flex-direction: column;
+        }
+        .back-btn {
+            display: inline-flex; align-items: center; gap: 8px;
+            background: #6c757d; color: white; text-decoration: none;
+            padding: 12px 24px; border-radius: 8px; font-weight: 600;
+            margin-bottom: 30px; transition: background 0.3s; width: fit-content;
+        }
+        .back-btn:hover { background: #5a6268; }
+        .dish-header {
+            background: linear-gradient(135deg, #FF416C 0%, #FF4B2B 100%);
+            color: white; border-radius: 15px; padding: 30px;
+            margin-bottom: 30px; box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        .dish-icon-large { font-size: 4rem; margin-bottom: 15px; text-align: center; }
+        .dish-name { color: white; font-size: 2.5rem; margin-bottom: 10px; 
+                    font-weight: 800; text-align: center; }
+        .dish-meta { color: rgba(255,255,255,0.9); font-size: 1.1rem; 
+                    font-family: 'Courier New', monospace; margin-bottom: 20px; text-align: center; }
+        .info-block { background: white; border-radius: 12px; padding: 25px;
+                     margin-bottom: 25px; box-shadow: 0 3px 10px rgba(0,0,0,0.06); }
+        .info-title { color: #2c3e50; font-size: 1.5rem; margin-bottom: 20px;
+                     padding-bottom: 10px; border-bottom: 2px solid #f0f5ff;
+                     display: flex; align-items: center; gap: 10px; }
+        .info-title::before { content: "›"; color: #FF416C; 
+                            font-weight: bold; font-size: 1.8rem; }
+        .ingredients-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; }
+        .ingredient-item { background: #f8f9fa; padding: 15px; border-radius: 8px;
+                          border-left: 4px solid #FF416C; transition: transform 0.2s; cursor: pointer; }
+        .ingredient-item:hover { transform: translateY(-3px); background: #fff0f3; }
+        .ingredient-name { font-weight: 700; color: #2c3e50; margin-bottom: 5px; font-size: 1.1rem; }
+        .ingredient-desc { color: #666; font-size: 0.95rem; }
+        .joke-box { background: #ffeef2; border-left: 4px solid #FF416C;
+                   padding: 20px; border-radius: 8px; margin: 20px 0; }
+        .joke-title { color: #c2185b; font-weight: 700; margin-bottom: 10px;
+                     display: flex; align-items: center; gap: 10px; }
+        .tech-box { background: #fff0f3; border-left: 4px solid #FF4B2B;
+                   padding: 20px; border-radius: 8px; font-family: 'Courier New', monospace;
+                   font-size: 1rem; line-height: 1.8; }
+        .tech-line { margin-bottom: 8px; }
+        .tech-key { color: #d32f2f; font-weight: bold; }
+        .canape-types { display: flex; flex-wrap: wrap; gap: 15px; margin-top: 20px; }
+        .canape-type { flex: 1; min-width: 200px; background: #f8f9fa; 
+                      padding: 15px; border-radius: 8px; border: 2px solid #FF416C; }
+        .canape-type h4 { color: #FF416C; margin-bottom: 10px; }
+
+        /* ===== НОВЫЕ СТИЛИ ДЛЯ УЛУЧШЕНИЙ ===== */
+        .stack-diagram {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            background: #1e1e2f;
+            padding: 15px;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            color: #00ff9d;
+            margin-top: 15px;
+        }
+        .stack-layer {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 5px 10px;
+            background: #2d2d44;
+            border-radius: 4px;
+        }
+        .layer-name {
+            font-weight: bold;
+            min-width: 100px;
+        }
+        .layer-desc {
+            color: #ccc;
+        }
+        .build-log {
+            background: #1e1e2e;
+            color: #0f0;
+            padding: 15px;
+            border-radius: 6px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            margin: 15px 0;
+            border-left: 4px solid #00ff00;
+            white-space: pre-wrap;
+        }
+        .counter-box {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: #fff;
+            border: 2px dashed #FF416C;
+            padding: 15px 20px;
+            border-radius: 30px;
+            margin: 20px 0;
+        }
+        .counter-value {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #FF416C;
+            font-family: 'Courier New', monospace;
+        }
+        .counter-btn {
+            background: #FF416C;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 30px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        .counter-btn:hover {
+            background: #ff1a4f;
+        }
+        .fact-box {
+            background: #ffeef2;
+            border-left: 4px solid #FF416C;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        .fact-box:active {
+            transform: scale(0.98);
+        }
+        .fact-title {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: bold;
+            color: #c2185b;
+            margin-bottom: 10px;
+        }
+        .compatibility-table {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-top: 15px;
+        }
+        .compat-item {
+            background: #fff0f3;
+            padding: 10px;
+            border-radius: 6px;
+            border: 1px solid #FF416C;
+            font-size: 0.9rem;
+        }
+        .compat-item strong {
+            color: #c2185b;
+        }
+        @media (max-width: 768px) {
+            body { padding: 15px; } .dish-header { padding: 20px; }
+            .dish-name { font-size: 2rem; } .dish-icon-large { font-size: 3.5rem; }
+            .info-block { padding: 20px; } .ingredients-grid { grid-template-columns: 1fr; }
+            .canape-types { flex-direction: column; }
+        }
+    </style>
+</head>
+<body>
+    <a href="index.html" class="back-btn">← НАЗАД К МЕНЮ</a>
+
+    <!-- Шапка блюда -->
+    <div class="dish-header">
+        <span class="dish-icon-large">🍢</span>
+        <h1 class="dish-name">Канапе ассорти</h1>
+        <div class="dish-meta">ID: CANAPE_001 | Версия: 2.0.1 | Статус: 🔥 READY FOR DEPLOY</div>
+    </div>
+
+    <!-- ===== ИНГРЕДИЕНТЫ + ИНТЕРАКТИВ ===== -->
+    <div class="info-block">
+        <h2 class="info-title">📦 КОМПОНЕНТЫ (Микросервисная архитектура)</h2>
+        <div class="ingredients-grid">
+            <div class="ingredient-item" data-ing="ham">
+                <div class="ingredient-name">🥩 Ветчина</div>
+                <div class="ingredient-desc">Основной бизнес-логика, protein-модуль</div>
+            </div>
+            <div class="ingredient-item" data-ing="cheese">
+                <div class="ingredient-name">🧀 Сыр</div>
+                <div class="ingredient-desc">Слой склеивания, работает как ORM</div>
+            </div>
+            <div class="ingredient-item" data-ing="olive">
+                <div class="ingredient-name">🫒 Оливки</div>
+                <div class="ingredient-desc">UI-декорация, но без неё — не комильфо</div>
+            </div>
+            <div class="ingredient-item" data-ing="salad">
+                <div class="ingredient-name">🥬 Салат</div>
+                <div class="ingredient-desc">Фреймворк для зелени, добавляет свежести</div>
+            </div>
+        </div>
+        <!-- Лог сборки -->
+        <div class="build-log" id="buildLog">
+            > Инициализация сборки канапе...
+            > Ожидание выбора компонентов
+        </div>
+    </div>
+
+    <!-- ===== СТЕК ТЕХНОЛОГИЙ (Схема сборки) ===== 
+    <div class="info-block">
+        <h2 class="info-title">🧱 СТЕК СБОРКИ (Full‑stack канапе)</h2>
+        <div class="stack-diagram">
+            <div class="stack-layer">
+                <span class="layer-name">🍞 Хлеб</span>
+                <span class="layer-desc">— инфраструктура (физический сервер)</span>
+            </div>
+            <div class="stack-layer">
+                <span class="layer-name">🥗 Салат</span>
+                <span class="layer-desc">— операционная система (зелёный интерфейс)</span>
+            </div>
+            <div class="stack-layer">
+                <span class="layer-name">🥩 Ветчина</span>
+                <span class="layer-desc">— бэкенд (тяжёлая логика)</span>
+            </div>
+            <div class="stack-layer">
+                <span class="layer-name">🧀 Сыр</span>
+                <span class="layer-desc">— middleware, связывает всё воедино</span>
+            </div>
+            <div class="stack-layer">
+                <span class="layer-name">🫒 Оливка</span>
+                <span class="layer-desc">— фасад, красивый UI</span>
+            </div>
+        </div>
+        <p style="margin-top: 15px; color: #666; font-style: italic;">💡 Tip: Если оливка упала — это не баг, а фича rollback'а</p>
+    </div>-->
+
+    <!-- ===== ИНТЕРАКТИВНЫЙ КОНСТРУКТОР (Счётчик) ===== -->
+    <div class="counter-box">
+        <div>
+            <span style="font-weight: bold; font-size: 1.2rem;">🍢 Канапе съедено:</span>
+            <span class="counter-value" id="canapeCounter">0</span>
+        </div>
+        <button class="counter-btn" id="eatBtn">➕ СЪЕСТЬ ЕЩЁ</button>
+    </div>
+
+    <!-- ===== ФАКТЫ О КАНАПЕ (с тапом) ===== 
+    <div class="fact-box" id="canapeFact">
+        <div class="fact-title">
+            <span>🍢</span>
+            <span id="factTitle">ФАКТ О КАНАПЕ #1</span>
+        </div>
+        <p id="factContent">Канапе — единственная закуска, которую можно есть одной рукой, не отрываясь от код‑ревью.</p>
+        <div class="tap-hint" style="background: #FF416C; color: white; padding: 8px 15px; border-radius: 20px; display: inline-block; margin-top: 10px;">🍅 ТАПНИ ДЛЯ НОВОГО ФАКТА</div>
+    </div>-->
+    
+    <div class="joke-box">
+        <h3 class="joke-title">💡 Канапе — идеальный фингерфуд</h3>
+        <p>• <strong>Модульная архитектура</strong> — можно комбинировать как Lego</p>
+        <p>• <strong>Быстрый деплой</strong> — одна рука свободна для мышки</p>
+        <p>• <strong>Микро-сервисы</strong> — маленькие, но самостоятельные</p>
+        <p>• <strong>Горизонтальное масштабирование</strong> — бери сколько хочешь</p>
+    </div>
+
+    <!-- ===== ШУТКИ ПРО IT (уже было, немного дополнил) ===== 
+    <div class="joke-box">
+        <h3 class="joke-title">💡 Почему канапе — идеальный IT-продукт?</h3>
+        <p>• <strong>Модульная архитектура</strong> — собирай как лего, хоть на коленке</p>
+        <p>• <strong>Быстрый деплой</strong> — 2 минуты, и уже на продакшене (тарелке)</p>
+        <p>• <strong>Горизонтальное масштабирование</strong> — сделал 20 штук, хватит на весь отдел</p>
+        <p>• <strong>Low coupling</strong> — ветчина и сыр не зависят друг от друга, но вместе вкуснее</p>
+        <p>• <strong>Отказоустойчивость</strong> — упало на пол? Подними и съешь (правило 5 секунд)</p>
+    </div>-->
+
+    <!-- ===== ТАБЛИЦА СОВМЕСТИМОСТИ (аналогии с версиями) ===== -->
+    <div class="info-block">
+        <h2 class="info-title">🔗 МАТРИЦА СОВМЕСТИМОСТИ</h2>
+        <div class="compatibility-table">
+            <div class="compat-item"><strong>🍞 Хлеб + 🥩 Ветчина</strong> — стабильная пара, проверено временем</div>
+            <div class="compat-item"><strong>🧀 Сыр + 🫒 Оливка</strong> — legacy‑интеграция, работает без багов</div>
+            <div class="compat-item"><strong>🥬 Салат + 🍞 Хлеб</strong> — свежий релиз, может быть хрустящим</div>
+            <div class="compat-item"><strong>🥩 Ветчина + 🧀 Сыр</strong> — enterprise‑решение, требует много ресурсов</div>
+        </div>
+        <p style="margin-top: 15px; background: #ffeef2; padding: 10px; border-radius: 6px;">
+            ⚠️ <strong>Warning:</strong> Не сочетайте оливку с ветчиной без сыра — нарушение бизнес-логики!
+        </p>
+    </div>
+
+    <!-- ===== ЖИЗНЕННЫЙ ЦИКЛ КАНАПЕ ===== 
+    <div class="joke-box">
+        <h3 class="joke-title">🔄 CI/CD пайплайн канапе</h3>
+        <p><strong>1. Development</strong> — нарезка ингредиентов</p>
+        <p><strong>2. Build</strong> — нанизывание на шпажку</p>
+        <p><strong>3. Test</strong> — проверка, не разваливается ли</p>
+        <p><strong>4. Staging</strong> — выложить на тарелку, позвать коллегу</p>
+        <p><strong>5. Production</strong> — съесть (с метриками удовольствия)</p>
+        <p><strong>6. Monitoring</strong> — не хочется ли добавки?</p>
+    </div>-->
+
+    <!-- ===== ТЕХНИЧЕСКАЯ ДОКУМЕНТАЦИЯ ===== -->
+    <div class="info-block">
+        <h2 class="info-title">📘 README.md</h2>
+        <div class="tech-box">
+            <div class="tech-line"><span class="tech-key">Размер порции:</span> 1 укус (bite-sized) — как микро‑коммит</div>
+            <div class="tech-line"><span class="tech-key">Температура сервера:</span> комнатная, не требует прогрева</div>
+            <div class="tech-line"><span class="tech-key">Время сборки:</span> 90 секунд (оптимизировано)</div>
+            <div class="tech-line"><span class="tech-key">Зависимости:</span> хлеб, ветчина, сыр, оливка, салат</div>
+            <div class="tech-line"><span class="tech-key">Лицензия:</span> Open Source — каждый может форкнуть рецепт</div>
+            <div class="tech-line"><span class="tech-key">Поддерживаемые платформы:</span> тарелка, салфетка, рука</div>
+        </div>
+    </div>
+
+    <!-- Кнопка назад -->
+    <div style="margin-top: 40px; text-align: center;">
+        <a href="index.html" class="back-btn" style="background: linear-gradient(135deg, #FF416C 0%, #FF4B2B 100%);">← ВЕРНУТЬСЯ К СПИСКУ БЛЮД</a>
+    </div>
+
+    <script>
+        // ========== ПЛАВНЫЙ ПЕРЕХОД ==========
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        document.querySelectorAll('.back-btn').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                e.preventDefault();
+                document.body.style.opacity = '0.9';
+                setTimeout(() => { window.location.href = this.getAttribute('href'); }, 150);
+            });
+        });
+
+        // ========== ИНТЕРАКТИВНЫЕ ИНГРЕДИЕНТЫ (ЛОГ СБОРКИ) ==========
+        const buildLog = document.getElementById('buildLog');
+        const ingredientMsgs = {
+            bread: '🍞 Базовая платформа: хлеб. Инфраструктура готова.',
+            ham: '🥩 Модуль ветчины установлен. Бизнес-логика загружена.',
+            cheese: '🧀 Сырный слой интегрирован. Связи установлены.',
+            olive: '🫒 UI-декорация: оливка. Интерфейс завершён.',
+            salad: '🥬 Фреймворк салата добавлен. Свежий дизайн.'
+        };
+
+        document.querySelectorAll('.ingredient-item').forEach(item => {
+            item.addEventListener('click', function() {
+                const ing = this.dataset.ing;
+                if (ing && ingredientMsgs[ing]) {
+                    buildLog.innerHTML = `> ${ingredientMsgs[ing]}\n> Текущий статус: компонент добавлен ✓`;
+                }
+                // Анимация
+                this.style.backgroundColor = '#ffe0e5';
+                setTimeout(() => this.style.backgroundColor = '', 200);
+            });
+        });
+
+        // ========== СЧЁТЧИК СЪЕДЕННЫХ КАНАПЕ ==========
+        let counter = 0;
+        const counterEl = document.getElementById('canapeCounter');
+        const eatBtn = document.getElementById('eatBtn');
+        eatBtn.addEventListener('click', function() {
+            counter++;
+            counterEl.textContent = counter;
+            if (counter === 5) {
+                buildLog.innerHTML = '> ВНИМАНИЕ! Вы съели 5 канапе. Рекомендуется сделать паузу.';
+            } else if (counter === 10) {
+                buildLog.innerHTML = '> 🔥 ЛИМИТ ПОЧТИ ДОСТИГНУТ. Ещё одно — и масштабирование горизонтальное!';
+            } else if (counter > 0) {
+                buildLog.innerHTML = `> 🍢 Канапе #${counter} съедено. Текущая продуктивность: ${counter * 10}%`;
+            }
+        });
+
+        // ========== ФАКТЫ О КАНАПЕ (переключение по тапу) ==========
+        const canapeFacts = [
+            "Канапе — единственная закуска, которую можно есть одной рукой, не отрываясь от код‑ревью.",
+            "В среднем IT-специалист съедает 3-4 канапе за одно совещание. Это примерно 120 строк кода в день.",
+            "Идеальный стек канапе: хлеб (UI) — ветчина (логика) — сыр (API) — оливка (UI).",
+            "Если канапе упало на пол — это rollback. Если подняли и съели — hotfix.",
+            "Канапе с оливкой — это как Java: везде есть, но многие спорят, нужно ли оно там.",
+            "Баг в канапе: оливка иногда скатывается. Фича: так веселее.",
+            "DevOps-канапе: положил на тарелку, настроил окружение (салфетку), подал."
+        ];
+        let factIndex = 0;
+        const factBox = document.getElementById('canapeFact');
+        const factTitle = document.getElementById('factTitle');
+        const factContent = document.getElementById('factContent');
+        const tapHint = factBox.querySelector('.tap-hint');
+
+        function showNextFact() {
+            factIndex = (factIndex + 1) % canapeFacts.length;
+            factTitle.textContent = `ФАКТ О КАНАПЕ #${factIndex + 1}`;
+            factContent.textContent = canapeFacts[factIndex];
+            // Анимация
+            factBox.style.transform = 'scale(0.98)';
+            setTimeout(() => factBox.style.transform = 'scale(1)', 150);
+        }
+
+        factBox.addEventListener('click', showNextFact);
+        if (tapHint) tapHint.addEventListener('click', showNextFact);
+
+        // ========== МОБИЛЬНАЯ ПОДСКАЗКА ==========
+        if ('ontouchstart' in window) {
+            if (tapHint) tapHint.textContent = '🍅 ТАПНИ ДЛЯ НОВОГО ФАКТА';
+        }
+
+        // ========== ПРИВЕТСТВЕННЫЙ ЛОГ ==========
+        console.log("🍢 Канапе-модуль загружен. Приятного аппетита!");
+    </script>
+</body>
+</html>
