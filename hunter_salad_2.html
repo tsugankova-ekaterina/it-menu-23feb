@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🏹 Охотничий салат | IT-Меню</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            background: #f8f9fa; color: #333;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6; padding: 20px; max-width: 800px; margin: 0 auto;
+            min-height: 100vh; display: flex; flex-direction: column;
+        }
+        .back-btn {
+            display: inline-flex; align-items: center; gap: 8px;
+            background: #6c757d; color: white; text-decoration: none;
+            padding: 12px 24px; border-radius: 8px; font-weight: 600;
+            margin-bottom: 30px; transition: background 0.3s; width: fit-content;
+        }
+        .back-btn:hover { background: #5a6268; }
+        .dish-header {
+            background: linear-gradient(135deg, #8B4513 0%, #A0522D 100%);
+            color: white; border-radius: 15px; padding: 30px;
+            margin-bottom: 30px; box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            position: relative;
+            overflow: hidden;
+        }
+        .dish-header::before {
+            content: "🏹";
+            position: absolute;
+            right: 20px;
+            top: 20px;
+            font-size: 3rem;
+            opacity: 0.3;
+        }
+        .dish-icon-large { font-size: 4rem; margin-bottom: 15px; text-align: center; }
+        .dish-name { color: white; font-size: 2.5rem; margin-bottom: 10px; 
+                    font-weight: 800; text-align: center; text-shadow: 1px 1px 3px rgba(0,0,0,0.3); }
+        .dish-meta { color: rgba(255,255,255,0.9); font-size: 1.1rem; 
+                    font-family: 'Courier New', monospace; margin-bottom: 20px; text-align: center; }
+        .info-block { background: white; border-radius: 12px; padding: 25px;
+                     margin-bottom: 25px; box-shadow: 0 3px 10px rgba(0,0,0,0.06); }
+        .info-title { color: #2c3e50; font-size: 1.5rem; margin-bottom: 20px;
+                     padding-bottom: 10px; border-bottom: 2px solid #f0f5ff;
+                     display: flex; align-items: center; gap: 10px; }
+        .info-title::before { content: "›"; color: #8B4513; 
+                            font-weight: bold; font-size: 1.8rem; }
+        .ingredients-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; }
+        .ingredient-item { background: #f8f9fa; padding: 15px; border-radius: 8px;
+                          border-left: 4px solid #8B4513; transition: all 0.2s; cursor: pointer; }
+        .ingredient-item:hover { transform: translateY(-3px); background: #fdf5e6; }
+        .ingredient-name { font-weight: 700; color: #2c3e50; margin-bottom: 5px; font-size: 1.1rem; }
+        .ingredient-desc { color: #666; font-size: 0.95rem; }
+        .joke-box { background: #f5f5dc; border-left: 4px solid #d2b48c;
+                   padding: 20px; border-radius: 8px; margin: 20px 0; }
+        .joke-title { color: #8b4513; font-weight: 700; margin-bottom: 10px;
+                     display: flex; align-items: center; gap: 10px; }
+        .tech-box { background: #faebd7; border-left: 4px solid #a0522d;
+                   padding: 20px; border-radius: 8px; font-family: 'Courier New', monospace;
+                   font-size: 1rem; line-height: 1.8; }
+        .tech-line { margin-bottom: 8px; display: flex; align-items: baseline; }
+        .tech-key { color: #8b4513; font-weight: bold; min-width: 150px; }
+        .hunter-badge { background: #8b4513; color: white; padding: 5px 15px;
+                       border-radius: 20px; font-size: 0.9rem; margin-left: 10px; }
+        @media (max-width: 768px) {
+            body { padding: 15px; } .dish-header { padding: 20px; }
+            .dish-name { font-size: 2rem; } .dish-icon-large { font-size: 3.5rem; }
+            .info-block { padding: 20px; } .ingredients-grid { grid-template-columns: 1fr; }
+            .tech-key { min-width: 130px; }
+        }
+        @media (max-width: 480px) {
+            .dish-name { font-size: 1.8rem; } .info-title { font-size: 1.3rem; }
+            .back-btn { width: 100%; justify-content: center; }
+        }
+
+        /* Новые стили */
+        .legacy-badge {
+            background: #d97706;
+            color: white;
+            font-size: 0.8rem;
+            padding: 4px 10px;
+            border-radius: 30px;
+            display: inline-block;
+            margin-left: 10px;
+            font-weight: 400;
+        }
+        .compile-console {
+            background: #2d1e12;
+            color: #fbbf93;
+            padding: 15px;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            margin: 15px 0;
+            border-left: 5px solid #b85e00;
+            white-space: pre-wrap;
+        }
+        .counter-box {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: white;
+            border: 2px dashed #8B4513;
+            padding: 15px 20px;
+            border-radius: 40px;
+            margin: 20px 0;
+        }
+        .counter-value {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #8B4513;
+            font-family: 'Courier New', monospace;
+        }
+        .counter-btn {
+            background: #8B4513;
+            color: white;
+            border: none;
+            padding: 10px 25px;
+            border-radius: 30px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        .counter-btn:hover { background: #5e2e1c; }
+        .fact-box {
+            background: #fdf5e6;
+            border-left: 6px solid #b85e00;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        .fact-box:active { transform: scale(0.98); }
+        .tap-hint {
+            background: #8B4513;
+            color: white;
+            padding: 8px 18px;
+            border-radius: 30px;
+            display: inline-block;
+            margin-top: 15px;
+            font-size: 0.9rem;
+        }
+        .smoke-layer {
+            background: #d2b48c;
+            height: 4px;
+            width: 100%;
+            margin: 25px 0 10px;
+            border-radius: 2px;
+            opacity: 0.6;
+        }
+        .tooltip-hunter {
+            background: #faebd7;
+            padding: 12px;
+            border-radius: 8px;
+            font-style: italic;
+            border: 1px dashed #8B4513;
+            margin-top: 15px;
+        }
+    </style>
+</head>
+<body>
+    <a href="index.html" class="back-btn">← НАЗАД К МЕНЮ</a>
+
+    <!-- ШАПКА -->
+    <div class="dish-header">
+        <span class="dish-icon-large">🏹</span>
+        <h1 class="dish-name">
+            Охотничий салат 
+            <span class="hunter-badge">LEGACY EDITION</span>
+        </h1>
+        <div class="dish-meta">
+            ID: SALAD_HUNTER_001 | Версия: 1.2.3 | Статус: 🪵 ПРОВЕРЕН ВРЕМЕНЕМ
+        </div>
+    </div>
+
+    <!-- ===== ТОЧНЫЙ СОСТАВ (исправленный) ===== -->
+    <div class="info-block">
+        <h2 class="info-title">📦 ТРОФЕИ (ингредиенты)</h2>
+        <div class="ingredients-grid">
+            <div class="ingredient-item" data-ing="sausage">
+                <div class="ingredient-name">🌭 Охотничьи колбаски</div>
+                <div class="ingredient-desc">Ядро системы — копчёное, жирное, надёжное</div>
+            </div>
+            <div class="ingredient-item" data-ing="potato">
+                <div class="ingredient-name">🥔 Картофель</div>
+                <div class="ingredient-desc">База — тяжёлый слой, держит форму</div>
+            </div>
+            <div class="ingredient-item" data-ing="gherkins">
+                <div class="ingredient-name">🥒 Корнишоны</div>
+                <div class="ingredient-desc">Логирование ошибок — кислые, но нужны</div>
+            </div>
+            <div class="ingredient-item" data-ing="onion">
+                <div class="ingredient-name">🧅 Лук репчатый</div>
+                <div class="ingredient-desc">Резкий код-ревью — без него пресно</div>
+            </div>
+            <div class="ingredient-item" data-ing="garlic">
+                <div class="ingredient-name">🧄 Чеснок</div>
+                <div class="ingredient-desc">Антивирус — отпугивает лишних</div>
+            </div>
+            <div class="ingredient-item" data-ing="dressing">
+                <div class="ingredient-name">⚙️ Заправочный движок</div>
+                <div class="ingredient-desc">Масло + уксус + горчица — API вкуса</div>
+            </div>
+        </div>
+        <div class="compile-console" id="buildLog">
+            > Разведка: сбор ингредиентов...
+            > Ожидание добычи
+        </div>
+        <span class="legacy-badge">🐍 legacy-код, но работает 20 лет</span>
+    </div>
+
+	<!-- ===== СЧЁТЧИК ПОРЦИЙ (охотничья добыча) ===== -->
+    <div class="counter-box">
+        <div>
+            <span style="font-weight: bold; font-size: 1.2rem;">🏆 Добыто порций:</span>
+            <span class="counter-value" id="hunterCounter">0</span>
+        </div>
+        <button class="counter-btn" id="hunterEatBtn">➕ ЕЩЁ ТРОФЕЙ</button>
+    </div>
+	
+    <!-- ===== ТАБЛИЦА СОВМЕСТИМОСТИ (unique) ===== -->
+    <div class="info-block">
+        <h2 class="info-title">🧪 МАТРИЦА СОВМЕСТИМОСТИ</h2>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+            <div style="background: #faebd7; padding: 12px; border-radius: 8px; border-left: 5px solid #8B4513;">
+                <strong>🍺 Пиво тёмное</strong><br>
+                <small>совместимость 100%</small>
+            </div>
+            <div style="background: #faebd7; padding: 12px; border-radius: 8px; border-left: 5px solid #8B4513;">
+                <strong>🍞 Бородинский хлеб</strong><br>
+                <small>классический интерфейс</small>
+            </div>
+            <div style="background: #faebd7; padding: 12px; border-radius: 8px; border-left: 5px solid #8B4513;">
+                <strong>🥔 Картофель горячий</strong><br>
+                <small>бэкенд-интеграция</small>
+            </div>
+            <div style="background: #faebd7; padding: 12px; border-radius: 8px; border-left: 5px solid #8B4513;">
+                <strong>🥒 Солёный огурец</strong><br>
+                <small>рекурсия — огурцы внутри</small>
+            </div>
+        </div>
+        <div class="tooltip-hunter">
+            🏹 Осторожно: салат вызывает привыкание и ностальгию по 90-м.
+        </div>
+    </div>
+
+    <!-- ===== ОХОТНИЧЬИ БАЙКИ (факты с переключением) ===== 
+    <div class="fact-box" id="hunterFact">
+        <div class="joke-title">
+            <span>🏹</span>
+            <span id="factTitle">БАЙКА #1</span>
+        </div>
+        <p id="factContent">Охотничий салат — единственное блюдо, которое не тухнет в холодильнике 3 дня. Фича, а не баг.</p>
+        <div class="tap-hint" id="tapHint">🏹 НАЖМИ ДЛЯ СЛЕДУЮЩЕЙ БАЙКИ</div>
+    </div>-->
+
+    
+
+    <!-- ===== АРХИТЕКТУРА В СТИЛЕ «ОХОТА» ===== 
+    <div class="info-block">
+        <h2 class="info-title">🗺️ КАРТА ОХОТЫ (схема сборки)</h2>
+        <div style="display: flex; flex-direction: column; gap: 12px;">
+            <div style="display: flex; gap: 12px; align-items: center; background: #fdf5e6; padding: 12px; border-radius: 8px;">
+                <span style="background: #8B4513; width: 16px; height: 16px; border-radius: 50%;"></span>
+                <span><strong>1. Добыть колбаски</strong> — основной трофей</span>
+            </div>
+            <div style="display: flex; gap: 12px; align-items: center; background: #fdf5e6; padding: 12px; border-radius: 8px;">
+                <span style="background: #b85e00; width: 16px; height: 16px; border-radius: 50%;"></span>
+                <span><strong>2. Выкопать картофель</strong> — отварить, нарезать</span>
+            </div>
+            <div style="display: flex; gap: 12px; align-items: center; background: #fdf5e6; padding: 12px; border-radius: 8px;">
+                <span style="background: #d97706; width: 16px; height: 16px; border-radius: 50%;"></span>
+                <span><strong>3. Призвать корнишоны</strong> — добавить кислоты</span>
+            </div>
+            <div style="display: flex; gap: 12px; align-items: center; background: #fdf5e6; padding: 12px; border-radius: 8px;">
+                <span style="background: #f59e0b; width: 16px; height: 16px; border-radius: 50%;"></span>
+                <span><strong>4. Заклинание заправки</strong> — масло, уксус, горчица, соль, перец</span>
+            </div>
+            <div style="display: flex; gap: 12px; align-items: center; background: #8B4513; color: white; padding: 12px; border-radius: 8px;">
+                <span><strong>5. Смешать и ждать</strong> — 30 минут в тёмном месте</span>
+            </div>
+        </div>
+    </div>-->
+
+    <!-- ===== ИСТОРИЯ ЛЕГАСИ (unique раздел) ===== -->
+    <div class="joke-box">
+        <h3 class="joke-title">📜 ИСТОРИЧЕСКАЯ СПРАВКА</h3>
+        <p>• Первая версия охотничьего салата была написана на салфетке в 1998 году.</p>
+        <p>• С тех пор код не рефакторили, но он всё ещё работает (принцип «не трогай — не ломай»).</p>
+        <p>• В 2010 году кто-то попытался заменить майонез на йогурт — салат упал с ошибкой "безвкусно".</p>
+        <p>• Текущая версия содержит 7 зависимостей, все устаревшие, но стабильные.</p>
+        <div class="smoke-layer"></div>
+        <p style="margin-top: 10px;"><strong>🏹 legacy-режим:</strong> одобрено дедушками и системными администраторами.</p>
+    </div>
+
+    <!-- ===== ИЗВЕСТНЫЕ ПРОБЛЕМЫ ===== -->
+    <div class="info-block">
+        <h2 class="info-title">🐞 LOG: ИЗВЕСТНЫЕ ПРОБЛЕМЫ</h2>
+        <div style="font-family: 'Courier New', monospace;">
+            <div style="display: flex; gap: 10px; padding: 8px 0;">
+                <span style="color: #b85e00;">[WARN]</span> 
+                <span>Лук перебивает вкус чеснока — конфликт приоритетов</span>
+            </div>
+            <div style="display: flex; gap: 10px; padding: 8px 0;">
+                <span style="color: #b85e00;">[WARN]</span> 
+                <span>Картофель разваливается, если переварить — fragile legacy</span>
+            </div>
+            <div style="display: flex; gap: 10px; padding: 8px 0;">
+                <span style="color: #2e7d32;">[FIXED]</span> 
+                <span>v1.2.3 — исправлена утечка рассола из корнишонов</span>
+            </div>
+            <div style="display: flex; gap: 10px; padding: 8px 0;">
+                <span style="color: #b85e00;">[BUG]</span> 
+                <span>Невозможно съесть одну порцию — масштабирование не отключается</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Кнопка назад -->
+    <div style="margin-top: 40px; text-align: center;">
+        <a href="index.html" class="back-btn" style="background: linear-gradient(135deg, #8B4513 0%, #A0522D 100%);">← ВЕРНУТЬСЯ К СПИСКУ БЛЮД</a>
+    </div>
+
+    <script>
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        document.querySelectorAll('.back-btn').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                e.preventDefault();
+                document.body.style.opacity = '0.9';
+                setTimeout(() => { window.location.href = this.getAttribute('href'); }, 150);
+            });
+        });
+
+        // ===== ИНТЕРАКТИВНЫЕ ИНГРЕДИЕНТЫ =====
+        const buildLog = document.getElementById('buildLog');
+        const ingredientMsgs = {
+            sausage: '🌭 Охотничьи колбаски: нарезаны, ядро запущено.',
+            potato: '🥔 Картофель: отварен, база готова.',
+            gherkins: '🥒 Корнишоны: нарезаны, логирование активно.',
+            onion: '🧅 Лук: измельчён, код-ревью добавлен.',
+            garlic: '🧄 Чеснок: антивирус активирован.',
+            dressing: '⚙️ Заправка: смешана, API готов.'
+        };
+
+        document.querySelectorAll('.ingredient-item').forEach(item => {
+            item.addEventListener('click', function() {
+                const ing = this.dataset.ing;
+                if (ing && ingredientMsgs[ing]) {
+                    buildLog.innerHTML = `> ${ingredientMsgs[ing]}\n> Статус: трофей добавлен ✓`;
+                }
+                this.style.backgroundColor = '#f5e6d3';
+                setTimeout(() => this.style.backgroundColor = '', 200);
+            });
+        });
+
+        // ===== СЧЁТЧИК ПОРЦИЙ =====
+        let hunterPortions = 0;
+        const hunterCounter = document.getElementById('hunterCounter');
+        const hunterEatBtn = document.getElementById('hunterEatBtn');
+
+        hunterEatBtn.addEventListener('click', function() {
+            hunterPortions++;
+            hunterCounter.textContent = hunterPortions;
+
+            if (hunterPortions === 1) {
+                buildLog.innerHTML = '> 🏹 Первый трофей! Охота удалась.';
+            } else if (hunterPortions === 3) {
+                buildLog.innerHTML = '> 🍖 Три порции — ты настоящий охотник!';
+            } else if (hunterPortions === 5) {
+                buildLog.innerHTML = '> ⚠️ Добыча лимитирована? Нет, не слышали.';
+            } else if (hunterPortions === 7) {
+                buildLog.innerHTML = '> 🔥 Ты побил рекорд отдела! Легенда.';
+            } else {
+                buildLog.innerHTML = `> 🏹 Порция #${hunterPortions} уничтожена. Уровень сытости: ${hunterPortions * 8}%`;
+            }
+        });
+
+        // ===== БАЙКИ (ФАКТЫ) ПЕРЕКЛЮЧЕНИЕ =====
+        const hunterFacts = [
+            'Охотничий салат — единственное блюдо, которое не тухнет в холодильнике 3 дня. Фича, а не баг.',
+            'В 90-х охотничий салат считался «серверным» блюдом — потому что готовили раз в неделю и все подключались.',
+            'Корнишоны в этом салате — как unit-тесты: мелкие, кислые, но без них всё разваливается.',
+            'Изначально в рецепте была сайра, но колбаски победили по производительности.',
+            'Заправка из масла, уксуса и горчицы — протокол HTTP: универсальный, все понимают.',
+            'Картофель в охотничьем салате — это хардкод: убрать нельзя, оставить надо.',
+            'Охотничий салат не прощает веганство. Пойман — съеден.'
+        ];
+
+        let factIndex = 0;
+        const factBox = document.getElementById('hunterFact');
+        const factTitle = document.getElementById('factTitle');
+        const factContent = document.getElementById('factContent');
+        const tapHint = document.getElementById('tapHint');
+
+        function showNextFact() {
+            factIndex = (factIndex + 1) % hunterFacts.length;
+            factTitle.textContent = `БАЙКА #${factIndex + 1}`;
+            factContent.textContent = hunterFacts[factIndex];
+            factBox.style.transform = 'scale(0.98)';
+            setTimeout(() => factBox.style.transform = 'scale(1)', 150);
+        }
+
+        factBox.addEventListener('click', showNextFact);
+        tapHint.addEventListener('click', showNextFact);
+        tapHint.textContent = '🏹 НАЖМИ ДЛЯ СЛЕДУЮЩЕЙ БАЙКИ';
+    </script>
+</body>
+</html>
