@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎪 Вафельные трубочки | IT-Меню</title>
+    <style>
+        /* ===== ВСЕ СТАРЫЕ СТИЛИ ОСТАЮТСЯ ===== */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            background: #f8f9fa; color: #333;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6; padding: 20px; max-width: 800px; margin: 0 auto;
+            min-height: 100vh; display: flex; flex-direction: column;
+        }
+        .back-btn {
+            display: inline-flex; align-items: center; gap: 8px;
+            background: #6c757d; color: white; text-decoration: none;
+            padding: 12px 24px; border-radius: 8px; font-weight: 600;
+            margin-bottom: 30px; transition: background 0.3s; width: fit-content;
+        }
+        .back-btn:hover { background: #5a6268; }
+        .dish-header {
+            background: linear-gradient(135deg, #8E2DE2 0%, #4A00E0 100%);
+            color: white; border-radius: 15px; padding: 30px;
+            margin-bottom: 30px; box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        .dish-icon-large { font-size: 4rem; margin-bottom: 15px; text-align: center; }
+        .dish-name { color: white; font-size: 2.5rem; margin-bottom: 10px; 
+                    font-weight: 800; text-align: center; }
+        .dish-meta { color: rgba(255,255,255,0.9); font-size: 1.1rem; 
+                    font-family: 'Courier New', monospace; margin-bottom: 20px; text-align: center; }
+        .info-block { background: white; border-radius: 12px; padding: 25px;
+                     margin-bottom: 25px; box-shadow: 0 3px 10px rgba(0,0,0,0.06); }
+        .info-title { color: #2c3e50; font-size: 1.5rem; margin-bottom: 20px;
+                     padding-bottom: 10px; border-bottom: 2px solid #f0f5ff;
+                     display: flex; align-items: center; gap: 10px; }
+        .info-title::before { content: "›"; color: #8E2DE2; 
+                            font-weight: bold; font-size: 1.8rem; }
+        .ingredients-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; }
+        .ingredient-item { background: #f8f9fa; padding: 15px; border-radius: 8px;
+                          border-left: 4px solid #8E2DE2; transition: transform 0.2s; cursor: pointer; }
+        .ingredient-item:hover { transform: translateY(-3px); background: #f3e5f5; }
+        .ingredient-name { font-weight: 700; color: #2c3e50; margin-bottom: 5px; font-size: 1.1rem; }
+        .ingredient-desc { color: #666; font-size: 0.95rem; }
+        .joke-box { background: #f3e5f5; border-left: 4px solid #8E2DE2;
+                   padding: 20px; border-radius: 8px; margin: 20px 0; }
+        .joke-title { color: #7b1fa2; font-weight: 700; margin-bottom: 10px;
+                     display: flex; align-items: center; gap: 10px; }
+        .tech-box { background: #f5f0ff; border-left: 4px solid #4A00E0;
+                   padding: 20px; border-radius: 8px; font-family: 'Courier New', monospace;
+                   font-size: 1rem; line-height: 1.8; }
+        .tech-line { margin-bottom: 8px; }
+        .tech-key { color: #4527a0; font-weight: bold; }
+        .fillings-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); 
+                        gap: 15px; margin-top: 20px; }
+        .filling { background: #e8eaf6; padding: 15px; border-radius: 8px; text-align: center; }
+        .filling h4 { color: #5c6bc0; margin-bottom: 10px; }
+
+        /* ===== НОВЫЕ СТИЛИ ДЛЯ ТРУБОЧЕК ===== */
+        .tube-visual {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            margin: 20px 0;
+        }
+        .tube {
+            width: 200px;
+            height: 60px;
+            background: linear-gradient(to right, #ffe0b2, #ffcc80, #ffe0b2);
+            border-radius: 30px 30px 30px 30px;
+            position: relative;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            border: 2px solid #b85e00;
+        }
+        .tube::after {
+            content: '';
+            position: absolute;
+            top: 10px;
+            left: 15px;
+            width: 170px;
+            height: 40px;
+            background: rgba(255,255,240,0.6);
+            border-radius: 20px;
+        }
+        .tube-filled {
+            background: linear-gradient(to right, #ffe0b2, #ffb74d, #ffe0b2);
+        }
+        .tube-filled::after {
+            background: rgba(245, 195, 125, 0.9);
+        }
+        .tube-filling-label {
+            position: absolute;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: #4e2e1e;
+            font-weight: bold;
+            z-index: 2;
+        }
+        .roll-btn {
+            background: #8E2DE2;
+            color: white;
+            border: none;
+            padding: 10px 25px;
+            border-radius: 40px;
+            font-weight: bold;
+            margin-top: 15px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        .roll-btn:hover {
+            background: #5e12a0;
+        }
+        .log-console {
+            background: #1e1e2f;
+            color: #bb9aff;
+            padding: 15px;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            margin: 20px 0;
+            border-left: 5px solid #aa80ff;
+        }
+        .meter {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-top: 15px;
+            background: #ede7f6;
+            padding: 15px;
+            border-radius: 12px;
+        }
+        .progress-bar {
+            flex-grow: 1;
+            height: 20px;
+            background: #d1c4e9;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        .progress-fill {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, #8E2DE2, #4A00E0);
+            transition: width 0.3s;
+        }
+        .crispness-value {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #4A00E0;
+            font-family: 'Courier New', monospace;
+        }
+        .fact-box {
+            background: #f3e5f5;
+            border-left: 6px solid #8E2DE2;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        .fact-box:active {
+            transform: scale(0.98);
+        }
+        .tap-hint {
+            background: #8E2DE2;
+            color: white;
+            padding: 8px 18px;
+            border-radius: 30px;
+            display: inline-block;
+            margin-top: 15px;
+            font-size: 0.9rem;
+        }
+        .counter {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: white;
+            border: 2px dashed #8E2DE2;
+            padding: 15px 20px;
+            border-radius: 40px;
+            margin-top: 20px;
+        }
+        .counter-value {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #8E2DE2;
+            font-family: 'Courier New', monospace;
+        }
+        .counter-btn {
+            background: #8E2DE2;
+            color: white;
+            border: none;
+            padding: 10px 25px;
+            border-radius: 30px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        .counter-btn:hover {
+            background: #5e12a0;
+        }
+        @media (max-width: 768px) {
+            body { padding: 15px; } .dish-header { padding: 20px; }
+            .dish-name { font-size: 2rem; } .dish-icon-large { font-size: 3.5rem; }
+            .info-block { padding: 20px; } .ingredients-grid { grid-template-columns: 1fr; }
+            .tube { width: 160px; height: 50px; }
+            .tube::after { width: 130px; height: 30px; left: 15px; }
+        }
+    </style>
+</head>
+<body>
+    <a href="index.html" class="back-btn">← НАЗАД К МЕНЮ</a>
+
+    <!-- Шапка блюда -->
+    <div class="dish-header">
+        <span class="dish-icon-large">🎪</span>
+        <h1 class="dish-name">Вафельные трубочки</h1>
+        <div class="dish-meta">ID: DESSERT_WAFTUBE_001 | Версия: 3.2.1 | Статус: 🍬 СЛАДКИЕ</div>
+    </div>
+
+    <!-- ===== ТОЧНЫЙ СОСТАВ (исправлен) ===== -->
+    <div class="info-block">
+        <h2 class="info-title">📦 СПЕЦИФИКАЦИЯ (базовые компоненты)</h2>
+        <div class="ingredients-grid">
+            <div class="ingredient-item" data-ing="eggs">
+                <div class="ingredient-name">🥚 Яйца куриные</div>
+                <div class="ingredient-desc">Биндер — связывает всё воедино, как ORM</div>
+            </div>
+            <div class="ingredient-item" data-ing="sugar">
+                <div class="ingredient-name">🍬 Сахарный песок</div>
+                <div class="ingredient-desc">Карамелизация — придаёт хруст, как компиляция</div>
+            </div>
+            <div class="ingredient-item" data-ing="butter">
+                <div class="ingredient-name">🧈 Сливочное масло</div>
+                <div class="ingredient-desc">Жировая прослойка — защита от прилипания (анти‑баг)</div>
+            </div>
+            <div class="ingredient-item" data-ing="flour">
+                <div class="ingredient-name">🌾 Мука</div>
+                <div class="ingredient-desc">Каркас трубочки — структурный каркас приложения</div>
+            </div>
+        </div>
+        <!-- Лог сборки -->
+        <div class="log-console" id="buildLog">
+            > Инициализация вафельницы...
+            > Ожидание загрузки ингредиентов
+        </div>
+    </div>
+
+    <!-- ===== ИНТЕРАКТИВНЫЙ СИМУЛЯТОР СКРУЧИВАНИЯ ===== -->
+    <div class="info-block">
+        <h2 class="info-title">🌀 СИМУЛЯТОР РОЛЛИНГА</h2>
+        <div class="tube-visual">
+            <div id="tube" class="tube"></div>
+            <button id="rollBtn" class="roll-btn">🎪 СКРУТИТЬ ТРУБОЧКУ</button>
+        </div>
+        <div class="meter">
+            <span style="font-weight: bold;">Хрусткость:</span>
+            <div class="progress-bar">
+                <div id="crispnessBar" class="progress-fill" style="width: 0%;"></div>
+            </div>
+            <span id="crispnessValue" class="crispness-value">0%</span>
+        </div>
+        <p style="margin-top: 15px; color: #5e35b1; font-style: italic;">
+            ⚡ Чем дольше печёшь — тем выше хрусткость, но выше риск перекомпиляции (подгорит).
+        </p>
+    </div>
+
+    <!-- ===== ФАКТЫ О ВАФЕЛЬНЫХ ТРУБОЧКАХ (переключение) ===== -->
+    <div class="fact-box" id="waffleFact">
+        <div class="joke-title">
+            <span>🎪</span>
+            <span id="factTitle">ФАКТ О ТРУБОЧКАХ #1</span>
+        </div>
+        <p id="factContent">В СССР вафельные трубочки были популярным десертом, но начинка часто была дефицитом (ресурс не найден).</p>
+        <div class="tap-hint" id="tapHint">🎪 НАЖМИ ДЛЯ НОВОГО ФАКТА</div>
+    </div>
+
+    <!-- ===== АРХИТЕКТУРА ТРУБОЧКИ (схема) ===== 
+    <div class="info-block">
+        <h2 class="info-title">🏗️ АРХИТЕКТУРА ТРУБОЧКИ</h2>
+        <div style="display: flex; flex-direction: column; gap: 12px;">
+            <div style="display: flex; gap: 10px; align-items: center;">
+                <span style="background: #8E2DE2; width: 20px; height: 20px; border-radius: 4px;"></span>
+                <span><strong>Frontend (хруст)</strong> — внешний слой, обжаренный до золотистости</span>
+            </div>
+            <div style="display: flex; gap: 10px; align-items: center;">
+                <span style="background: #ffb74d; width: 20px; height: 20px; border-radius: 4px;"></span>
+                <span><strong>Backend (начинка)</strong> — любая БД: заварной крем, шоколад, варёнка</span>
+            </div>
+            <div style="display: flex; gap: 10px; align-items: center;">
+                <span style="background: #ab47bc; width: 20px; height: 20px; border-radius: 4px;"></span>
+                <span><strong>API (открытый конец)</strong> — интерфейс для доступа к контенту</span>
+            </div>
+        </div>
+        <p style="margin-top: 20px; background: #ede7f6; padding: 12px; border-radius: 6px;">
+            📐 <strong>Паттерн "Труба (Pipe)"</strong> — данные текут из начала в конец, 
+            промежуточная обработка опциональна (откусить кусочек).
+        </p>
+    </div>-->
+
+    <!-- ===== CI/CD ПАЙПЛАЙН ИЗГОТОВЛЕНИЯ ===== -->
+    <div class="joke-box">
+        <h3 class="joke-title">🔄 CI/CD ПАЙПЛАЙН</h3>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 12px;">
+            <div style="background: #e1bee7; padding: 12px; border-radius: 8px;">
+                <strong>📦 Build</strong><br>Смешать яйца, сахар, масло, муку → тесто
+            </div>
+            <div style="background: #ce93d8; padding: 12px; border-radius: 8px;">
+                <strong>🧪 Test</strong><br>Вылить порцию на вафельницу, проверить температуру
+            </div>
+            <div style="background: #ba68c8; padding: 12px; border-radius: 8px;">
+                <strong>🚀 Deploy</strong><br>Скрутить горячую вафлю → трубочка
+            </div>
+            <div style="background: #ab47bc; padding: 12px; border-radius: 8px; color: white;">
+                <strong>🎯 Release</strong><br>Наполнить кремом, подать к столу
+            </div>
+        </div>
+        <p style="margin-top: 20px; font-weight: bold; color: #4a148c;">
+            ⚠️ Важно: скручивать нужно горячей, иначе будет хрупкий legacy-код, который крошится.
+        </p>
+    </div>
+
+    <!-- ===== НАГРУЗОЧНОЕ ТЕСТИРОВАНИЕ ===== 
+    <div class="info-block">
+        <h2 class="info-title">📊 МЕТРИКИ И НАГРУЗКА</h2>
+        <div class="tech-box">
+            <div class="tech-line"><span class="tech-key">Пропускная способность:</span> 3 трубочки в минуту (одной вафельницей)</div>
+            <div class="tech-line"><span class="tech-key">Время отклика (откусывание):</span> 0.3 сек – 1.2 сек</div>
+            <div class="tech-line"><span class="tech-key">Уровень хруста:</span> 78 дБ (на пике)</div>
+            <div class="tech-line"><span class="tech-key">Совместимость с напитками:</span> кофе, чай, какао, молоко (LTS)</div>
+            <div class="tech-line"><span class="tech-key">Кэширование:</span> можно хранить в контейнере до 3 дней</div>
+        </div>
+    </div>-->
+
+    <!-- ===== СЧЁТЧИК СЪЕДЕННЫХ ТРУБОЧЕК ===== -->
+    <div class="counter">
+        <div>
+            <span style="font-weight: bold; font-size: 1.2rem;">🎪 Трубочек съедено:</span>
+            <span class="counter-value" id="tubeCounter">0</span>
+        </div>
+        <button class="counter-btn" id="eatTubeBtn">➕ СЪЕСТЬ ЕЩЁ</button>
+    </div>
+
+    <!-- ===== ИЗВЕСТНЫЕ БАГИ И ФИЧИ ===== 
+    <div class="joke-box">
+        <h3 class="joke-title">🐞 ИЗВЕСТНЫЕ ПРОБЛЕМЫ</h3>
+        <p>• <strong>Баг #404:</strong> Начинка вытекает, если откусить слишком много (overfetching)</p>
+        <p>• <strong>Баг #503:</strong> Трубочка размокает в горячем молоке — не тестировали под нагрузкой</p>
+        <p>• <strong>Фича:</strong> Хруст улучшает восприятие сладости (аудио-фидбек)</p>
+        <p>• <strong>Релиз-ноут:</strong> В версии 3.2.1 добавлена поддержка вафельницы (bare-metal)</p>
+    </div>-->
+
+    <!-- Кнопка назад -->
+    <div style="margin-top: 40px; text-align: center;">
+        <a href="index.html" class="back-btn" style="background: linear-gradient(135deg, #8E2DE2 0%, #4A00E0 100%);">← ВЕРНУТЬСЯ К СПИСКУ БЛЮД</a>
+    </div>
+
+    <script>
+        // ========== ПЛАВНЫЙ ПЕРЕХОД ==========
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        document.querySelectorAll('.back-btn').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                e.preventDefault();
+                document.body.style.opacity = '0.9';
+                setTimeout(() => { window.location.href = this.getAttribute('href'); }, 150);
+            });
+        });
+
+        // ========== ИНТЕРАКТИВНЫЕ ИНГРЕДИЕНТЫ (ЛОГ СБОРКИ) ==========
+        const buildLog = document.getElementById('buildLog');
+        const ingredientMsgs = {
+            eggs: '🥚 Яйца: взбиты, ORM-связи установлены.',
+            sugar: '🍬 Сахар: растворён, сладкий алгоритм активирован.',
+            butter: '🧈 Масло: растоплено, антипригарный слой нанесён.',
+            flour: '🌾 Мука: просеяна, каркас приложения готов.'
+        };
+
+        document.querySelectorAll('.ingredient-item').forEach(item => {
+            item.addEventListener('click', function() {
+                const ing = this.dataset.ing;
+                if (ing && ingredientMsgs[ing]) {
+                    buildLog.innerHTML = `> ${ingredientMsgs[ing]}\n> Статус: компонент добавлен ✓`;
+                }
+                this.style.backgroundColor = '#e1bee7';
+                setTimeout(() => this.style.backgroundColor = '', 200);
+            });
+        });
+
+        // ========== СИМУЛЯТОР СКРУЧИВАНИЯ ==========
+        let crispness = 0;
+        const tube = document.getElementById('tube');
+        const rollBtn = document.getElementById('rollBtn');
+        const crispnessBar = document.getElementById('crispnessBar');
+        const crispnessValue = document.getElementById('crispnessValue');
+
+        rollBtn.addEventListener('click', function() {
+            crispness += 14; // каждый клик +14%
+            if (crispness > 100) crispness = 100;
+            crispnessBar.style.width = crispness + '%';
+            crispnessValue.textContent = crispness + '%';
+            
+            if (crispness < 30) {
+                tube.style.background = 'linear-gradient(to right, #ffe0b2, #ffcc80, #ffe0b2)';
+                buildLog.innerHTML = '> 🥚 Тесто сыровато, нужно ещё подержать в вафельнице.';
+            } else if (crispness < 70) {
+                tube.style.background = 'linear-gradient(to right, #ffe0b2, #ffb74d, #ffe0b2)';
+                buildLog.innerHTML = '> 🔥 Хрусткость нарастает! Трубочка почти готова.';
+            } else if (crispness < 95) {
+                tube.style.background = 'linear-gradient(to right, #ffb74d, #ff9800, #ffb74d)';
+                buildLog.innerHTML = '> ✅ Отличная хрусткость! Можно скручивать.';
+            } else {
+                tube.style.background = 'linear-gradient(to right, #bf360c, #b85e00, #bf360c)';
+                buildLog.innerHTML = '> ⚠️ ВНИМАНИЕ! Трубочка подгорает! Срочно вынимай!';
+            }
+
+            if (crispness === 100) {
+                buildLog.innerHTML += '\n> 🎪 Трубочка готова к деплою! Начиняй кремом.';
+            }
+        });
+
+        // ========== ФАКТЫ О ТРУБОЧКАХ (переключение) ==========
+        const waffleFacts = [
+			'В СССР вафельные трубочки были популярным десертом, но начинка часто была дефицитом (ресурс не найден).',
+            'Скручивать трубочку нужно сразу после выпечки — как hotfix на прод.',
+            'Если трубочка поломалась — это не баг, а фича "ручной сборки".',
+            'Вафельные трубочки — единственный десерт, у которого есть метод .roll().'
+        ];
+
+        let factIndex = 0;
+        const factBox = document.getElementById('waffleFact');
+        const factTitle = document.getElementById('factTitle');
+        const factContent = document.getElementById('factContent');
+        const tapHint = document.getElementById('tapHint');
+
+        function showNextFact() {
+            factIndex = (factIndex + 0.5) % waffleFacts.length;
+            factTitle.textContent = `ФАКТ О ТРУБОЧКАХ #${factIndex + 1}`;
+            factContent.textContent = waffleFacts[factIndex];
+            factBox.style.transform = 'scale(0.98)';
+            setTimeout(() => factBox.style.transform = 'scale(1)', 150);
+        }
+
+        factBox.addEventListener('click', showNextFact);
+        tapHint.addEventListener('click', showNextFact);
+
+        // ========== СЧЁТЧИК СЪЕДЕННЫХ ТРУБОЧЕК ==========
+        let tubeCounter = 0;
+        const tubeCounterEl = document.getElementById('tubeCounter');
+        const eatTubeBtn = document.getElementById('eatTubeBtn');
+
+        eatTubeBtn.addEventListener('click', function() {
+            tubeCounter++;
+            tubeCounterEl.textContent = tubeCounter;
+
+            if (tubeCounter === 3) {
+                buildLog.innerHTML = '> 🎉 Уже 3 трубочки! Продуктивность повышена на 20%.';
+            } else if (tubeCounter === 5) {
+                buildLog.innerHTML = '> ⚠️ Вы съели 5 трубочек. Рекомендуется сделать паузу и выпить чаю.';
+            } else if (tubeCounter === 7) {
+                buildLog.innerHTML = '> 🔥 ЛИМИТ ПОЧТИ ДОСТИГНУТ. Осталась одна?';
+            } else if (tubeCounter === 8) {
+                buildLog.innerHTML = '> 🎪 Поздравляю! Вы — чемпион по поеданию трубочек!';
+            } else {
+                buildLog.innerHTML = `> 🍬 Трубочка #${tubeCounter} съедена. Уровень счастья: ${tubeCounter * 5}%`;
+            }
+        });
+
+        // ========== МОБИЛЬНАЯ ПОДСКАЗКА ==========
+        if ('ontouchstart' in window) {
+            tapHint.textContent = '🎪 ТАПНИ ДЛЯ НОВОГО ФАКТА';
+        }
+    </script>
+</body>
+</html>
