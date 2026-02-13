@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🍅 Капрезе | IT-Меню</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            background: #f8f9fa; color: #333;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6; padding: 20px; max-width: 800px; margin: 0 auto;
+            min-height: 100vh; display: flex; flex-direction: column;
+        }
+        .back-btn {
+            display: inline-flex; align-items: center; gap: 8px;
+            background: #6c757d; color: white; text-decoration: none;
+            padding: 12px 24px; border-radius: 8px; font-weight: 600;
+            margin-bottom: 30px; transition: background 0.3s; width: fit-content;
+        }
+        .back-btn:hover { background: #5a6268; }
+        .dish-header {
+            background: linear-gradient(135deg, #E74C3C 0%, #2ECC71 100%);
+            color: white; border-radius: 15px; padding: 30px;
+            margin-bottom: 30px; box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        .dish-icon-large { font-size: 4rem; margin-bottom: 15px; text-align: center; }
+        .dish-name { color: white; font-size: 2.5rem; margin-bottom: 10px; 
+                    font-weight: 800; text-align: center; }
+        .dish-meta { color: rgba(255,255,255,0.9); font-size: 1.1rem; 
+                    font-family: 'Courier New', monospace; margin-bottom: 20px; text-align: center; }
+        .info-block { background: white; border-radius: 12px; padding: 25px;
+                     margin-bottom: 25px; box-shadow: 0 3px 10px rgba(0,0,0,0.06); }
+        .info-title { color: #2c3e50; font-size: 1.5rem; margin-bottom: 20px;
+                     padding-bottom: 10px; border-bottom: 2px solid #f0f5ff;
+                     display: flex; align-items: center; gap: 10px; }
+        .info-title::before { content: "›"; color: #E74C3C; 
+                            font-weight: bold; font-size: 1.8rem; }
+        .joke-box { background: #FDEDEC; border-left: 4px solid #E74C3C;
+                   padding: 20px; border-radius: 8px; margin: 20px 0; }
+        .joke-title { color: #CB4335; font-weight: 700; margin-bottom: 10px;
+                     display: flex; align-items: center; gap: 10px; }
+
+        /* ===== УНИКАЛЬНЫЕ СТИЛИ ДЛЯ КАПРЕЗЕ ===== */
+        .italian-flag {
+            display: flex;
+            height: 30px;
+            border-radius: 15px;
+            overflow: hidden;
+            margin: 20px 0;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+        .flag-green { flex: 1; background: #2ECC71; }
+        .flag-white { flex: 1; background: white; }
+        .flag-red { flex: 1; background: #E74C3C; }
+
+        .pattern-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin: 25px 0;
+        }
+        .pattern-item {
+            text-align: center;
+            padding: 20px;
+            border-radius: 10px;
+            font-size: 2rem;
+        }
+        .pattern-1 { background: #FDEDEC; }
+        .pattern-2 { background: #FEF9E7; }
+        .pattern-3 { background: #E8F8F5; }
+
+        .premium-badge {
+            background: linear-gradient(135deg, #FFD700, #FFA500);
+            color: #333;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+            display: inline-block;
+            margin-left: 10px;
+            font-size: 0.9rem;
+            animation: shine 2s infinite;
+        }
+        @keyframes shine {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.8; }
+        }
+
+        /* НОВЫЕ БЛОКИ */
+        .recipe-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-top: 15px;
+        }
+        .recipe-col {
+            flex: 1 1 280px;
+            background: #FEF9F0;
+            padding: 20px;
+            border-radius: 16px;
+            border: 2px solid #FAD7A0;
+        }
+        .recipe-col h3 {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #BA4A00;
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+        }
+        .ingredient-list {
+            list-style: none;
+            padding: 0;
+        }
+        .ingredient-list li {
+            padding: 8px 0;
+            border-bottom: 1px dashed #FAD7A0;
+            display: flex;
+            align-items: baseline;
+            gap: 6px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .ingredient-list li:hover {
+            background: #FEF5E7;
+            padding-left: 5px;
+        }
+        .build-console {
+            background: #2d2d2d;
+            color: #ffe082;
+            padding: 15px;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            margin: 20px 0 0;
+            border-left: 5px solid #E67E22;
+            white-space: pre-wrap;
+        }
+
+        .counter-box {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: white;
+            border: 2px dashed #E74C3C;
+            padding: 15px 20px;
+            border-radius: 40px;
+            margin: 20px 0;
+        }
+        .counter-value {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #E74C3C;
+            font-family: 'Courier New', monospace;
+        }
+        .counter-btn {
+            background: #E74C3C;
+            color: white;
+            border: none;
+            padding: 10px 25px;
+            border-radius: 30px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        .counter-btn:hover { background: #CB4335; }
+
+        .fact-box {
+            background: #FDEDEC;
+            border-left: 6px solid #E74C3C;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        .fact-box:active { transform: scale(0.98); }
+        .tap-hint {
+            background: #E74C3C;
+            color: white;
+            padding: 8px 18px;
+            border-radius: 30px;
+            display: inline-block;
+            margin-top: 15px;
+            font-size: 0.9rem;
+        }
+
+        .metric-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+        .metric-card {
+            background: #FEF5F0;
+            padding: 20px;
+            border-radius: 16px;
+            border: 2px solid #F1948A;
+            text-align: center;
+        }
+        .metric-value {
+            font-size: 2.2rem;
+            font-weight: bold;
+            color: #E74C3C;
+            font-family: 'Courier New', monospace;
+        }
+        .metric-label {
+            color: #666;
+            margin-top: 8px;
+        }
+
+        .pairing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+        .pairing-item {
+            background: #FEF9F0;
+            padding: 15px;
+            border-radius: 16px;
+            text-align: center;
+            border: 2px solid #FAD7A0;
+        }
+        .pairing-item span { font-size: 2rem; display: block; margin-bottom: 8px; }
+
+        .signature {
+            display: inline-block;
+            background: #F39C12;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 30px;
+            font-size: 0.9rem;
+            margin-left: 10px;
+            vertical-align: middle;
+        }
+
+        @media (max-width: 768px) {
+            body { padding: 15px; } .dish-header { padding: 20px; }
+            .dish-name { font-size: 2rem; } .dish-icon-large { font-size: 3.5rem; }
+            .info-block { padding: 20px; }
+            .pattern-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+        @media (max-width: 480px) {
+            .dish-name { font-size: 1.8rem; } .info-title { font-size: 1.3rem; }
+            .back-btn { width: 100%; justify-content: center; }
+            .pattern-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <a href="index.html" class="back-btn">← НАЗАД К МЕНЮ</a>
+
+    <!-- ШАПКА С ИМЕНЕМ АВТОРА -->
+    <div class="dish-header">
+        <span class="dish-icon-large">🍅</span>
+        <h1 class="dish-name">
+            Капрезе <span class="premium-badge">ITALIAN PREMIUM</span>
+            <!-- <span class="signature">by Зимина Евгения</span> -->
+        </h1>
+        <div class="dish-meta">ID: SALAD_CAPRESE_001 | Версия: 1.2.0 | Статус: 🇮🇹 MINIMALIST MASTERPIECE</div>
+    </div>
+
+    <!-- ИТАЛЬЯНСКИЙ ФЛАГ (анимация сохранена) -->
+    <div class="italian-flag" id="flag">
+        <div class="flag-green"></div>
+        <div class="flag-white"></div>
+        <div class="flag-red"></div>
+    </div>
+
+    <!-- ПАТТЕРН КАПРЕЗЕ (анимация сохранена) -->
+    <div class="pattern-grid">
+        <div class="pattern-item pattern-1">🍅</div>
+        <div class="pattern-item pattern-2">🧀</div>
+        <div class="pattern-item pattern-3">🌿</div>
+        <div class="pattern-item pattern-2">🧀</div>
+        <div class="pattern-item pattern-1">🍅</div>
+        <div class="pattern-item pattern-3">🌿</div>
+    </div>
+
+    <!-- ===== ТОЧНЫЙ СОСТАВ (ПО ТЗ) ===== -->
+    <div class="info-block">
+        <h2 class="info-title">📦 СПЕЦИФИКАЦИЯ (точные ингредиенты)</h2>
+        <div class="recipe-row">
+            <!-- Основные компоненты -->
+            <div class="recipe-col">
+                <h3>🍅 Основной стек</h3>
+                <ul class="ingredient-list">
+                    <li data-ing="mozzarella">🧀 Моцарелла</li>
+                    <li data-ing="tomatoes">🍅 Помидоры</li>
+                    <li data-ing="basil">🌿 Базилик зелёный</li>
+                    <li data-ing="pesto">🫒 Соус Песто</li>
+                    <li data-ing="baguette">🥖 Багет</li>
+                    <li data-ing="olives">🫒 Оливки (для украшения)</li>
+                </ul>
+                <p style="margin-top: 15px; color: #BA4A00; font-size: 0.95rem;">
+                    🔧 Все компоненты должны быть комнатной температуры (production-ready).
+                </p>
+            </div>
+            <!-- Дополнительно: багет, оливки — сервировка -->
+            <div class="recipe-col">
+                <h3>🥖 Сторонние модули</h3>
+                <ul class="ingredient-list">
+                    <li data-ing="bread">🥖 Багет — нарезать диагональю</li>
+                    <li data-ing="olives">🫒 Оливки — чёрные/зелёные для декора</li>
+                    <li data-ing="salt">🧂 Соль морская — по вкусу</li>
+                    <li data-ing="oil">🫒 Масло оливковое — extra virgin (если нужно)</li>
+                </ul>
+                <p style="margin-top: 15px; color: #BA4A00; font-size: 0.95rem;">
+                    🔧 Багет можно поджарить — тогда он становится «билд-тайм» зависимостью.
+                </p>
+            </div>
+        </div>
+        <!-- Консоль сборки -->
+        <div class="build-console" id="buildLog">
+            > Инициализация тарелки...
+            > Ожидание добавления компонентов
+        </div>
+    </div>
+
+    <!-- ===== ИНТЕРАКТИВНЫЙ СЧЁТЧИК ПОРЦИЙ ===== -->
+    <div class="counter-box">
+        <div>
+            <span style="font-weight: bold; font-size: 1.2rem;">🍽️ Порций съедено:</span>
+            <span class="counter-value" id="capreseCounter">0</span>
+        </div>
+        <button class="counter-btn" id="eatCapreseBtn">➕ ВЗЯТЬ ПОРЦИЮ</button>
+    </div>
+
+    <!-- ===== ФАКТЫ О КАПРЕЗЕ (ПЕРЕКЛЮЧЕНИЕ ПО НАЖАТИЮ) ===== -->
+    <div class="fact-box" id="capreseFact">
+        <div class="joke-title">
+            <span>🇮🇹</span>
+            <span id="factTitle">ФАКТ О КАПРЕЗЕ #1</span>
+        </div>
+        <p id="factContent">Капрезе — единственное блюдо, которое одновременно удовлетворяет паттернам «Фабрика» (сборка) и «Одиночка» (каждый ингредиент сам за себя).</p>
+        <div class="tap-hint" id="tapHint">🍅 НАЖМИ ДЛЯ НОВОГО ФАКТА</div>
+    </div>
+
+    <!-- ===== BENCHMARK: ЦВЕТОВОЙ ПРОФАЙЛЕР (УНИКАЛЬНЫЙ РАЗДЕЛ) ===== -->
+    <div class="info-block">
+        <h2 class="info-title">🎨 COLOR PROFILER (RGB‑аналитика)</h2>
+        <div style="display: flex; gap: 30px; flex-wrap: wrap; align-items: center;">
+            <div style="flex: 1; min-width: 200px;">
+                <div style="display: flex; align-items: center; margin-bottom: 15px;">
+                    <span style="display: inline-block; width: 20px; height: 20px; background: #E74C3C; border-radius: 4px; margin-right: 10px;"></span>
+                    <span style="font-weight: bold;">Красный (помидоры)</span>
+                    <span style="margin-left: auto;">#E74C3C</span>
+                </div>
+                <div style="display: flex; align-items: center; margin-bottom: 15px;">
+                    <span style="display: inline-block; width: 20px; height: 20px; background: #F4D03F; border-radius: 4px; margin-right: 10px;"></span>
+                    <span style="font-weight: bold;">Белый (моцарелла)</span>
+                    <span style="margin-left: auto;">#FFFFFF</span>
+                </div>
+                <div style="display: flex; align-items: center; margin-bottom: 15px;">
+                    <span style="display: inline-block; width: 20px; height: 20px; background: #2ECC71; border-radius: 4px; margin-right: 10px;"></span>
+                    <span style="font-weight: bold;">Зелёный (базилик)</span>
+                    <span style="margin-left: auto;">#2ECC71</span>
+                </div>
+                <div style="display: flex; align-items: center;">
+                    <span style="display: inline-block; width: 20px; height: 20px; background: #8B4513; border-radius: 4px; margin-right: 10px;"></span>
+                    <span style="font-weight: bold;">Желтый (багет)</span>
+                    <span style="margin-left: auto;">#F0D1A0</span>
+                </div>
+            </div>
+            <div style="flex: 1; min-width: 150px; background: #FEF5F0; padding: 20px; border-radius: 12px;">
+                <span style="font-size: 2.5rem;">🎨</span>
+                <p style="margin-top: 10px;"><strong>Итальянская палитра</strong><br>Контрастность: 94%<br>Насыщенность: высокая</p>
+            </div>
+        </div>
+        <p style="margin-top: 20px; background: #FADBD8; padding: 10px; border-radius: 6px;">
+            🧑‍🎨 Цветовая схема одобрена итальянскими дизайнерами. Идеально для фуд-фото.
+        </p>
+    </div>
+
+    <!-- ===== МАТРИЦА СОВМЕСТИМОСТИ (ИНГРЕДИЕНТ + НАПИТОК) ===== -->
+    <div class="info-block">
+        <h2 class="info-title">🍷 MATRIX COMPATIBILITY</h2>
+        <div class="pairing-grid">
+            <div class="pairing-item">
+                <span>🥂</span>
+                <strong>Просекко</strong>
+                <small>игристое, 100%</small>
+            </div>
+            <div class="pairing-item">
+                <span>🍷</span>
+                <strong>Кьянти</strong>
+                <small>красное, тосканское</small>
+            </div>
+            <div class="pairing-item">
+                <span>🥖</span>
+                <strong>Чиабатта</strong>
+                <small>багет-совместимость</small>
+            </div>
+            <div class="pairing-item">
+                <span>🫒</span>
+                <strong>Оливки</strong>
+                <small>гарант аутентичности</small>
+            </div>
+            <div class="pairing-item">
+                <span>🍋</span>
+                <strong>Лимонад</strong>
+                <small>безалкогольный режим</small>
+            </div>
+            <div class="pairing-item">
+                <span>☕</span>
+                <strong>Эспрессо</strong>
+                <small>после блюда</small>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== RELEASE NOTES: ИСТОРИЯ РЕЦЕПТА =====
+    <div class="info-block">
+        <h2 class="info-title">📝 RELEASE NOTES</h2>
+        <div style="background: #FEF5F0; padding: 20px; border-radius: 12px; font-family: 'Courier New', monospace;">
+            <div style="display: flex; gap: 15px; padding: 8px 0; border-bottom: 1px dashed #FAD7A0;">
+                <span style="font-weight: bold; color: #BA4A00;">v1.2.0</span>
+                <span>🍅 Добавлена опция «песто» — теперь соус интегрирован в сборку.</span>
+            </div>
+            <div style="display: flex; gap: 15px; padding: 8px 0; border-bottom: 1px dashed #FAD7A0;">
+                <span style="font-weight: bold; color: #BA4A00;">v1.1.0</span>
+                <span>🥖 Багет вынесен в отдельный модуль. Возможна обжарка (toast mode).</span>
+            </div>
+            <div style="display: flex; gap: 15px; padding: 8px 0; border-bottom: 1px dashed #FAD7A0;">
+                <span style="font-weight: bold; color: #BA4A00;">v1.0.0</span>
+                <span>🇮🇹 Первый релиз. Три компонента: помидоры, моцарелла, базилик. Оливки — декоративный патч.</span>
+            </div>
+            <div style="display: flex; gap: 15px; padding: 8px 0;">
+                <span style="font-weight: bold; color: #BA4A00;">v0.9.0</span>
+                <span>⚡ Бета-версия на острове Капри.</span>
+            </div>
+        </div>
+    </div> -->
+
+    <!-- ===== ИНТЕРАКТИВНЫЙ МИНИ-ТЕСТ «КАКОЙ ТЫ ИНГРЕДИЕНТ?» ===== -->
+    <div class="joke-box">
+        <h3 class="joke-title">🧪 КАКОЙ ТЫ ИНГРЕДИЕНТ В КАПРЕЗЕ?</h3>
+        <p style="margin-bottom: 15px;">Нажми на кнопку и узнай свою итальянскую сущность:</p>
+        <button id="personalityTestBtn" style="background: #E74C3C; color: white; border: none; padding: 12px 30px; border-radius: 40px; font-weight: bold; font-size: 1rem; cursor: pointer;">🍅 УЗНАТЬ</button>
+        <p id="personalityResult" style="margin-top: 15px; font-weight: bold; min-height: 30px;"></p>
+    </div>
+
+    <!-- КНОПКА НАЗАД -->
+    <div style="margin-top: 40px; text-align: center;">
+        <a href="index.html" class="back-btn" style="background: linear-gradient(135deg, #E74C3C 0%, #2ECC71 100%);">← ВЕРНУТЬСЯ К МЕНЮ</a>
+    </div>
+
+    <script>
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        document.querySelectorAll('.back-btn').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                e.preventDefault();
+                document.body.style.opacity = '0.9';
+                setTimeout(() => { window.location.href = this.getAttribute('href'); }, 150);
+            });
+        });
+
+        // ===== АНИМАЦИЯ ФЛАГА (СОХРАНЯЕМ) =====
+        const flag = document.querySelector('.italian-flag');
+        if (flag) {
+            flag.style.opacity = '0';
+            flag.style.transform = 'scale(0.8)';
+            flag.style.transition = 'opacity 1s, transform 1s';
+            setTimeout(() => {
+                flag.style.opacity = '1';
+                flag.style.transform = 'scale(1)';
+            }, 500);
+        }
+
+        // ===== АНИМАЦИЯ ПАТТЕРНА (СОХРАНЯЕМ) =====
+        const patternItems = document.querySelectorAll('.pattern-item');
+        patternItems.forEach((item, index) => {
+            item.style.opacity = '0';
+            item.style.transform = 'translateY(20px)';
+            item.style.transition = 'opacity 0.5s, transform 0.5s';
+            setTimeout(() => {
+                item.style.opacity = '1';
+                item.style.transform = 'translateY(0)';
+            }, 100 + index * 100);
+        });
+
+        // ===== ИНТЕРАКТИВНЫЕ ИНГРЕДИЕНТЫ =====
+        const buildLog = document.getElementById('buildLog');
+        const ingredientMsgs = {
+            mozzarella: '🧀 Моцарелла: нарезана кружками 5 мм. Основной компонент загружен.',
+            tomatoes: '🍅 Помидоры: нарезаны, соотношение 1:1 с сыром. Идеально.',
+            basil: '🌿 Базилик: листья сорваны, ароматический модуль активирован.',
+            pesto: '🫒 Соус Песто: интегрирован. Итальянский алгоритм запущен.',
+            baguette: '🥖 Багет: нарезан, опционально поджарен. Хрустящий интерфейс.',
+            olives: '🫒 Оливки: декоративный патч установлен.',
+            bread: '🥖 Багет: готов к подаче.',
+            salt: '🧂 Соль: баланс вкуса настроен.',
+            oil: '🫒 Масло: финальный штрих.'
+        };
+
+        document.querySelectorAll('.ingredient-list li').forEach(item => {
+            item.addEventListener('click', function(e) {
+                e.stopPropagation();
+                const ing = this.dataset.ing;
+                if (ing && ingredientMsgs[ing]) {
+                    buildLog.innerHTML = `> ${ingredientMsgs[ing]}\n> Статус: компонент добавлен ✓`;
+                }
+                this.style.backgroundColor = '#FEF5E7';
+                setTimeout(() => this.style.backgroundColor = '', 200);
+            });
+        });
+
+        // ===== СЧЁТЧИК ПОРЦИЙ =====
+        let capreseCount = 0;
+        const counterEl = document.getElementById('capreseCounter');
+        const eatBtn = document.getElementById('eatCapreseBtn');
+
+        eatBtn.addEventListener('click', function() {
+            capreseCount++;
+            counterEl.textContent = capreseCount;
+
+            if (capreseCount === 1) {
+                buildLog.innerHTML = '> 🍅 Первая порция! Buon appetito!';
+            } else if (capreseCount === 3) {
+                buildLog.innerHTML = '> 🇮🇹 Три порции — как триколор!';
+            } else if (capreseCount === 5) {
+                buildLog.innerHTML = '> ⚠️ Рекомендуемая дневная норма итальянца — 5 порций. Вы на месте!';
+            } else if (capreseCount === 7) {
+                buildLog.innerHTML = '> 🏆 Вы настоящий итальянец!';
+            } else {
+                buildLog.innerHTML = `> 🍅 Порция #${capreseCount} съедена. Уровень dolce vita: ${capreseCount * 8}%`;
+            }
+        });
+
+        // ===== ФАКТЫ О КАПРЕЗЕ (С ИСПРАВЛЕНИЕМ ДВОЙНОГО КЛИКА) =====
+        const capreseFacts = [
+            'Капрезе — единственное блюдо, которое одновременно удовлетворяет паттернам «Фабрика» (сборка) и «Одиночка» (каждый ингредиент сам за себя).',
+            'Соус Песто — это dependency injection: он связывает томаты и моцареллу, не изменяя их.',
+            'Багет в капрезе выполняет роль транспорта: доставляет вкус от тарелки до рта.',
+            'Итальянцы никогда не кладут бальзамик в классическое капрезе. Это как CSS-инлайн — можно, но не принято.',
+            'Идеальное соотношение помидора к моцарелле — 1:1. Как бинарный поиск: всегда точно.',
+            'Капрезе — первое блюдо, которое было запатентовано как UI-паттерн (красный/белый/зелёный).'
+        ];
+
+        let factIndex = 0;
+        const factBox = document.getElementById('capreseFact');
+        const factTitle = document.getElementById('factTitle');
+        const factContent = document.getElementById('factContent');
+        const tapHint = document.getElementById('tapHint');
+
+        function showNextFact() {
+            factIndex = (factIndex + 1) % capreseFacts.length;
+            factTitle.textContent = `ФАКТ О КАПРЕЗЕ #${factIndex + 1}`;
+            factContent.textContent = capreseFacts[factIndex];
+            factBox.style.transform = 'scale(0.98)';
+            setTimeout(() => factBox.style.transform = 'scale(1)', 150);
+        }
+
+        // Исправляем двойное срабатывание: stopPropagation на подсказке
+        factBox.addEventListener('click', function(e) {
+            // Игнорируем клик, если цель — сам tapHint (обработаем отдельно)
+            if (e.target.closest('.tap-hint')) return;
+            showNextFact();
+        });
+
+        tapHint.addEventListener('click', function(e) {
+            e.stopPropagation(); // не даём событию подняться до factBox
+            showNextFact();
+        });
+
+        tapHint.textContent = '🍅 НАЖМИ ДЛЯ НОВОГО ФАКТА';
+
+        // ===== ПЕРСОНАЛЬНЫЙ ТЕСТ (ИНТЕРАКТИВ) =====
+        const personalityBtn = document.getElementById('personalityTestBtn');
+        const personalityResult = document.getElementById('personalityResult');
+        const ingredients = ['🍅 Помидор', '🧀 Моцарелла', '🌿 Базилик', '🫒 Оливка', '🥖 Багет', '🫒 Песто'];
+        personalityBtn.addEventListener('click', function() {
+            const randomIndex = Math.floor(Math.random() * ingredients.length);
+            const chosen = ingredients[randomIndex];
+            let description = '';
+            if (chosen.includes('Помидор')) description = 'Ты яркий, сочный и всегда в центре внимания. Красный — твой цвет!';
+            else if (chosen.includes('Моцарелла')) description = 'Ты спокойный, нейтральный, но без тебя всё разваливается.';
+            else if (chosen.includes('Базилик')) description = 'Ты добавляешь изюминку в любой проект. Без тебя скучно.';
+            else if (chosen.includes('Оливка')) description = 'Ты — финальный штрих, делаешь картину завершённой.';
+            else if (chosen.includes('Багет')) description = 'Ты — надёжный каркас, на котором всё держится.';
+            else if (chosen.includes('Песто')) description = 'Ты — клей, объединяешь команду своим соусом.';
+            personalityResult.innerHTML = `🍽️ Ты — ${chosen}! ${description}`;
+        });
+
+        // ===== МОБИЛЬНАЯ ПОДСКАЗКА =====
+        if ('ontouchstart' in window) {
+            tapHint.textContent = '🍅 НАЖМИ ДЛЯ НОВОГО ФАКТА';
+        }
+    </script>
+</body>
+</html>
