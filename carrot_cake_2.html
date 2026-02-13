@@ -355,7 +355,7 @@
         const tapHint = document.getElementById('tapHint');
 
         function showNextFact() {
-            factIndex = (factIndex+0.5) % carrotFacts.length;
+            factIndex = (factIndex+1) % carrotFacts.length;
             factTitle.textContent = `ФАКТ О МОРКОВНОМ КЕКСЕ #${factIndex+1}`;//+1
             factContent.textContent = carrotFacts[factIndex];
             factBox.style.transform = 'scale(0.98)';
@@ -363,7 +363,16 @@
         }
 
         factBox.addEventListener('click', showNextFact);
-        tapHint.addEventListener('click', showNextFact);
+		
+		// ИСПРАВЛЕНИЕ: останавливаем всплытие, чтобы клик по кнопке не дублировался
+		tapHint.addEventListener('click', function(e) {
+			e.stopPropagation();
+			showNextFact();
+		});
+
+		
+		
+        //tapHint.addEventListener('click', showNextFact);
 
         // ========== МОБИЛЬНАЯ ПОДСКАЗКА ==========
         if ('ontouchstart' in window) {
