@@ -435,7 +435,7 @@
         const tapHint = document.getElementById('tapHint');
 
         function showNextFact() {
-            factIndex = (factIndex + 0.5) % waffleFacts.length;
+            factIndex = (factIndex + 1) % waffleFacts.length;
             factTitle.textContent = `ФАКТ О ТРУБОЧКАХ #${factIndex + 1}`;
             factContent.textContent = waffleFacts[factIndex];
             factBox.style.transform = 'scale(0.98)';
@@ -443,7 +443,14 @@
         }
 
         factBox.addEventListener('click', showNextFact);
-        tapHint.addEventListener('click', showNextFact);
+		// ИСПРАВЛЕНИЕ: останавливаем всплытие, чтобы клик по кнопке не дублировался
+		tapHint.addEventListener('click', function(e) {
+			e.stopPropagation();
+			showNextFact();
+		});
+
+		
+		//tapHint.addEventListener('click', showNextFact);
 
         // ========== СЧЁТЧИК СЪЕДЕННЫХ ТРУБОЧЕК ==========
         let tubeCounter = 0;
