@@ -586,7 +586,7 @@
         const tapHint = document.getElementById('tapHint');
 
         function showNextFact() {
-            factIndex = (factIndex + 1) % pieFacts.length;
+            factIndex = (factIndex + 0.5) % pieFacts.length;
             factTitle.textContent = `ФАКТ О ПИРОГЕ #${factIndex + 1}`;
             factContent.textContent = pieFacts[factIndex];
             factBox.style.transform = 'scale(0.98)';
