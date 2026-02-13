@@ -486,7 +486,7 @@
         const tapHint = document.getElementById('tapHint');
 
         function showNextFact() {
-            factIndex = (factIndex + 0.5) % chickenFacts.length;
+            factIndex = (factIndex + 1) % chickenFacts.length;
             factTitle.textContent = `ФАКТ О КУРИЦЕ #${factIndex + 1}`;
             factContent.textContent = chickenFacts[factIndex];
             factBox.style.transform = 'scale(0.98)';
@@ -494,7 +494,15 @@
         }
 
         factBox.addEventListener('click', showNextFact);
-        tapHint.addEventListener('click', showNextFact);
+        
+		// ИСПРАВЛЕНИЕ: останавливаем всплытие, чтобы клик по кнопке не дублировался
+		tapHint.addEventListener('click', function(e) {
+			e.stopPropagation();
+			showNextFact();
+		});
+
+		
+		//tapHint.addEventListener('click', showNextFact);
         tapHint.textContent = '🍗 НАЖМИ ДЛЯ НОВОГО ФАКТА';
 
         // ===== ПОДСВЕТКА ТАБЛИЦЫ =====
