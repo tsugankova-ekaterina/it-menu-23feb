@@ -36,113 +36,362 @@
                      display: flex; align-items: center; gap: 10px; }
         .info-title::before { content: "›"; color: #8B0000; 
                             font-weight: bold; font-size: 1.8rem; }
-        .ingredients-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; }
-        .ingredient-item { background: #f8f9fa; padding: 15px; border-radius: 8px;
-                          border-left: 4px solid #8B0000; transition: transform 0.2s; }
-        .ingredient-item:hover { transform: translateY(-3px); }
-        .ingredient-name { font-weight: 700; color: #2c3e50; margin-bottom: 5px; font-size: 1.1rem; }
-        .ingredient-desc { color: #666; font-size: 0.95rem; }
         .joke-box { background: #ffebee; border-left: 4px solid #f44336;
                    padding: 20px; border-radius: 8px; margin: 20px 0; }
         .joke-title { color: #c62828; font-weight: 700; margin-bottom: 10px;
                      display: flex; align-items: center; gap: 10px; }
-        .tech-box { background: #fff5f5; border-left: 4px solid #B22222;
-                   padding: 20px; border-radius: 8px; font-family: 'Courier New', monospace;
-                   font-size: 1rem; line-height: 1.8; }
-        .tech-line { margin-bottom: 8px; }
-        .tech-key { color: #8B0000; font-weight: bold; }
-        .meat-types { display: flex; flex-wrap: wrap; gap: 15px; margin-top: 20px; }
-        .meat-type { flex: 1; min-width: 180px; background: #ffebee; 
-                    padding: 15px; border-radius: 8px; border: 2px solid #f44336; }
-        .meat-type h4 { color: #c62828; margin-bottom: 10px; }
+
+        /* ===== УНИКАЛЬНЫЕ СТИЛИ ДЛЯ МЯСА ===== */
+        .recipe-minimal {
+            background: #ffebee;
+            border: 3px dashed #8B0000;
+            border-radius: 20px;
+            padding: 30px 20px;
+            margin: 20px 0;
+            text-align: center;
+        }
+        .minimal-ingredient {
+            display: inline-block;
+            background: white;
+            padding: 12px 30px;
+            margin: 8px;
+            border-radius: 40px;
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: #8B0000;
+            box-shadow: 0 3px 10px rgba(139,0,0,0.2);
+        }
+
+        .oven-temp {
+            background: #1e1e1e;
+            color: #ffb300;
+            padding: 20px;
+            border-radius: 16px;
+            font-family: 'Courier New', monospace;
+            margin: 20px 0;
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            flex-wrap: wrap;
+        }
+        .temp-display {
+            font-size: 2.2rem;
+            font-weight: bold;
+        }
+        .temp-label {
+            font-size: 0.9rem;
+            color: #ffcc80;
+        }
+
+        .build-console {
+            background: #2d2d2d;
+            color: #ffe082;
+            padding: 15px;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            margin: 20px 0 0;
+            border-left: 5px solid #8B0000;
+            white-space: pre-wrap;
+        }
+
+        .counter-box {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: white;
+            border: 2px dashed #8B0000;
+            padding: 15px 20px;
+            border-radius: 40px;
+            margin: 20px 0;
+        }
+        .counter-value {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #8B0000;
+            font-family: 'Courier New', monospace;
+        }
+        .counter-btn {
+            background: #8B0000;
+            color: white;
+            border: none;
+            padding: 10px 25px;
+            border-radius: 30px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        .counter-btn:hover { background: #5a0000; }
+
+        .fact-box {
+            background: #ffebee;
+            border-left: 6px solid #8B0000;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        .fact-box:active { transform: scale(0.98); }
+        .tap-hint {
+            background: #8B0000;
+            color: white;
+            padding: 8px 18px;
+            border-radius: 30px;
+            display: inline-block;
+            margin-top: 15px;
+            font-size: 0.9rem;
+        }
+
+        .metric-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+        .metric-card {
+            background: #fff5f5;
+            padding: 20px;
+            border-radius: 16px;
+            border: 2px solid #f44336;
+            text-align: center;
+        }
+        .metric-value {
+            font-size: 2.2rem;
+            font-weight: bold;
+            color: #8B0000;
+            font-family: 'Courier New', monospace;
+        }
+
+        .pairing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+        .pairing-item {
+            background: #fff5f5;
+            padding: 15px;
+            border-radius: 16px;
+            text-align: center;
+            border: 2px solid #f44336;
+        }
+        .pairing-item span { font-size: 2rem; display: block; margin-bottom: 8px; }
+
+        .release-box {
+            background: #fff5f5;
+            padding: 20px;
+            border-radius: 12px;
+            font-family: 'Courier New', monospace;
+            border-left: 6px solid #8B0000;
+        }
+        .release-item {
+            display: flex;
+            gap: 15px;
+            padding: 8px 0;
+            border-bottom: 1px dashed #e6b0aa;
+        }
+        .release-item:last-child { border-bottom: none; }
+        .release-version {
+            font-weight: bold;
+            color: #8B0000;
+            min-width: 80px;
+        }
+
+        .signature {
+            display: inline-block;
+            background: #ffb74d;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 30px;
+            font-size: 0.9rem;
+            margin-left: 10px;
+            vertical-align: middle;
+        }
+
         @media (max-width: 768px) {
             body { padding: 15px; } .dish-header { padding: 20px; }
             .dish-name { font-size: 2rem; } .dish-icon-large { font-size: 3.5rem; }
-            .info-block { padding: 20px; } .ingredients-grid { grid-template-columns: 1fr; }
-            .meat-types { flex-direction: column; }
-        }
-        @media (max-width: 480px) {
-            .dish-name { font-size: 1.8rem; } .info-title { font-size: 1.3rem; }
-            .back-btn { width: 100%; justify-content: center; }
+            .info-block { padding: 20px; }
         }
     </style>
 </head>
 <body>
     <a href="index.html" class="back-btn">← НАЗАД К МЕНЮ</a>
+
+    <!-- ШАПКА -->
     <div class="dish-header">
         <span class="dish-icon-large">🥩</span>
-        <h1 class="dish-name">Мясо в духовке</h1>
-        <div class="dish-meta">ID: MEAT_BAKED_001 | Версия: 4.0.2 | Статус: 🔥 ГОРЯЧЕЕ</div>
+        <h1 class="dish-name">
+            Мясо в духовке 
+            <span class="signature">UNIX‑философия</span>
+        </h1>
+        <div class="dish-meta">ID: MEAT_BAKED_002 | Версия: 5.0.0 | Статус: 🔥 ПРОСТОТА — ЗАЛОГ УСПЕХА</div>
     </div>
+
+    <!-- ===== ТОЧНЫЙ СОСТАВ (МИНИМАЛИЗМ) ===== -->
+    <div class="recipe-minimal">
+        <h3 style="color: #8B0000; margin-bottom: 25px;">🍖 СПЕЦИФИКАЦИЯ (lean‑версия)</h3>
+        <div>
+            <span class="minimal-ingredient">🥩 Свинина</span>
+            <span class="minimal-ingredient">🧂 Соль</span>
+            <span class="minimal-ingredient">🌿 Специи</span>
+        </div>
+        <p style="margin-top: 25px; color: #b71c1c; font-size: 1.1rem;">
+            «Делай одну вещь и делай её хорошо» — идеальный кусок мяса, только соль и специи.
+        </p>
+    </div>
+
+    <!-- ===== МОНИТОРИНГ ТЕМПЕРАТУРЫ (УНИКАЛЬНЫЙ РАЗДЕЛ) ===== -->
     <div class="info-block">
-        <h2 class="info-title">📦 Состав (Protein Core)</h2>
-        <div class="ingredients-grid">
-            <div class="ingredient-item"><div class="ingredient-name">Мясо (свинина/говядина)</div><div class="ingredient-desc">Основной процессор, protein source</div></div>
-            <div class="ingredient-item"><div class="ingredient-name">Лук репчатый</div><div class="ingredient-desc">Ароматический модуль, flavor layer</div></div>
-            <div class="ingredient-item"><div class="ingredient-name">Чеснок</div><div class="ingredient-desc">Система безопасности, antibacterial</div></div>
-            <div class="ingredient-item"><div class="ingredient-name">Специи</div><div class="ingredient-desc">Алгоритмы вкуса, spice algorithms</div></div>
-            <div class="ingredient-item"><div class="ingredient-name">Растительное масло</div><div class="ingredient-desc">Теплопроводящий слой, heat conductor</div></div>
-            <div class="ingredient-item"><div class="ingredient-name">Соль</div><div class="ingredient-desc">Базовый усилитель, basic amplifier</div></div>
+        <h2 class="info-title">🌡️ PROFILER ТЕМПЕРАТУРЫ</h2>
+        <div class="oven-temp">
+            <div>
+                <div class="temp-display" id="ovenTempDisplay">180°C</div>
+                <div class="temp-label">духовка (target)</div>
+            </div>
+            <div>
+                <div class="temp-display" id="meatTempDisplay">65°C</div>
+                <div class="temp-label">внутри мяса</div>
+            </div>
+            <div>
+                <button id="tempUpBtn" style="background: #8B0000; color: white; border: none; border-radius: 30px; padding: 10px 20px; font-weight: bold; cursor: pointer;">➕</button>
+                <button id="tempDownBtn" style="background: #6c757d; color: white; border: none; border-radius: 30px; padding: 10px 20px; font-weight: bold; cursor: pointer;">➖</button>
+            </div>
+        </div>
+        <div id="tempLog" class="build-console" style="margin-top: 10px;">
+            > Датчики инициализированы. Целевая температура: 180°C
+        </div>
+        <p style="margin-top: 15px; color: #b71c1c; font-style: italic;">
+            🥩 Well‑done: 75°C внутри. Medium: 65°C. Не пересушите!
+        </p>
+    </div>
+
+    <!-- ===== БЕНЧМАРК СПЕЦИЙ (SPICE BENCHMARK) ===== -->
+    <div class="info-block">
+        <h2 class="info-title">⚡ SPICE BENCHMARK</h2>
+        <div class="metric-grid">
+            <div class="metric-card">
+                <span class="metric-value">10%</span>
+                <div>Увеличение вкуса (перец)</div>
+            </div>
+            <div class="metric-card">
+                <span class="metric-value">15%</span>
+                <div>Улучшение аромата (паприка)</div>
+            </div>
+            <div class="metric-card">
+                <span class="metric-value">7%</span>
+                <div>Сочность (розмарин)</div>
+            </div>
+            <div class="metric-card">
+                <span class="metric-value">3.4</span>
+                <div>Индекс пикантности</div>
+            </div>
+        </div>
+        <p style="margin-top: 20px; background: #ffebee; padding: 12px; border-radius: 8px;">
+            🏆 По результатам A/B тестирования, свинина с солью и чёрным перцем побеждает в 89% случаев.
+        </p>
+    </div>
+
+
+    <!-- ===== ФАКТЫ О СВИНИНЕ (ПЕРЕКЛЮЧЕНИЕ ПО НАЖАТИЮ) ===== -->
+    <div class="fact-box" id="meatFact">
+        <div class="joke-title">
+            <span>🥩</span>
+            <span id="factTitle">ФАКТ О СВИНИНЕ #1</span>
+        </div>
+        <p id="factContent">Свинина — единственное мясо, которое не требует сложного маринада. Соль и специи — это весь DevOps‑пайплайн.</p>
+        <div class="tap-hint" id="tapHint">🥩 НАЖМИ ДЛЯ НОВОГО ФАКТА</div>
+    </div>
+
+    <!-- ===== RELEASE NOTES (история версий блюда) ===== 
+    <div class="info-block">
+        <h2 class="info-title">📝 RELEASE NOTES</h2>
+        <div class="release-box">
+            <div class="release-item">
+                <span class="release-version">v5.0.0</span>
+                <span>🔥 Убраны все лишние ингредиенты. Остались только свинина, соль, специи. Производительность повышена на 40%.</span>
+            </div>
+            <div class="release-item">
+                <span class="release-version">v4.2.0</span>
+                <span>🌿 Добавлена возможность выбора специй: паприка, розмарин, тимьян (опциональные плагины).</span>
+            </div>
+            <div class="release-item">
+                <span class="release-version">v3.1.0</span>
+                <span>⏱️ Оптимизировано время запекания: теперь 60 мин при 180°C (раньше 75 мин).</span>
+            </div>
+            <div class="release-item">
+                <span class="release-version">v1.0.0</span>
+                <span>🎉 Первый релиз: свинина, соль, перец. Классика, проверенная бабушкой.</span>
+            </div>
+        </div>
+    </div>-->
+
+    <!-- ===== МАТРИЦА СОВМЕСТИМОСТИ (pairings) ===== -->
+    <div class="info-block">
+        <h2 class="info-title">🍷 MATRIX COMPATIBILITY</h2>
+        <div class="pairing-grid">
+            <div class="pairing-item">
+                <span>🥔</span>
+                <strong>Картофель</strong>
+                <small>фундаментальный гарнир</small>
+            </div>
+            <div class="pairing-item">
+                <span>🥕</span>
+                <strong>Овощи гриль</strong>
+                <small>здоровый кэш</small>
+            </div>
+            <div class="pairing-item">
+                <span>🍷</span>
+                <strong>Красное вино</strong>
+                <small>совместимость 100%</small>
+            </div>
+            <div class="pairing-item">
+                <span>🍺</span>
+                <strong>Пиво</strong>
+                <small>неофициальный стандарт</small>
+            </div>
+            <div class="pairing-item">
+                <span>🥖</span>
+                <strong>Хлеб</strong>
+                <small>транспортный протокол</small>
+            </div>
+            <div class="pairing-item">
+                <span>🧄</span>
+                <strong>Чесночный соус</strong>
+                <small>опциональный патч</small>
+            </div>
         </div>
     </div>
+	
+	<!-- ===== ИНТЕРАКТИВНЫЙ СЧЁТЧИК ПОРЦИЙ ===== -->
+    <div class="counter-box">
+        <div>
+            <span style="font-weight: bold; font-size: 1.2rem;">🍽️ Порций съедено:</span>
+            <span class="counter-value" id="meatCounter">0</span>
+        </div>
+        <button class="counter-btn" id="eatMeatBtn">➕ ВЗЯТЬ ПОРЦИЮ</button>
+    </div>
+
+    <!-- ===== ЛОГИРОВАНИЕ ЗАПЕКАНИЯ (терминал) ===== -->
     <div class="info-block">
-        <h2 class="info-title">🎛️ Типы мяса (Processor Types)</h2>
-        <div class="meat-types">
-            <div class="meat-type">
-                <h4>🐷 Свинина</h4>
-                <p>Сочная, жирная</p>
-                <small>Высокая производительность</small>
-            </div>
-            <div class="meat-type">
-                <h4>🐮 Говядина</h4>
-                <p>Плотная, насыщенная</p>
-                <small>Enterprise edition</small>
-            </div>
-            <div class="meat-type">
-                <h4>🐑 Баранина</h4>
-                <p>Ароматная, специфическая</p>
-                <small>Для ценителей</small>
-            </div>
-            <div class="meat-type">
-                <h4>🍗 Курица</h4>
-                <p>Диетическая, нежная</p>
-                <small>Light version</small>
-            </div>
+        <h2 class="info-title">📋 BAKING.LOG</h2>
+        <div class="build-console" id="bakingLog">
+            [2026-02-13 15:30] Духовка разогрета до 180°C<br>
+            [2026-02-13 15:31] Мясо отправлено в духовку<br>
+            [2026-02-13 15:32] Запущен таймер 60 мин<br>
+            [2026-02-13 16:32] ❗ Готово! Мясо отдыхает 10 мин<br>
+        </div>
+        <div style="display: flex; gap: 10px; margin-top: 15px;">
+            <span id="simulateBakeBtn" style="background: #8B0000; color: white; padding: 10px 20px; border-radius: 30px; font-weight: bold; cursor: pointer;">⏲️ СИМУЛИРОВАТЬ ЗАПЕКАНИЕ</span>
         </div>
     </div>
-    <div class="joke-box">
-        <h3 class="joke-title">💡 Мясо в духовке — это backend процесс</h3>
-        <p>• <strong>Долгая обработка</strong> — но результат того стоит</p>
-        <p>• <strong>Высокие температуры</strong> — как стресс-тестирование</p>
-        <p>• <strong>Медленное томление</strong> — оптимизация вкуса</p>
-        <p>• <strong>Аромат по всему office</strong> — лучший мотиватор</p>
-    </div>
-    <div class="info-block">
-        <h2 class="info-title">⚙️ Технические характеристики</h2>
-        <div class="tech-box">
-            <div class="tech-line"><span class="tech-key">Температура духовки:</span> 180-200°C (оптимальный range)</div>
-            <div class="tech-line"><span class="tech-key">Время приготовления:</span> 60-90 минут (в зависимости от размера)</div>
-            <div class="tech-line"><span class="tech-key">Внутренняя температура мяса:</span> 72-75°C (food safety standard)</div>
-            <div class="tech-line"><span class="tech-key">Подача:</span> Горячей, сразу из духовки</div>
-            <div class="tech-line"><span class="tech-key">Порция:</span> 150-200g мяса на человека</div>
-            <div class="tech-line"><span class="tech-key">Идеальные пары:</span> Картофель, овощи, красное вино, пиво</div>
-            <div class="tech-line"><span class="tech-key">Особенность:</span> Мясо должно "отдохнуть" 10 минут перед нарезкой</div>
-        </div>
-    </div>
-    <div class="info-block">
-        <h2 class="info-title">🎯 Процесс приготовления</h2>
-        <div class="tech-box">
-            <div class="tech-line">1. Подготовка мяса (initial setup)</div>
-            <div class="tech-line">2. Маринование (data preprocessing)</div>
-            <div class="tech-line">3. Обжарка (searing, quick deploy)</div>
-            <div class="tech-line">4. Запекание (baking, long process)</div>
-            <div class="tech-line">5. Отдых (resting, cool down)</div>
-            <div class="tech-line">6. Нарезка и подача (serving, production)</div>
-        </div>
-    </div>
+
+    <!-- КНОПКА НАЗАД -->
     <div style="margin-top: 40px; text-align: center;">
-        <a href="index.html" class="back-btn" style="background: linear-gradient(135deg, #8B0000 0%, #B22222 100%);">← ВЕРНУТЬСЯ К СПИСКУ БЛЮД</a>
+        <a href="index.html" class="back-btn" style="background: linear-gradient(135deg, #8B0000 0%, #B22222 100%);">← ВЕРНУТЬСЯ К МЕНЮ</a>
     </div>
+
     <script>
         window.scrollTo({ top: 0, behavior: 'smooth' });
         document.querySelectorAll('.back-btn').forEach(btn => {
@@ -152,6 +401,103 @@
                 setTimeout(() => { window.location.href = this.getAttribute('href'); }, 150);
             });
         });
+
+        // ===== ИНТЕРАКТИВНЫЙ ТЕМПЕРАТУРНЫЙ ПРОФАЙЛЕР =====
+        let ovenTemp = 180;
+        let meatTemp = 65;
+        const ovenDisplay = document.getElementById('ovenTempDisplay');
+        const meatDisplay = document.getElementById('meatTempDisplay');
+        const tempLog = document.getElementById('tempLog');
+
+        document.getElementById('tempUpBtn').addEventListener('click', function() {
+            ovenTemp += 5;
+            if (ovenTemp > 250) ovenTemp = 250;
+            ovenDisplay.textContent = ovenTemp + '°C';
+            meatTemp = Math.min(85, meatTemp + 2);
+            meatDisplay.textContent = meatTemp + '°C';
+            tempLog.innerHTML = `> Температура повышена до ${ovenTemp}°C. Внутри мяса: ${meatTemp}°C.`;
+        });
+
+        document.getElementById('tempDownBtn').addEventListener('click', function() {
+            ovenTemp -= 5;
+            if (ovenTemp < 100) ovenTemp = 100;
+            ovenDisplay.textContent = ovenTemp + '°C';
+            meatTemp = Math.max(40, meatTemp - 2);
+            meatDisplay.textContent = meatTemp + '°C';
+            tempLog.innerHTML = `> Температура понижена до ${ovenTemp}°C. Внутри мяса: ${meatTemp}°C.`;
+        });
+
+        // ===== СИМУЛЯЦИЯ ЗАПЕКАНИЯ =====
+        const bakingLog = document.getElementById('bakingLog');
+        document.getElementById('simulateBakeBtn').addEventListener('click', function() {
+            bakingLog.innerHTML = `[2026-02-13 ${new Date().getHours()}:${new Date().getMinutes()}] Запуск цикла запекания...\n` +
+                                  `[${new Date().getHours()}:${new Date().getMinutes()+2}] Мясо достигло 55°C\n` +
+                                  `[${new Date().getHours()}:${new Date().getMinutes()+5}] Переворот (ребаланс)\n` +
+                                  `[${new Date().getHours()}:${new Date().getMinutes()+7}] Температура стабильна: 180°C\n` +
+                                  `[${new Date().getHours()}:${new Date().getMinutes()+10}] ✅ Симуляция завершена. Мясо готово!`;
+        });
+
+        // ===== СЧЁТЧИК ПОРЦИЙ =====
+        let meatCount = 0;
+        const counterEl = document.getElementById('meatCounter');
+        const eatBtn = document.getElementById('eatMeatBtn');
+
+        eatBtn.addEventListener('click', function() {
+            meatCount++;
+            counterEl.textContent = meatCount;
+
+            if (meatCount === 1) {
+                bakingLog.innerHTML = '> 🥩 Первая порция! Мясо сочное, специи идеальны.';
+            } else if (meatCount === 3) {
+                bakingLog.innerHTML = '> 🥩🥩🥩 Три порции — ты настоящий мясоед!';
+            } else if (meatCount === 5) {
+                bakingLog.innerHTML = '> ⚠️ Рекомендуемая порция — 5. Но ты справишься!';
+            } else if (meatCount === 7) {
+                bakingLog.innerHTML = '> 🏆 Ты побил рекорд! Мясо в духовке теперь твоё коронное блюдо.';
+            } else {
+                bakingLog.innerHTML = `> 🥩 Порция #${meatCount} съедена. Уровень сытости: ${meatCount * 8}%`;
+            }
+        });
+
+        // ===== ФАКТЫ О СВИНИНЕ =====
+        const meatFacts = [
+            'Свинина — единственное мясо, которое не требует сложного маринада. Соль и специи — это весь DevOps‑пайплайн.',
+            'В Древнем Риме свинину запекали с солью и лавровым листом. Первая документированная версия (v0.1).',
+            'Свинина содержит витамин B1 — он улучшает работу нейросетей разработчика.',
+            'Минимализм в еде — как в коде: чем меньше ингредиентов, тем меньше багов.'
+        ];
+
+        let factIndex = 0;
+        const factBox = document.getElementById('meatFact');
+        const factTitle = document.getElementById('factTitle');
+        const factContent = document.getElementById('factContent');
+        const tapHint = document.getElementById('tapHint');
+
+        function showNextFact() {
+            factIndex = (factIndex + 1) % meatFacts.length;
+            factTitle.textContent = `ФАКТ О СВИНИНЕ #${factIndex + 1}`;
+            factContent.textContent = meatFacts[factIndex];
+            factBox.style.transform = 'scale(0.98)';
+            setTimeout(() => factBox.style.transform = 'scale(1)', 150);
+        }
+
+        // Исправляем двойное срабатывание
+        factBox.addEventListener('click', function(e) {
+            if (e.target.closest('.tap-hint')) return;
+            showNextFact();
+        });
+
+        tapHint.addEventListener('click', function(e) {
+            e.stopPropagation();
+            showNextFact();
+        });
+
+        tapHint.textContent = '🥩 НАЖМИ ДЛЯ НОВОГО ФАКТА';
+
+        // ===== МОБИЛЬНАЯ ПОДСКАЗКА =====
+        if ('ontouchstart' in window) {
+            tapHint.textContent = '🥩 НАЖМИ ДЛЯ НОВОГО ФАКТА';
+        }
     </script>
 </body>
 </html>
