@@ -512,6 +512,7 @@
             setTimeout(() => factBox.style.transform = 'scale(1)', 150);
         }
 
+/*
         factBox.addEventListener('click', function(e) {
             if (e.target.closest('.tap-hint')) return;
             showNextFact();
@@ -523,7 +524,7 @@
         });
 
         tapHint.textContent = '🍫 НАЖМИ ДЛЯ НОВОГО ФАКТА';
-
+*/
         // ===== МОБИЛЬНАЯ ПОДСКАЗКА =====
         if ('ontouchstart' in window) {
             tapHint.textContent = '🍫 НАЖМИ ДЛЯ НОВОГО ФАКТА';
