@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🍎 Яблочный пирог | IT-Меню</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            background: #f8f9fa; color: #333;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6; padding: 20px; max-width: 800px; margin: 0 auto;
+            min-height: 100vh; display: flex; flex-direction: column;
+        }
+        .back-btn {
+            display: inline-flex; align-items: center; gap: 8px;
+            background: #6c757d; color: white; text-decoration: none;
+            padding: 12px 24px; border-radius: 8px; font-weight: 600;
+            margin-bottom: 30px; transition: background 0.3s; width: fit-content;
+        }
+        .back-btn:hover { background: #5a6268; }
+        .dish-header {
+            background: linear-gradient(135deg, #E74C3C 0%, #EC7063 100%);
+            color: white; border-radius: 15px; padding: 30px;
+            margin-bottom: 30px; box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        .dish-icon-large { font-size: 4rem; margin-bottom: 15px; text-align: center; }
+        .dish-name { color: white; font-size: 2.5rem; margin-bottom: 10px; 
+                    font-weight: 800; text-align: center; }
+        .dish-meta { color: rgba(255,255,255,0.9); font-size: 1.1rem; 
+                    font-family: 'Courier New', monospace; margin-bottom: 20px; text-align: center; }
+        .info-block { background: white; border-radius: 12px; padding: 25px;
+                     margin-bottom: 25px; box-shadow: 0 3px 10px rgba(0,0,0,0.06); }
+        .info-title { color: #2c3e50; font-size: 1.5rem; margin-bottom: 20px;
+                     padding-bottom: 10px; border-bottom: 2px solid #f0f5ff;
+                     display: flex; align-items: center; gap: 10px; }
+        .info-title::before { content: "›"; color: #E74C3C; 
+                            font-weight: bold; font-size: 1.8rem; }
+        .joke-box { background: #FDEDEC; border-left: 4px solid #E74C3C;
+                   padding: 20px; border-radius: 8px; margin: 20px 0; }
+        .joke-title { color: #CB4335; font-weight: 700; margin-bottom: 10px;
+                     display: flex; align-items: center; gap: 10px; }
+
+        /* === АНИМАЦИЯ ЯБЛОК (НЕ ТРОГАЕМ) === */
+        .pie-animation {
+            text-align: center;
+            margin: 25px 0;
+            padding: 25px;
+            background: #FBEEE6;
+            border-radius: 12px;
+            position: relative;
+        }
+        .apple-emoji {
+            font-size: 2.5rem;
+            display: inline-block;
+            animation: appleFall 3s ease-in-out infinite;
+            animation-delay: calc(var(--delay) * 0.3s);
+        }
+        @keyframes appleFall {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(20px) rotate(180deg); }
+        }
+        .oven-status {
+            background: #F2D7D5;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+            text-align: center;
+            font-family: 'Courier New', monospace;
+            border: 2px dashed #E74C3C;
+        }
+
+        /* === НОВЫЕ УНИКАЛЬНЫЕ СТИЛИ === */
+        .recipe-panel {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-top: 15px;
+        }
+        .recipe-card {
+            background: #FEF5F0;
+            padding: 20px;
+            border-radius: 16px;
+            border: 2px solid #F1948A;
+        }
+        .recipe-card h3 {
+            color: #B03A2E;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+        }
+        .ingredient-list {
+            list-style: none;
+            padding: 0;
+        }
+        .ingredient-list li {
+            padding: 10px 0;
+            border-bottom: 1px dashed #F5B7B1;
+            display: flex;
+            align-items: baseline;
+            gap: 6px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .ingredient-list li:hover {
+            background: #FADBD8;
+            padding-left: 5px;
+        }
+        .build-console {
+            background: #2d2d2d;
+            color: #ffe082;
+            padding: 15px;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            margin: 20px 0 0;
+            border-left: 5px solid #E67E22;
+            white-space: pre-wrap;
+        }
+        .benchmark-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+        .benchmark-card {
+            background: #FDEDEC;
+            border-radius: 16px;
+            padding: 20px;
+            border: 2px solid #EC7063;
+            text-align: center;
+        }
+        .benchmark-card h4 {
+            color: #B03A2E;
+            margin-bottom: 15px;
+        }
+        .meter {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin: 10px 0;
+        }
+        .meter-label {
+            font-weight: bold;
+            color: #666;
+            font-size: 0.9rem;
+        }
+        .meter-bar {
+            width: 100px;
+            height: 10px;
+            background: #ddd;
+            border-radius: 5px;
+            overflow: hidden;
+            margin-left: 8px;
+        }
+        .meter-fill {
+            height: 100%;
+            background: #E74C3C;
+        }
+        .release-note {
+            background: #FEF9E7;
+            padding: 20px;
+            border-radius: 16px;
+            border-left: 6px solid #F39C12;
+            font-family: 'Courier New', monospace;
+        }
+        .release-item {
+            display: flex;
+            gap: 15px;
+            padding: 8px 0;
+            border-bottom: 1px dashed #FAD7A0;
+        }
+        .release-version {
+            font-weight: bold;
+            color: #BA4A00;
+            min-width: 80px;
+        }
+        .counter-box {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: white;
+            border: 2px dashed #E74C3C;
+            padding: 15px 20px;
+            border-radius: 40px;
+            margin: 20px 0;
+        }
+        .counter-value {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #E74C3C;
+            font-family: 'Courier New', monospace;
+        }
+        .counter-btn {
+            background: #E74C3C;
+            color: white;
+            border: none;
+            padding: 10px 25px;
+            border-radius: 30px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        .counter-btn:hover { background: #CB4335; }
+        .fact-box {
+            background: #FDEDEC;
+            border-left: 6px solid #E74C3C;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        .fact-box:active { transform: scale(0.98); }
+        .tap-hint {
+            background: #E74C3C;
+            color: white;
+            padding: 8px 18px;
+            border-radius: 30px;
+            display: inline-block;
+            margin-top: 15px;
+            font-size: 0.9rem;
+        }
+        .tooltip-icon {
+            font-size: 1.2rem;
+            vertical-align: middle;
+        }
+        @media (max-width: 768px) {
+            body { padding: 15px; } .dish-header { padding: 20px; }
+            .dish-name { font-size: 2rem; } .dish-icon-large { font-size: 3.5rem; }
+            .info-block { padding: 20px; }
+            .recipe-panel { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <a href="index.html" class="back-btn">← НАЗАД К МЕНЮ</a>
+
+    <!-- ШАПКА -->
+    <div class="dish-header">
+        <span class="dish-icon-large">🍎</span>
+        <h1 class="dish-name">Яблочный пирог</h1>
+        <div class="dish-meta">ID: PIE_APPLE_001 | Версия: 2.1.4 | Статус: 🏡 HOMEMADE EDITION</div>
+    </div>
+
+    <!-- АНИМАЦИЯ ЯБЛОК (НЕ МЕНЯЕМ) -->
+    <div class="pie-animation">
+        <h3 style="color: #CB4335; margin-bottom: 20px;">🍎 Apple Core Processing...</h3>
+        <div style="display: flex; justify-content: center; gap: 20px;">
+            <span class="apple-emoji" style="--delay: 0">🍎</span>
+            <span class="apple-emoji" style="--delay: 1">🍏</span>
+            <span class="apple-emoji" style="--delay: 2">🍎</span>
+            <span class="apple-emoji" style="--delay: 3">🍏</span>
+        </div>
+        <div style="color: #666; margin-top: 15px; font-size: 0.9rem;">
+            <em>// Процесс подготовки apple slices...</em>
+        </div>
+    </div>
+
+    <!-- СТАТУС ДУХОВКИ (ОСТАВЛЯЕМ, НО ДОБАВЛЯЕМ КЛИКАБЕЛЬНОСТЬ) -->
+    <div class="oven-status" id="ovenStatus">
+        🔥 ДУХОВКА: 180°C | ТАЙМЕР: 40 мин | СТАТУС: BAKING...
+    </div>
+
+    <!-- ===== ТОЧНЫЙ СОСТАВ (исправленный) ===== -->
+    <div class="info-block">
+        <h2 class="info-title">📦 СПЕЦИФИКАЦИЯ (точные ингредиенты)</h2>
+        <div class="recipe-panel">
+            <!-- Тесто -->
+            <div class="recipe-card">
+                <h3>🥧 Тесто (Base Layer)</h3>
+                <ul class="ingredient-list">
+                    <li data-ing="flour">🌾 Мука</li>
+                    <li data-ing="butter">🧈 Масло сливочное</li>
+                    <li data-ing="eggs">🥚 Яйца</li>
+                    <li data-ing="sugar">🍬 Сахар</li>
+                    <li data-ing="salt">🧂 Соль</li>
+                </ul>
+                <p style="margin-top: 15px; color: #B03A2E; font-size: 0.95rem;">
+                    🔧 Инфраструктура: масло растереть с сахаром, добавить яйца, муку, соль.
+                </p>
+            </div>
+            <!-- Начинка -->
+            <div class="recipe-card">
+                <h3>🍎 Начинка (Fruit Core)</h3>
+                <ul class="ingredient-list">
+                    <li data-ing="apples">🍎 Яблоки (кисло-сладкие)</li>
+                </ul>
+                <p style="margin-top: 15px; color: #B03A2E; font-size: 0.95rem;">
+                    🔧 Яблоки очистить, нарезать ломтиками 5 мм. По желанию — корица или лимон (опционально).
+                </p>
+            </div>
+        </div>
+        <!-- Консоль сборки -->
+        <div class="build-console" id="buildLog">
+            > Инициализация формы для выпечки...
+            > Ожидание добавления ингредиентов
+        </div>
+    </div>
+
+    <!-- ===== ИНТЕРАКТИВНЫЙ СЧЁТЧИК КУСОЧКОВ ===== -->
+    <div class="counter-box">
+        <div>
+            <span style="font-weight: bold; font-size: 1.2rem;">🍰 Кусочков съедено:</span>
+            <span class="counter-value" id="pieCounter">0</span>
+        </div>
+        <button class="counter-btn" id="eatPieBtn">➕ ОТРЕЗАТЬ КУСОЧЕК</button>
+    </div>
+
+
+    <!-- ===== APPLE BENCHMARK SUITE (УНИКАЛЬНЫЙ РАЗДЕЛ) ===== -->
+    <div class="info-block">
+        <h2 class="info-title">📊 APPLE BENCHMARK SUITE</h2>
+        <p style="margin-bottom: 15px;">Сравнение популярных сортов яблок для пирога (чем больше ★ — тем лучше):</p>
+        <div class="benchmark-grid">
+            <div class="benchmark-card">
+                <h4>🍏 Гренни Смит</h4>
+                <div class="meter">
+                    <span class="meter-label">Сладость</span>
+                    <div class="meter-bar"><div class="meter-fill" style="width: 30%;"></div></div>
+                </div>
+                <div class="meter">
+                    <span class="meter-label">Кислота</span>
+                    <div class="meter-bar"><div class="meter-fill" style="width: 90%;"></div></div>
+                </div>
+                <div class="meter">
+                    <span class="meter-label">Хруст</span>
+                    <div class="meter-bar"><div class="meter-fill" style="width: 85%;"></div></div>
+                </div>
+                <div class="meter">
+                    <span class="meter-label">Стабильность при выпечке</span>
+                    <div class="meter-bar"><div class="meter-fill" style="width: 95%;"></div></div>
+                </div>
+            </div>
+            <div class="benchmark-card">
+                <h4>🍎 Гала</h4>
+                <div class="meter">
+                    <span class="meter-label">Сладость</span>
+                    <div class="meter-bar"><div class="meter-fill" style="width: 80%;"></div></div>
+                </div>
+                <div class="meter">
+                    <span class="meter-label">Кислота</span>
+                    <div class="meter-bar"><div class="meter-fill" style="width: 40%;"></div></div>
+                </div>
+                <div class="meter">
+                    <span class="meter-label">Хруст</span>
+                    <div class="meter-bar"><div class="meter-fill" style="width: 70%;"></div></div>
+                </div>
+                <div class="meter">
+                    <span class="meter-label">Стабильность</span>
+                    <div class="meter-bar"><div class="meter-fill" style="width: 75%;"></div></div>
+                </div>
+            </div>
+            <div class="benchmark-card">
+                <h4>🍏 Фуджи</h4>
+                <div class="meter">
+                    <span class="meter-label">Сладость</span>
+                    <div class="meter-bar"><div class="meter-fill" style="width: 95%;"></div></div>
+                </div>
+                <div class="meter">
+                    <span class="meter-label">Кислота</span>
+                    <div class="meter-bar"><div class="meter-fill" style="width: 20%;"></div></div>
+                </div>
+                <div class="meter">
+                    <span class="meter-label">Хруст</span>
+                    <div class="meter-bar"><div class="meter-fill" style="width: 90%;"></div></div>
+                </div>
+                <div class="meter">
+                    <span class="meter-label">Стабильность</span>
+                    <div class="meter-bar"><div class="meter-fill" style="width: 70%;"></div></div>
+                </div>
+            </div>
+            <div class="benchmark-card">
+                <h4>🍎 Антоновка</h4>
+                <div class="meter">
+                    <span class="meter-label">Сладость</span>
+                    <div class="meter-bar"><div class="meter-fill" style="width: 45%;"></div></div>
+                </div>
+                <div class="meter">
+                    <span class="meter-label">Кислота</span>
+                    <div class="meter-bar"><div class="meter-fill" style="width: 80%;"></div></div>
+                </div>
+                <div class="meter">
+                    <span class="meter-label">Хруст</span>
+                    <div class="meter-bar"><div class="meter-fill" style="width: 60%;"></div></div>
+                </div>
+                <div class="meter">
+                    <span class="meter-label">Стабильность</span>
+                    <div class="meter-bar"><div class="meter-fill" style="width: 90%;"></div></div>
+                </div>
+            </div>
+        </div>
+        <p style="margin-top: 15px; font-style: italic; color: #B03A2E;">
+            🍎 Рекомендация: для классического пирога используйте микс Гренни Смит (70%) + Гала (30%) — баланс кислоты и сладости.
+        </p>
+    </div>
+
+    <!-- ===== PIE RELEASE NOTES (УНИКАЛЬНЫЙ РАЗДЕЛ) ===== 
+    <div class="info-block">
+        <h2 class="info-title">📝 RELEASE NOTES (история версий)</h2>
+        <div class="release-note">
+            <div class="release-item">
+                <span class="release-version">v2.1.4</span>
+                <span>🍏 Оптимизирована нарезка яблок — толщина ломтиков теперь 5 мм (было 7 мм). Улучшена текстура.</span>
+            </div>
+            <div class="release-item">
+                <span class="release-version">v2.0.0</span>
+                <span>🎉 Добавлена поддержка корицы (beta). Возможность посыпать верх пирога сахарной пудрой.</span>
+            </div>
+            <div class="release-item">
+                <span class="release-version">v1.5.0</span>
+                <span>🔥 Переработан алгоритм выпечки: понижена температура со 190°C до 180°C для равномерного пропекания.</span>
+            </div>
+            <div class="release-item">
+                <span class="release-version">v1.2.3</span>
+                <span>⚡ Исправлен баг: тесто больше не прилипает к скалке (добавлена дополнительная обсыпка мукой).</span>
+            </div>
+            <div class="release-item">
+                <span class="release-version">v1.0.0</span>
+                <span>🍎 Первый релиз. Базовый рецепт яблочного пирога от бабушки.</span>
+            </div>
+        </div>
+    </div>-->
+
+
+    <!-- ===== ФАКТЫ О ЯБЛОЧНОМ ПИРОГЕ (ПЕРЕКЛЮЧЕНИЕ) ===== -->
+    <div class="fact-box" id="pieFact">
+        <div class="joke-title">
+            <span>🍎</span>
+            <span id="factTitle">ФАКТ О ПИРОГЕ #1</span>
+        </div>
+        <p id="factContent">В среднем, яблочный пирог содержит 4–5 яблок. Оптимальный размер команды для code review.</p>
+        <div class="tap-hint" id="tapHint">🍏 НАЖМИ ДЛЯ НОВОГО ФАКТА</div>
+    </div>
+
+    <!-- ===== ДЕБАГГЕР ПИРОГА (ИНТЕРАКТИВНЫЕ ЛОГИ) ===== -->
+    <div class="info-block">
+        <h2 class="info-title">🐞 PIE DEBUGGER</h2>
+        <div style="font-family: 'Courier New', monospace; background: #2c3e50; color: #ecf0f1; padding: 20px; border-radius: 12px;">
+            <div id="debugLog" style="min-height: 80px;">
+                [🕐 00:00] Система готова. Нажми на ингредиенты или таймер.
+            </div>
+        </div>
+        <div style="display: flex; gap: 10px; margin-top: 15px;">
+            <span style="background: #E74C3C; color: white; padding: 8px 16px; border-radius: 30px; cursor: pointer;" id="testDoneness">🧪 ПРОВЕРИТЬ ГОТОВНОСТЬ</span>
+            <span style="background: #F39C12; color: white; padding: 8px 16px; border-radius: 30px; cursor: pointer;" id="resetOven">⏲️ СБРОСИТЬ ТАЙМЕР</span>
+        </div>
+    </div>
+
+    <!-- КНОПКА НАЗАД -->
+    <div style="margin-top: 40px; text-align: center;">
+        <a href="index.html" class="back-btn" style="background: linear-gradient(135deg, #E74C3C 0%, #EC7063 100%);">← ВЕРНУТЬСЯ К МЕНЮ</a>
+    </div>
+
+    <script>
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        document.querySelectorAll('.back-btn').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                e.preventDefault();
+                document.body.style.opacity = '0.9';
+                setTimeout(() => { window.location.href = this.getAttribute('href'); }, 150);
+            });
+        });
+
+        // ===== АНИМАЦИЯ ЯБЛОК (ИСПРАВЛЕНА РАНДОМИЗАЦИЯ) =====
+        const apples = document.querySelectorAll('.apple-emoji');
+        apples.forEach(apple => {
+            const randomDelay = Math.random() * 2;
+            apple.style.animationDelay = `${randomDelay}s`;
+        });
+
+        // ===== ТАЙМЕР ДУХОВКИ (С ВОЗМОЖНОСТЬЮ СБРОСА) =====
+        const ovenStatus = document.getElementById('ovenStatus');
+        let minutes = 40, seconds = 0;
+        let timerInterval;
+        function startTimer() {
+            if (timerInterval) clearInterval(timerInterval);
+            timerInterval = setInterval(() => {
+                if (seconds === 0) {
+                    if (minutes === 0) {
+                        ovenStatus.innerHTML = "✅ ДУХОВКА: ВЫКЛ | ТАЙМЕР: 00:00 | СТАТУС: READY TO SERVE!";
+                        ovenStatus.style.background = "#D5F4E6";
+                        ovenStatus.style.borderColor = "#52BE80";
+                        clearInterval(timerInterval);
+                        return;
+                    }
+                    minutes--;
+                    seconds = 59;
+                } else {
+                    seconds--;
+                }
+                const minStr = minutes.toString().padStart(2, '0');
+                const secStr = seconds.toString().padStart(2, '0');
+                ovenStatus.innerHTML = `🔥 ДУХОВКА: 180°C | ТАЙМЕР: ${minStr}:${secStr} | СТАТУС: BAKING...`;
+                ovenStatus.style.background = "#F2D7D5";
+                ovenStatus.style.borderColor = "#E74C3C";
+            }, 1000);
+        }
+        startTimer();
+
+        // Сброс таймера
+        document.getElementById('resetOven').addEventListener('click', function() {
+            minutes = 40;
+            seconds = 0;
+            clearInterval(timerInterval);
+            startTimer();
+            document.getElementById('debugLog').innerHTML = `[🕐 ${minutes.toString().padStart(2,'0')}:${seconds.toString().padStart(2,'0')}] Таймер сброшен. Пирог начинает выпекаться заново.`;
+        });
+
+        // ===== ИНТЕРАКТИВНЫЕ ИНГРЕДИЕНТЫ =====
+        const buildLog = document.getElementById('buildLog');
+        const debugLog = document.getElementById('debugLog');
+        const ingredientMsgs = {
+            flour: '🌾 Мука: просеяна, каркас теста готов.',
+            butter: '🧈 Масло: растоплено, жировой слой интегрирован.',
+            eggs: '🥚 Яйца: взбиты, связующий агент активирован.',
+            sugar: '🍬 Сахар: добавлен, энергия для карамелизации подана.',
+            salt: '🧂 Соль: баланс вкуса настроен.',
+            apples: '🍎 Яблоки: нарезаны, core-компонент установлен.'
+        };
+
+        document.querySelectorAll('.ingredient-list li').forEach(item => {
+            item.addEventListener('click', function(e) {
+                e.stopPropagation();
+                const ing = this.dataset.ing;
+                if (ing && ingredientMsgs[ing]) {
+                    buildLog.innerHTML = `> ${ingredientMsgs[ing]}\n> Статус: компонент добавлен ✓`;
+                    debugLog.innerHTML = `[🕐 ${minutes.toString().padStart(2,'0')}:${seconds.toString().padStart(2,'0')}] ${ingredientMsgs[ing]}`;
+                }
+                this.style.backgroundColor = '#FADBD8';
+                setTimeout(() => this.style.backgroundColor = '', 200);
+            });
+        });
+
+        // ===== ПРОВЕРКА ГОТОВНОСТИ =====
+        document.getElementById('testDoneness').addEventListener('click', function() {
+            if (minutes <= 0 && seconds <= 0) {
+                debugLog.innerHTML = `[✅ ГОТОВО] Пирог испёкся! Зубочистка сухая. Можно подавать.`;
+            } else {
+                const remaining = minutes * 60 + seconds;
+                debugLog.innerHTML = `[⏳ ЕЩЁ ${Math.floor(remaining/60)}:${(remaining%60).toString().padStart(2,'0')}] Пирог ещё сыроват. Зубочистка с тестом.`;
+            }
+        });
+
+        // ===== СЧЁТЧИК КУСОЧКОВ =====
+        let pieCount = 0;
+        const pieCounter = document.getElementById('pieCounter');
+        const eatBtn = document.getElementById('eatPieBtn');
+
+        eatBtn.addEventListener('click', function() {
+            pieCount++;
+            pieCounter.textContent = pieCount;
+
+            if (pieCount === 1) {
+                buildLog.innerHTML = '> 🍰 Первый кусочек! Классика.';
+                debugLog.innerHTML = `[🍎] Отрезан первый кусок. Уровень счастья: 100%.`;
+            } else if (pieCount === 3) {
+                buildLog.innerHTML = '> 🍰🍰🍰 Три кусочка — самое время для чая.';
+                debugLog.innerHTML = `[🍎] Съедено 3 куска. Пирог стремительно исчезает.`;
+            } else if (pieCount === 5) {
+                buildLog.innerHTML = '> ⚠️ Остался последний кусок! Кто возьмёт?';
+                debugLog.innerHTML = `[🍎] Критический уровень! Остался 1 кусок.`;
+            } else if (pieCount === 6) {
+                buildLog.innerHTML = '> 🏆 Пирог съеден полностью! Вы — легенда.';
+                debugLog.innerHTML = `[🍎] Пирог успешно уничтожен. Пользователь доволен.`;
+            } else {
+                buildLog.innerHTML = `> 🍰 Кусочек #${pieCount} съеден. Настроение: ${pieCount * 10}%`;
+                debugLog.innerHTML = `[🍎] Кусок #${pieCount} съеден. Осталось: ${6-pieCount} кусков.`;
+            }
+        });
+
+        // ===== ФАКТЫ О ЯБЛОЧНОМ ПИРОГЕ =====
+        const pieFacts = [
+            'В среднем, яблочный пирог содержит 4–5 яблок. Оптимальный размер команды для code review.',
+            'Если пирог осел в центре — это не баг, а фича «углубление для мороженого».',
+            'Корица в яблочном пироге работает как декоратор: добавляет аромат, не меняя исходный код.',
+            'Англичане говорят: «An apple pie without cheese is like a kiss without a squeeze». Сыр — опциональная зависимость.'
+        ];
+
+        let factIndex = 0;
+        const factBox = document.getElementById('pieFact');
+        const factTitle = document.getElementById('factTitle');
+        const factContent = document.getElementById('factContent');
+        const tapHint = document.getElementById('tapHint');
+
+        function showNextFact() {
+            factIndex = (factIndex + 1) % pieFacts.length;
+            factTitle.textContent = `ФАКТ О ПИРОГЕ #${factIndex + 1}`;
+            factContent.textContent = pieFacts[factIndex];
+            factBox.style.transform = 'scale(0.98)';
+            setTimeout(() => factBox.style.transform = 'scale(1)', 150);
+        }
+
+        factBox.addEventListener('click', showNextFact);
+        tapHint.addEventListener('click', showNextFact);
+        tapHint.textContent = '🍏 НАЖМИ ДЛЯ НОВОГО ФАКТА';
+
+        // ===== МОБИЛЬНАЯ ПОДСКАЗКА =====
+        if ('ontouchstart' in window) {
+            tapHint.textContent = '🍏 НАЖМИ ДЛЯ НОВОГО ФАКТА';
+        }
+    </script>
+</body>
+</html>
