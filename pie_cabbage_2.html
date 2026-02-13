@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🥟 Пироги с капустой и яйцом | IT-Меню</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            background: #f8f9fa; color: #333;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6; padding: 20px; max-width: 800px; margin: 0 auto;
+            min-height: 100vh; display: flex; flex-direction: column;
+        }
+        .back-btn {
+            display: inline-flex; align-items: center; gap: 8px;
+            background: #6c757d; color: white; text-decoration: none;
+            padding: 12px 24px; border-radius: 8px; font-weight: 600;
+            margin-bottom: 30px; transition: background 0.3s; width: fit-content;
+        }
+        .back-btn:hover { background: #5a6268; }
+        .dish-header {
+            background: linear-gradient(135deg, #FF9800 0%, #F57C00 100%);
+            color: white; border-radius: 15px; padding: 30px;
+            margin-bottom: 30px; box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        .dish-icon-large { font-size: 4rem; margin-bottom: 15px; text-align: center; }
+        .dish-name { color: white; font-size: 2.5rem; margin-bottom: 10px; 
+                    font-weight: 800; text-align: center; }
+        .dish-meta { color: rgba(255,255,255,0.9); font-size: 1.1rem; 
+                    font-family: 'Courier New', monospace; margin-bottom: 20px; text-align: center; }
+        .info-block { background: white; border-radius: 12px; padding: 25px;
+                     margin-bottom: 25px; box-shadow: 0 3px 10px rgba(0,0,0,0.06); }
+        .info-title { color: #2c3e50; font-size: 1.5rem; margin-bottom: 20px;
+                     padding-bottom: 10px; border-bottom: 2px solid #f0f5ff;
+                     display: flex; align-items: center; gap: 10px; }
+        .info-title::before { content: "›"; color: #FF9800; 
+                            font-weight: bold; font-size: 1.8rem; }
+        .ingredients-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; }
+        .ingredient-item { background: #f8f9fa; padding: 15px; border-radius: 8px;
+                          border-left: 4px solid #FF9800; transition: all 0.2s; cursor: pointer; }
+        .ingredient-item:hover { transform: translateY(-3px); background: #fff3e0; }
+        .ingredient-name { font-weight: 700; color: #2c3e50; margin-bottom: 5px; font-size: 1.1rem; }
+        .ingredient-desc { color: #666; font-size: 0.95rem; }
+        .joke-box { background: #FFF3E0; border-left: 4px solid #FF9800;
+                   padding: 20px; border-radius: 8px; margin: 20px 0; }
+        .joke-title { color: #E65100; font-weight: 700; margin-bottom: 10px;
+                     display: flex; align-items: center; gap: 10px; }
+
+        /* === НОВЫЕ УНИКАЛЬНЫЕ БЛОКИ === */
+        .build-console {
+            background: #2e2e2e;
+            color: #ffe082;
+            padding: 15px;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            margin: 15px 0;
+            border-left: 5px solid #FFB300;
+            white-space: pre-wrap;
+        }
+        .counter-box {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: white;
+            border: 2px dashed #FF9800;
+            padding: 15px 20px;
+            border-radius: 40px;
+            margin: 20px 0;
+        }
+        .counter-value {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #FF9800;
+            font-family: 'Courier New', monospace;
+        }
+        .counter-btn {
+            background: #FF9800;
+            color: white;
+            border: none;
+            padding: 10px 25px;
+            border-radius: 30px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        .counter-btn:hover { background: #e68900; }
+        .fact-box {
+            background: #fff3e0;
+            border-left: 6px solid #FF9800;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        .fact-box:active { transform: scale(0.98); }
+        .tap-hint {
+            background: #FF9800;
+            color: white;
+            padding: 8px 18px;
+            border-radius: 30px;
+            display: inline-block;
+            margin-top: 15px;
+            font-size: 0.9rem;
+        }
+        .pipeline-steps {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 20px;
+        }
+        .pipeline-step {
+            background: #FFF8E1;
+            border-left: 5px solid #FFB74D;
+            padding: 12px 15px;
+            border-radius: 0 12px 12px 0;
+            flex: 1 1 200px;
+        }
+        .pipeline-step strong { color: #E65100; }
+        .bug-list {
+            font-family: 'Courier New', monospace;
+            background: #fef9e7;
+            padding: 15px;
+            border-radius: 8px;
+        }
+        .bug-entry {
+            display: flex;
+            gap: 10px;
+            padding: 8px 0;
+            border-bottom: 1px dashed #ffe0b2;
+        }
+        .bug-entry:last-child { border-bottom: none; }
+        .bug-sev-low { color: #2e7d32; }
+        .bug-sev-med { color: #f57c00; }
+        .bug-sev-high { color: #d32f2f; }
+        .pairing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 12px;
+            margin-top: 15px;
+        }
+        .pairing-item {
+            background: #fff8e1;
+            padding: 12px;
+            border-radius: 12px;
+            text-align: center;
+            border: 1px solid #ffb74d;
+        }
+
+        @media (max-width: 768px) {
+            body { padding: 15px; } .dish-header { padding: 20px; }
+            .dish-name { font-size: 2rem; } .dish-icon-large { font-size: 3.5rem; }
+            .info-block { padding: 20px; } .ingredients-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <a href="index.html" class="back-btn">← НАЗАД К МЕНЮ</a>
+
+    <!-- ШАПКА -->
+    <div class="dish-header">
+        <span class="dish-icon-large">🥟</span>
+        <h1 class="dish-name">Пироги с капустой и яйцом</h1>
+        <div class="dish-meta">ID: PIE_CABBAGE_001 | Версия: 2.1.7 | Статус: 🍞 ГОРЯЧИЕ</div>
+    </div>
+
+    <!-- ===== ТОЧНЫЙ СОСТАВ (ИСПРАВЛЕННЫЙ) ===== -->
+    <div class="info-block">
+        <h2 class="info-title">📦 СБОРКА (ингредиенты)</h2>
+        <div class="ingredients-grid">
+            <div class="ingredient-item" data-ing="flour">
+                <div class="ingredient-name">🌾 Мука</div>
+                <div class="ingredient-desc">Каркас приложения — структура, без которой всё развалится</div>
+            </div>
+            <!--<div class="ingredient-item" data-ing="yeast">
+                <div class="ingredient-name">⚗️ Дрожжи</div>
+                <div class="ingredient-desc">Система сборки — поднимает проект</div>
+            </div>
+            <div class="ingredient-item" data-ing="sugar">
+                <div class="ingredient-name">🍬 Сахар</div>
+                <div class="ingredient-desc">Энергия для дрожжей — топливо</div>
+            </div>
+            <div class="ingredient-item" data-ing="salt">
+                <div class="ingredient-name">🧂 Соль</div>
+                <div class="ingredient-desc">Валидация — балансирует вкус</div>
+            </div>-->
+            <div class="ingredient-item" data-ing="margarine">
+                <div class="ingredient-name">🧈 Маргарин</div>
+                <div class="ingredient-desc">Жировой слой — мягкость и эластичность</div>
+            </div>
+            <div class="ingredient-item" data-ing="oil">
+                <div class="ingredient-name">🛢️ Масло растительное</div>
+                <div class="ingredient-desc">Антипригарный протокол — не даёт прилипнуть</div>
+            </div>
+            <div class="ingredient-item" data-ing="egg">
+                <div class="ingredient-name">🥚 Яйцо</div>
+                <div class="ingredient-desc">Связующий агент — ORM для теста</div>
+            </div>
+            <div class="ingredient-item" data-ing="cabbage">
+                <div class="ingredient-name">🥬 Капуста белокочанная</div>
+                <div class="ingredient-desc">Основная бизнес-логика — ядро начинки</div>
+            </div>
+            <!-- <div class="ingredient-item" data-ing="onion"> -->
+                <!-- <div class="ingredient-name">🧅 Лук репчатый</div> -->
+                <!-- <div class="ingredient-desc">Ароматический патч — добавляет глубины</div> -->
+            <!-- </div> -->
+        </div>
+        <!-- Консоль сборки -->
+        <div class="build-console" id="buildLog">
+            > Инициализация теста...
+            > Ожидание активации дрожжей
+        </div>
+        <span style="display: inline-block; background: #ffe0b2; padding: 5px 12px; border-radius: 20px; font-size: 0.85rem; margin-top: 10px;">
+            ⚡ В начинке дополнительно: варёные яйца (отдельный dependency)
+        </span>
+    </div>
+	
+	<!-- ===== СЧЁТЧИК СЪЕДЕННЫХ ПИРОГОВ (интерактив) ===== -->
+    <div class="counter-box">
+        <div>
+            <span style="font-weight: bold; font-size: 1.2rem;">🥟 Пирогов съедено:</span>
+            <span class="counter-value" id="pieCounter">0</span>
+        </div>
+        <button class="counter-btn" id="eatPieBtn">➕ СЪЕСТЬ ПИРОГ</button>
+    </div>
+
+    <!-- ===== CI/CD ПАЙПЛАЙН ВЫПЕЧКИ (уникальный раздел) ===== 
+    <div class="info-block">
+        <h2 class="info-title">🔄 CI/CD ПАЙПЛАЙН</h2>
+        <div class="pipeline-steps">
+            <div class="pipeline-step">
+                <strong>1. Commit</strong><br>
+                Смешать муку, дрожжи, сахар, соль, маргарин, масло, яйцо
+            </div>
+            <div class="pipeline-step">
+                <strong>2. Build</strong><br>
+                Замес теста → расстойка 1 час (unit-test)
+            </div>
+            <div class="pipeline-step">
+                <strong>3. Test</strong><br>
+                Проверить, поднялось ли тесто (статус: ✅/❌)
+            </div>
+            <div class="pipeline-step">
+                <strong>4. Deploy</strong><br>
+                Формовка пирогов, укладка на противень
+            </div>
+            <div class="pipeline-step">
+                <strong>5. Release</strong><br>
+                Выпечка 30 мин при 180°C → золотистая корочка
+            </div>
+            <div class="pipeline-step">
+                <strong>6. Monitoring</strong><br>
+                Подача горячими, контроль температуры
+            </div>
+        </div>
+        <p style="margin-top: 15px; color: #e65100; font-style: italic;">
+            🍞 Дрожжи — как CI-сервер: без них ничего не взлетит.
+        </p>
+    </div>ы
+
+    <!-- ===== АРХИТЕКТУРА ПИРОГА (слои) ===== -->
+    <div class="info-block">
+        <h2 class="info-title">🏗️ АРХИТЕКТУРА ПИРОГА</h2>
+        <div style="display: flex; flex-direction: column; gap: 12px;">
+            <div style="display: flex; gap: 12px; align-items: center; background: #FFF8E1; padding: 12px; border-radius: 8px;">
+                <span style="background: #FFB300; width: 20px; height: 20px; border-radius: 4px;"></span>
+                <span><strong>Верхний слой теста (Frontend)</strong> — хрустящий интерфейс</span>
+            </div>
+            <div style="display: flex; gap: 12px; align-items: center; background: #FFF3E0; padding: 12px; border-radius: 8px;">
+                <span style="background: #6a994e; width: 20px; height: 20px; border-radius: 4px;"></span>
+                <span><strong>Начинка (Backend)</strong> — капуста, лук, яйцо, бизнес-логика</span>
+            </div>
+            <div style="display: flex; gap: 12px; align-items: center; background: #FFE0B2; padding: 12px; border-radius: 8px;">
+                <span style="background: #bc8f8f; width: 20px; height: 20px; border-radius: 4px;"></span>
+                <span><strong>Нижний слой теста (Database)</strong> — фундамент, держит всё</span>
+            </div>
+        </div>
+        <p style="margin-top: 20px; background: #ffd699; padding: 12px; border-radius: 8px;">
+            🧱 Паттерн «Сэндвич» — классическая трёхзвенка. Начинка полностью инкапсулирована.
+        </p>
+    </div>
+
+    <!-- ===== ФАКТЫ О ПИРОГАХ (переключение по нажатию) ===== -->
+    <div class="fact-box" id="pieFact">
+        <div class="joke-title">
+            <span>🥟</span>
+            <span id="factTitle">ФАКТ О ПИРОГАХ #1</span>
+        </div>
+        <p id="factContent">Дрожжевое тесто удваивается в объёме — как hard disk за 5 лет.</p>
+        <div class="tap-hint" id="tapHint">🥟 НАЖМИ ДЛЯ НОВОГО ФАКТА</div>
+    </div>
+
+  
+    <!-- ===== LOG: ИЗВЕСТНЫЕ БАГИ И ФИЧИ ===== -->
+    <div class="info-block">
+        <h2 class="info-title">🐞 LOG: ИЗВЕСТНЫЕ ПРОБЛЕМЫ</h2>
+        <div class="bug-list">
+            <div class="bug-entry">
+                <span class="bug-sev-high">[CRITICAL]</span>
+                <span>Тесто не поднялось — дрожжи устарели (dependency outdated)</span>
+            </div>
+            <div class="bug-entry">
+                <span class="bug-sev-med">[MEDIUM]</span>
+                <span>Начинка вытекла через шов — недостаточная инкапсуляция</span>
+            </div>
+            <div class="bug-entry">
+                <span class="bug-sev-med">[MEDIUM]</span>
+                <span>Пирог подгорел снизу — неравномерное распределение тепла (load balancing)</span>
+            </div>
+            <!-- <div class="bug-entry"> -->
+                <!-- <span class="bug-sev-low">[LOW]</span> -->
+                <!-- <span>Капуста сыровата — требуется больше времени тушения</span> -->
+            <!-- </div> -->
+            <!-- <div class="bug-entry"> -->
+                <!-- <span class="bug-sev-low">[FIXED]</span> -->
+                <!-- <span>v2.1.7 — исправлен баг с липким тестом (добавлено масло)</span> -->
+            <!-- </div> -->
+        </div>
+    </div>
+
+    <!-- ===== МАТРИЦА СОВМЕСТИМОСТИ ===== 
+    <div class="info-block">
+        <h2 class="info-title">🍶 МАТРИЦА СОВМЕСТИМОСТИ</h2>
+        <div class="pairing-grid">
+            <div class="pairing-item">
+                <span style="font-size: 1.8rem;">🥛</span><br>
+                <strong>Сметана</strong><br>
+                <small>классический API</small>
+            </div>
+            <div class="pairing-item">
+                <span style="font-size: 1.8rem;">🧈</span><br>
+                <strong>Масло</strong><br>
+                <small>жировой слой</small>
+            </div>
+            <div class="pairing-item">
+                <span style="font-size: 1.8rem;">☕</span><br>
+                <strong>Кофе</strong><br>
+                <small>утренний релиз</small>
+            </div>
+            <div class="pairing-item">
+                <span style="font-size: 1.8rem;">🍵</span><br>
+                <strong>Чай</strong><br>
+                <small>low‑latency</small>
+            </div>
+            <div class="pairing-item">
+                <span style="font-size: 1.8rem;">🍺</span><br>
+                <strong>Квас</strong><br>
+                <small>традиционный стек</small>
+            </div>
+            <div class="pairing-item">
+                <span style="font-size: 1.8rem;">🥣</span><br>
+                <strong>Бульон</strong><br>
+                <small>экзотический коннектор</small>
+            </div>
+        </div>
+        <p style="margin-top: 15px; font-size: 0.9rem; color: #b85e00;">
+            ⚠️ С осторожностью: пироги + холодное молоко → exception у желудка.
+        </p>
+    </div>-->
+
+    <!-- ===== ШУТКА ПРО КАПУСТУ ===== -->
+    <div class="joke-box">
+        <h3 class="joke-title">💡 Почему капуста — идеальный backend?</h3>
+        <p>• <strong>Слоёная</strong> — как хорошо структурированный код</p>
+        <p>• <strong>Дёшево</strong> — оптимизация бюджета</p>
+        <p>• <strong>Сытная</strong> — низкое потребление памяти</p>
+        <p>• <strong>Сочетается с яйцом</strong> — идеальное dependency injection</p>
+        <p style="margin-top: 10px;">🥬 Капуста не была бы так популярна без лука и специй — как Python без библиотек.</p>
+    </div>
+
+    <!-- КНОПКА НАЗАД -->
+    <div style="margin-top: 40px; text-align: center;">
+        <a href="index.html" class="back-btn" style="background: linear-gradient(135deg, #FF9800 0%, #F57C00 100%);">← ВЕРНУТЬСЯ К СПИСКУ БЛЮД</a>
+    </div>
+
+    <script>
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        document.querySelectorAll('.back-btn').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                e.preventDefault();
+                document.body.style.opacity = '0.9';
+                setTimeout(() => { window.location.href = this.getAttribute('href'); }, 150);
+            });
+        });
+
+        // ===== ИНТЕРАКТИВНЫЕ ИНГРЕДИЕНТЫ (КОНСОЛЬ СБОРКИ) =====
+        const buildLog = document.getElementById('buildLog');
+        const ingredientMsgs = {
+            flour: '🌾 Мука: просеяна, каркас готов.',
+            yeast: '⚗️ Дрожжи: активированы в тёплой воде, процесс пошёл.',
+            sugar: '🍬 Сахар: добавлен, энергия подана.',
+            salt: '🧂 Соль: валидация пройдена.',
+            margarine: '🧈 Маргарин: растоплен, жировой слой нанесён.',
+            oil: '🛢️ Масло: антипригарный протокол активирован.',
+            egg: '🥚 Яйцо: взбито, связующий агент внедрён.',
+            cabbage: '🥬 Капуста: нашинкована, протушена с луком, ядро готово.',
+            onion: '🧅 Лук: обжарен до золотистости, ароматический патч установлен.'
+        };
+
+        document.querySelectorAll('.ingredient-item').forEach(item => {
+            item.addEventListener('click', function() {
+                const ing = this.dataset.ing;
+                if (ing && ingredientMsgs[ing]) {
+                    buildLog.innerHTML = `> ${ingredientMsgs[ing]}\n> Статус: компонент добавлен ✓`;
+                }
+                this.style.backgroundColor = '#ffe0b2';
+                setTimeout(() => this.style.backgroundColor = '', 200);
+            });
+        });
+
+        // ===== СЧЁТЧИК ПИРОГОВ =====
+        let pieCount = 0;
+        const pieCounter = document.getElementById('pieCounter');
+        const eatPieBtn = document.getElementById('eatPieBtn');
+
+        eatPieBtn.addEventListener('click', function() {
+            pieCount++;
+            pieCounter.textContent = pieCount;
+
+            if (pieCount === 1) {
+                buildLog.innerHTML = '> 🥟 Первый пирог съеден! Отличный старт.';
+            } else if (pieCount === 3) {
+                buildLog.innerHTML = '> 🥟🥟🥟 Уже три! Ты на пути к рекорду.';
+            } else if (pieCount === 5) {
+                buildLog.innerHTML = '> ⚠️ 5 пирогов — рекомендуемое количество на одного. Но кто остановится?';
+            } else if (pieCount === 7) {
+                buildLog.innerHTML = '> 🔥 ЛИМИТ ПРЕВЫШЕН! Вы — легенда пироговых баталий.';
+            } else {
+                buildLog.innerHTML = `> 🥟 Пирог #${pieCount} съеден. Уровень счастья: ${pieCount * 12}%`;
+            }
+        });
+
+        // ===== ФАКТЫ О ПИРОГАХ (переключение) =====
+        const pieFacts = [
+            'Дрожжевое тесто удваивается в объёме — как hard disk за 5 лет.',
+            'Капуста для начинки должна быть тушёной не меньше 40 минут — это называется «долгий рефакторинг».',
+            'Первый пирог с капустой упоминается в летописях XVI века — настоящее legacy.',
+            'Если пирог лопнул при выпечке — это не баг, а фича «паровой сброс».',
+            'Идеальный пирог должен иметь 2.8 мм толщины теста. Проверено A/B тестами.'
+        ];
+
+        let factIndex = 0;
+        const factBox = document.getElementById('pieFact');
+        const factTitle = document.getElementById('factTitle');
+        const factContent = document.getElementById('factContent');
+        const tapHint = document.getElementById('tapHint');
+
+        function showNextFact() {
+            factIndex = (factIndex + 0.5) % pieFacts.length;
+            factTitle.textContent = `ФАКТ О ПИРОГАХ #${factIndex + 1}`;
+            factContent.textContent = pieFacts[factIndex];
+            factBox.style.transform = 'scale(0.98)';
+            setTimeout(() => factBox.style.transform = 'scale(1)', 150);
+        }
+
+        factBox.addEventListener('click', showNextFact);
+        tapHint.addEventListener('click', showNextFact);
+        tapHint.textContent = '🥟 НАЖМИ ДЛЯ НОВОГО ФАКТА';
+    </script>
+</body>
+</html>
