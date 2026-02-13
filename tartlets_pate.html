@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🧇 Тарталетки с паштетом | IT-Меню</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            background: #f8f9fa; color: #333;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6; padding: 20px; max-width: 800px; margin: 0 auto;
+            min-height: 100vh; display: flex; flex-direction: column;
+        }
+        .back-btn {
+            display: inline-flex; align-items: center; gap: 8px;
+            background: #6c757d; color: white; text-decoration: none;
+            padding: 12px 24px; border-radius: 8px; font-weight: 600;
+            margin-bottom: 30px; transition: background 0.3s; width: fit-content;
+        }
+        .back-btn:hover { background: #5a6268; }
+        .dish-header {
+            background: linear-gradient(135deg, #A0522D 0%, #CD853F 100%);
+            color: white; border-radius: 15px; padding: 30px;
+            margin-bottom: 30px; box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        .dish-icon-large { font-size: 4rem; margin-bottom: 15px; text-align: center; }
+        .dish-name { color: white; font-size: 2.5rem; margin-bottom: 10px; 
+                    font-weight: 800; text-align: center; }
+        .dish-meta { color: rgba(255,255,255,0.9); font-size: 1.1rem; 
+                    font-family: 'Courier New', monospace; margin-bottom: 20px; text-align: center; }
+        .info-block { background: white; border-radius: 12px; padding: 25px;
+                     margin-bottom: 25px; box-shadow: 0 3px 10px rgba(0,0,0,0.06); }
+        .info-title { color: #2c3e50; font-size: 1.5rem; margin-bottom: 20px;
+                     padding-bottom: 10px; border-bottom: 2px solid #f0f5ff;
+                     display: flex; align-items: center; gap: 10px; }
+        .info-title::before { content: "›"; color: #A0522D; 
+                            font-weight: bold; font-size: 1.8rem; }
+        .joke-box { background: #fdf5e6; border-left: 4px solid #CD853F;
+                   padding: 20px; border-radius: 8px; margin: 20px 0; }
+        .joke-title { color: #8B4513; font-weight: 700; margin-bottom: 10px;
+                     display: flex; align-items: center; gap: 10px; }
+
+        /* Уникальные стили для тарталеток */
+        .ingredients-mini {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+            margin: 30px 0;
+        }
+        .ingredient-badge {
+            background: #fff0e0;
+            border: 3px solid #A0522D;
+            border-radius: 60px;
+            padding: 15px 30px;
+            font-size: 1.4rem;
+            font-weight: bold;
+            color: #5a2e0e;
+            box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+        }
+
+        .ved-code {
+            background: #e8e8e8;
+            font-family: 'Courier New', monospace;
+            padding: 10px 20px;
+            border-radius: 40px;
+            display: inline-block;
+            margin: 5px 0;
+            border-left: 5px solid #A0522D;
+        }
+
+        .counter-box {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: white;
+            border: 2px dashed #A0522D;
+            padding: 15px 20px;
+            border-radius: 40px;
+            margin: 20px 0;
+        }
+        .counter-value {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #A0522D;
+            font-family: 'Courier New', monospace;
+        }
+        .counter-btn {
+            background: #A0522D;
+            color: white;
+            border: none;
+            padding: 10px 25px;
+            border-radius: 30px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        .counter-btn:hover { background: #6b2e0e; }
+
+        .fact-box {
+            background: #fdf5e6;
+            border-left: 6px solid #A0522D;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        .fact-box:active { transform: scale(0.98); }
+        .tap-hint {
+            background: #A0522D;
+            color: white;
+            padding: 8px 18px;
+            border-radius: 30px;
+            display: inline-block;
+            margin-top: 15px;
+            font-size: 0.9rem;
+        }
+
+        .pairing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+        .pairing-item {
+            background: #fff0e0;
+            padding: 15px;
+            border-radius: 16px;
+            text-align: center;
+            border: 2px solid #CD853F;
+        }
+        .pairing-item span { font-size: 2rem; display: block; margin-bottom: 8px; }
+
+        .signature {
+            background: #f39c12;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 30px;
+            font-size: 0.8rem;
+            margin-left: 10px;
+            display: inline-block;
+            vertical-align: middle;
+        }
+
+        @media (max-width: 768px) {
+            body { padding: 15px; } .dish-header { padding: 20px; }
+            .dish-name { font-size: 2rem; } .dish-icon-large { font-size: 3.5rem; }
+            .info-block { padding: 20px; }
+        }
+    </style>
+</head>
+<body>
+    <a href="index.html" class="back-btn">← НАЗАД К МЕНЮ</a>
+
+    <!-- ШАПКА -->
+    <div class="dish-header">
+        <span class="dish-icon-large">🧇</span>
+        <h1 class="dish-name">
+            Тарталетки с паштетом
+            <span class="signature">by Отдел разработки ПО для ВЭД</span>
+        </h1>
+        <div class="dish-meta">ID: SNACK_PATE_001 | Версия: 1.0.0 | Статус: ✅ READY FOR IMPORT/EXPORT</div>
+    </div>
+
+    <!-- МИНИМАЛИСТИЧНЫЙ СОСТАВ -->
+    <div class="info-block">
+        <h2 class="info-title">📦 Спецификация (payload)</h2>
+        <div class="ingredients-mini">
+            <div class="ingredient-badge">🧇 Тарталетка</div>
+            <div class="ingredient-badge">🥫 Мясной паштет</div>
+        </div>
+        <p style="text-align: center; color: #8B4513; font-size: 1.2rem; margin-top: 10px;">
+            <strong>Форм-фактор:</strong> корзиночка 35 мм, наполнение — 20 г паштета
+        </p>
+        <div style="background: #f0e0d0; border-radius: 12px; padding: 15px; margin-top: 20px;">
+            <span style="font-weight: bold;">📦 ВЭД‑коды:</span>
+            <div class="ved-code">ТН ВЭД 1905 90 600 0 — тарталетки</div>
+            <div class="ved-code">ТН ВЭД 1602 49 900 0 — паштет мясной</div>
+        </div>
+    </div>
+
+    <!-- ЛОГИСТИКА И СЕРВИРОВКА -->
+    <div class="info-block">
+        <h2 class="info-title">🚚 Логистика</h2>
+        <div style="display: flex; flex-wrap: wrap; gap: 20px; align-items: center;">
+            <div style="flex: 1; min-width: 200px;">
+                <p>📏 <strong>Размер партии:</strong> 12 шт (дюжина) — оптимально для совещания</p>
+                <p>⏱️ <strong>Время сборки:</strong> 5 мин (быстрее, чем деплой)</p>
+                <p>🌡️ <strong>Температура подачи:</strong> комнатная (не требует подогрева)</p>
+            </div>
+            <div style="flex: 1; min-width: 150px; background: #f0e0d0; border-radius: 16px; padding: 20px; text-align: center;">
+                <span style="font-size: 3rem;">🧇🥫</span>
+                <p><strong>Тарталетка + паштет</strong><br>интеграция без багов</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- ИНТЕРАКТИВНЫЙ СЧЁТЧИК -->
+    <div class="counter-box">
+        <div>
+            <span style="font-weight: bold; font-size: 1.2rem;">🧇 Тарталеток съедено:</span>
+            <span class="counter-value" id="tartletCounter">0</span>
+        </div>
+        <button class="counter-btn" id="eatTartletBtn">➕ ЗАГРУЗИТЬ ПОРЦИЮ</button>
+    </div>
+
+    <!-- ФАКТЫ О ПАШТЕТЕ -->
+    <div class="fact-box" id="pateFact">
+        <div class="joke-title">
+            <span>🥫</span>
+            <span id="factTitle">ФАКТ О ПАШТЕТЕ #1</span>
+        </div>
+        <p id="factContent">Паштет — идеальный пример контейнеризации: содержимое упаковано в оболочку и готово к подаче.</p>
+        <div class="tap-hint" id="tapHint">🧇 НАЖМИ ДЛЯ НОВОГО ФАКТА</div>
+    </div>
+
+    <!-- МАТРИЦА СОВМЕСТИМОСТИ (мини) -->
+    <div class="info-block">
+        <h2 class="info-title">🥂 Compatibility</h2>
+        <div class="pairing-grid">
+            <div class="pairing-item"><span>🥂</span>Просекко</div>
+            <div class="pairing-item"><span>☕</span>Кофе</div>
+            <div class="pairing-item"><span>🍷</span>Красное вино</div>
+            <div class="pairing-item"><span>🧃</span>Сок</div>
+        </div>
+        <p style="margin-top: 15px; font-style: italic; color: #8B4513;">
+            * Все напитки проходят таможню без пошлин.
+        </p>
+    </div>
+
+    <!-- ШУТКА ПРО ВЭД -->
+    <div class="joke-box">
+        <h3 class="joke-title">📄 Импортно-экспортная декларация</h3>
+        <p>«Груз — тарталетки с паштетом, страна происхождения — кухня, получатель — отдел разработки ПО для ВЭД. Таможенная стоимость: 100% удовольствия. Разрешение на выпуск: выдано (после чаепития).»</p>
+    </div>
+
+    <!-- КНОПКА НАЗАД -->
+    <div style="margin-top: 40px; text-align: center;">
+        <a href="index.html" class="back-btn" style="background: linear-gradient(135deg, #A0522D 0%, #CD853F 100%);">← ВЕРНУТЬСЯ К МЕНЮ</a>
+    </div>
+
+    <script>
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        document.querySelectorAll('.back-btn').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                e.preventDefault();
+                document.body.style.opacity = '0.9';
+                setTimeout(() => { window.location.href = this.getAttribute('href'); }, 150);
+            });
+        });
+
+        // ===== СЧЁТЧИК ТАРТАЛЕТОК =====
+        let count = 0;
+        const counterEl = document.getElementById('tartletCounter');
+        const eatBtn = document.getElementById('eatTartletBtn');
+        eatBtn.addEventListener('click', function() {
+            count++;
+            counterEl.textContent = count;
+            // можно добавить забавные комментарии, но для краткости оставим так
+        });
+
+        // ===== ФАКТЫ О ПАШТЕТЕ =====
+        const pateFacts = [
+            'Паштет — идеальный пример контейнеризации: содержимое упаковано в оболочку и готово к подаче.',
+            'Тарталетка — это как Docker-контейнер: лёгкая, одноразовая, но без неё всё развалится.',
+            'Во ВЭД паштет декларируется как «готовое изделие из мяса». Код ТН ВЭД 1602 49.',
+            'Идеальный паштет не должен вытекать из тарталетки — как правильно настроенный API.',
+            'Срок хранения тарталеток с паштетом — 24 часа. После этого — legacy.',
+            'Отдел ВЭД рекомендует подавать с красным вином — это повышает конверсию переговоров.'
+        ];
+        let factIndex = 0;
+        const factBox = document.getElementById('pateFact');
+        const factTitle = document.getElementById('factTitle');
+        const factContent = document.getElementById('factContent');
+        const tapHint = document.getElementById('tapHint');
+
+        function showNextFact() {
+            factIndex = (factIndex + 1) % pateFacts.length;
+            factTitle.textContent = `ФАКТ О ПАШТЕТЕ #${factIndex + 1}`;
+            factContent.textContent = pateFacts[factIndex];
+            factBox.style.transform = 'scale(0.98)';
+            setTimeout(() => factBox.style.transform = 'scale(1)', 150);
+        }
+
+        factBox.addEventListener('click', function(e) {
+            if (e.target.closest('.tap-hint')) return;
+            showNextFact();
+        });
+        tapHint.addEventListener('click', function(e) {
+            e.stopPropagation();
+            showNextFact();
+        });
+        tapHint.textContent = '🧇 НАЖМИ ДЛЯ НОВОГО ФАКТА';
+        if ('ontouchstart' in window) {
+            tapHint.textContent = '🧇 НАЖМИ ДЛЯ НОВОГО ФАКТА';
+        }
+    </script>
+</body>
+</html>
