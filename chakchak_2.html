@@ -234,22 +234,15 @@
             .dish-name { font-size: 2rem; } .dish-icon-large { font-size: 3.5rem; }
             .info-block { padding: 20px; }
         }
-		
 		canvas#networkChart {
+			width: 100%;
+			height: auto;
+			max-width: 200px;
 			display: block;
-			width: 200px;
-			height: 200px;
 			margin: 0 auto;
 			border-radius: 12px;
 			box-shadow: 0 2px 8px rgba(0,0,0,0.1);
 		}
-		@media (max-width: 480px) {
-			canvas#networkChart {
-				width: 180px;
-				height: 180px;
-			}
-		}
-		
 		
     </style>
 </head>
@@ -346,8 +339,6 @@
         </p>
     </div>
 
-
-
     <!-- ===== ФАКТЫ О ЧАК-ЧАКЕ (переключение по нажатию) ===== 
     <div class="fact-box" id="chakFact">
         <div class="joke-title">
@@ -422,9 +413,9 @@
     <div class="joke-box">
         <h3 class="joke-title">📊 АНАЛИЗ РАСПРЕДЕЛЁННОЙ СЕТИ</h3>
         <div style="display: flex; flex-wrap: wrap; gap: 20px; align-items: center;">
-            <div style="flex: 1; min-width: 150px;">
-                <canvas id="networkChart" width="200" height="200" style="background: #FEF9E7; border-radius: 12px;"></canvas>
-            </div>
+			 <div style="flex: 1; min-width: 150px; display: flex; justify-content: center;">
+				<canvas id="networkChart" width="200" height="200"></canvas>
+			</div>
             <div style="flex: 2;">
                 <p><strong>Топология:</strong> «Горка» (кластерная)</p>
                 <p><strong>Средняя степень связности:</strong> 3.7</p>
@@ -576,7 +567,7 @@
             ctx.fillStyle = '#D68910';
             ctx.font = '12px "Courier New"';
             ctx.fillText('cluster', 30, 180);
-        }*/
+        }
 		
 		
 		
@@ -609,7 +600,38 @@
 			ctx.fillStyle = '#D68910';
 			ctx.font = '12px "Courier New"';
 			ctx.fillText('cluster', 30, 180);
+		}*/
+		
+		const canvas = document.getElementById('networkChart');
+		if (canvas) {
+			const ctx = canvas.getContext('2d');
+			const w = canvas.width, h = canvas.height;
+			ctx.clearRect(0, 0, w, h);
+			ctx.fillStyle = '#FEF9E7';
+			ctx.fillRect(0, 0, w, h);
+
+			ctx.fillStyle = '#F39C12';
+			ctx.strokeStyle = '#B76E00';
+			ctx.lineWidth = 2;
+			ctx.shadowColor = 'rgba(0,0,0,0.2)';
+			ctx.shadowBlur = 5;
+
+			for (let i = 0; i < 5; i++) {
+				for (let j = 0; j <= i; j++) {
+					ctx.beginPath();
+					ctx.arc(40 + j * 30, 40 + i * 30, 12, 0, 2 * Math.PI);
+					ctx.fill();
+					ctx.stroke();
+				}
+			}
+
+			ctx.shadowBlur = 0;
+			ctx.fillStyle = '#B76E00';
+			ctx.font = '12px "Courier New"';
+			ctx.fillText('cluster', 30, 180);
 		}
+		
+		
     </script>
 </body>
 </html>
